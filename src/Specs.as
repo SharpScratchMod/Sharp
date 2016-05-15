@@ -241,6 +241,7 @@ public class Specs {
 		["if %b then",							"e", 6, "doIfElse"],
 		["wait until %b",						" ", 6, "doWaitUntil"],
 		["repeat until %b",						"c", 6, "doUntil"],
+		["for each %m.var in %s",			"c", 6, "doForLoop", "v", 10],
 		["-"],
 		["stop %m.stop",						"f", 6, "stopScripts", "all"],
 		["-"],
@@ -248,6 +249,9 @@ public class Specs {
 		["create clone of %m.spriteOnly",		" ", 6, "createCloneOf"],
 		["delete this clone",					"f", 6, "deleteClone"],
 		["-"],
+		["counter",								"r", 6, "COUNT"],
+		["clear counter",						" ", 6, "CLR_COUNT"],
+		["incr counter",						" ", 6, "INCR_COUNT"],
 
 		// control - stage
 		["// %s",                               " ", 106, "inlineComment:", "My comment"],
@@ -261,10 +265,15 @@ public class Specs {
 		["if %b then",							"e", 106, "doIfElse"],
 		["wait until %b",						" ", 106, "doWaitUntil"],
 		["repeat until %b",						"c", 106, "doUntil"],
+		["for each %m.var in %s",			"c", 106, "doForLoop", "v", 10],
 		["-"],
 		["stop %m.stop",						"f", 106, "stopScripts", "all"],
 		["-"],
 		["create clone of %m.spriteOnly",		" ", 106, "createCloneOf"],
+		["-"],
+		["counter",								"r", 106, "COUNT"],
+		["clear counter",						" ", 106, "CLR_COUNT"],
+		["incr counter",						" ", 106, "INCR_COUNT"],
 
 		// sensing
 		["touching %m.touching?",				"b", 7, "touching:",			""],
@@ -385,9 +394,9 @@ public class Specs {
 
 		// testing and experimental control prims
 		["noop",								"r", 99, "COUNT"],
-		["counter",								"r", 99, "COUNT"],
-		["clear counter",						" ", 99, "CLR_COUNT"],
-		["incr counter",						" ", 99, "INCR_COUNT"],
+		//["counter",								"r", 6, "COUNT"],
+		//["clear counter",						" ", 6, "CLR_COUNT"],
+		//["incr counter",						" ", 6, "INCR_COUNT"],
 		["for each %m.varName in %s",			"c", 99, "doForLoop", "v", 10],
 		["while %b",							"c", 99, "doWhile"],
 		["all at once",							"c", 99, "warpSpeed"],
