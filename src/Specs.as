@@ -230,6 +230,8 @@ public class Specs {
 		["broadcast %m.broadcast and wait",		" ", 5, "doBroadcastAndWait",	""],
 
 		// control - sprite
+		["// %s",                               " ", 6, "inlineComment:", "My comment"],
+		["-"],
 		["wait %n secs",						" ", 6, "wait:elapsed:from:",	1],
 		["-"],
 		["repeat %n",							"c", 6, "doRepeat", 10],
@@ -248,6 +250,8 @@ public class Specs {
 		["-"],
 
 		// control - stage
+		["// %s",                               " ", 106, "inlineComment:", "My comment"],
+		["-"],
 		["wait %n secs",						" ", 106, "wait:elapsed:from:",	1],
 		["-"],
 		["repeat %n",							"c", 106, "doRepeat", 10],

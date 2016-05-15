@@ -78,6 +78,8 @@ public class Primitives {
 		primTable["COUNT"]				= function(b:*):* { return counter };
 		primTable["INCR_COUNT"]			= function(b:*):* { counter++ };
 		primTable["CLR_COUNT"]			= function(b:*):* { counter = 0 };
+		
+		primTable["inlineComment:"]     = function(b:*):* {};
 
 		new LooksPrims(app, interp).addPrimsTo(primTable);
 		new MotionAndPenPrims(app, interp).addPrimsTo(primTable);
