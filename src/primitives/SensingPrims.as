@@ -29,6 +29,7 @@ package primitives {
 	import blocks.Block;
 	import interpreter.*;
 	import scratch.*;
+	import uiwidgets.DialogBox;
 
 public class SensingPrims {
 
@@ -72,6 +73,14 @@ public class SensingPrims {
 		primTable['hideVariable:']		= primHideWatcher;
 		primTable['showList:']			= primShowListWatcher;
 		primTable['hideList:']			= primHideListWatcher;
+		
+		// Sharp
+		primTable["notify:"]            = primNotify;
+	}
+	
+	// Sharp
+	private function primNotify(b:Block):void{
+		DialogBox.notify(interp.arg(b,1),interp.arg(b,0));
 	}
 
 	// TODO: move to stage
