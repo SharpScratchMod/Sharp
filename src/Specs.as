@@ -324,6 +324,7 @@ public class Specs {
 		["%n - %n",								"r", 8, "-",					"", ""],
 		["%n * %n",								"r", 8, "*",					"", ""],
 		["%n / %n",								"r", 8, "/",					"", ""],
+		["%n ^ %n", 							"r", 8, "power:of:", "8", "2"],
 		["-"],
 		["pick random %n to %n",		"r", 8, "randomFrom:to:",		1, 10],
 		["-"],
@@ -343,7 +344,6 @@ public class Specs {
 		["round %n",							"r", 8, "rounded", 				""],
 		["-"],
 		["%m.mathOp of %n",						"r", 8, "computeFunction:of:",	"sqrt", 9],
-		["%n ^ %n", 							"r", 8, "power:of:", "8", "2"],
 
 		// variables
 		["set %m.var to %s",								" ", 9, SET_VAR],
