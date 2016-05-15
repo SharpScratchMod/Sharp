@@ -23,6 +23,8 @@ package uiwidgets {
 	import flash.filters.DropShadowFilter;
 	import flash.text.*;
 	import flash.utils.Dictionary;
+	import flash.net.URLRequest;
+	import flash.net.navigateToURL;
 	import translation.Translator;
 	import ui.parts.UIPart;
 
@@ -86,6 +88,22 @@ public class DialogBox extends Sprite {
 		d.addButton('OK', d.accept);
 		if (context) d.updateContext(context);
 		d.showOnStage(stage ? stage : Scratch.app.stage);
+	}
+	
+	public static function reportBugDialog():void{
+		var d:DialogBox = new DialogBox(done);
+		function done():void {
+			var request:URLRequest = new URLRequest("https://github.com/SharpScratchMod/Sharp/issues/new?title=" + d.fields['title'].text + "&body=" + d.fields["body"].text);
+			navigateToURL(request, "_blank");
+		}
+		d.addTitle("Report a bug");
+		d.addText("First box: Title");
+		d.addField("title", 120, "", false);
+		d.addText("Second box: Content");
+		d.addField("body", 120, "", false);
+		d.addButton("Report bug", d.accept);
+		d.addButton("Cancel", d.cancel);
+		d.showOnStage(Scratch.app.stage);
 	}
 	
 	public static function close(title:String, msg:String = null, widget:DisplayObject = null, button:String = "OK", stage:Stage = null, okFunction:Function = null, cancelFunction:Function = null, context:Dictionary = null,inverted:Boolean = false):void {

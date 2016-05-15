@@ -42,6 +42,7 @@ import flash.net.LocalConnection;
 import flash.net.URLLoader;
 import flash.net.URLLoaderDataFormat;
 import flash.net.URLRequest;
+import flash.net.navigateToURL;
 import flash.system.*;
 import flash.text.*;
 import flash.utils.*;
@@ -1057,8 +1058,47 @@ public class Scratch extends Sprite {
 		m.showOnStage(stage, b.x, topBarPart.bottom() - 1);
 	}
 	
+	public function showHelpMenu(b:*):void {
+		var m:Menu = new Menu(null, 'Help', CSS.topBarColor(), 28);
+		
+		addHelpMenuItems(b, m);
+		
+		m.showOnStage(stage, b.x, topBarPart.bottom() - 1);
+	}
+	
 	public function stopVideo(b:*):void {
 		runtime.stopVideo();
+	}
+	
+	protected function addHelpMenuItems(b:*, m:Menu):void {
+		function helpMenuItemCredits(){
+			DialogBox.notify("Credits", "*Owner\n\nDrKat123*, Mrcomputer1*");
+		}
+		function helpMenuItemReportBug(){
+			DialogBox.reportBugDialog();
+		}
+		function helpMenuItemAbout(){
+			var aboutMsg:String = "Scratch\n" +
+			"Based on Scratch from the MIT Media Lab, 2.0 v446\n" +
+			"\n" +
+			"Scratch is developed by the Lifelong Kindergarten Group at the MIT Media Lab\n" +
+			"\n" +
+			"https://scratch.mit.edu - https://github.com/llk/scratch-flash\n" +
+			"\n" +
+			"\n" +
+			"--------------------" +
+			"\n" +
+			"\n" +
+			"Sharp\n" +
+			"Sharp Scratch mod by DrKat123 and Mrcomputer1\n" +
+			"https://sharpscratchmod.github.io\n" +
+			versionString;
+			DialogBox.notify("About Sharp", aboutMsg);
+		}
+		m.addItem('Report a bug', helpMenuItemReportBug);
+		m.addLine();
+		m.addItem('Credits', helpMenuItemCredits);
+		m.addItem('About', helpMenuItemAbout);
 	}
 
 	protected function addFileMenuItems(b:*, m:Menu):void {
