@@ -58,6 +58,7 @@ public class Primitives {
 		primTable["not"]			= function(b:*):* { return !interp.arg(b, 0) };
 		primTable["abs"]			= function(b:*):* { return Math.abs(interp.numarg(b, 0)) };
 		primTable["sqrt"]			= function(b:*):* { return Math.sqrt(interp.numarg(b, 0)) };
+		primTable["power:of:"] = function(b:*):* { return Math.pow(interp.numarg(b, 0), interp.numarg(b, 1)) };
 
 		primTable["concatenate:with:"]	= function(b:*):* { return ("" + interp.arg(b, 0) + interp.arg(b, 1)).substr(0, 10240); };
 		primTable["letter:of:"]			= primLetterOf;
