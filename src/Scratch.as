@@ -74,7 +74,7 @@ import watchers.ListWatcher;
 
 public class Scratch extends Sprite {
 	// Version
-	public static const versionString:String = 'v446';
+	public static const versionString:String = 'Dev : Scratch v446';
 	public static var app:Scratch; // static reference to the app, used for debugging
 
 	// Display modes
@@ -162,7 +162,7 @@ public class Scratch extends Sprite {
 	}
 
 	protected function initialize():void {
-		isOffline = !URLUtil.isHttpURL(loaderInfo.url);
+		isOffline = (loaderInfo.parameters['asPlayer'] != 'true'); // !URLUtil.isHttpURL(loaderInfo.url)
 		hostProtocol = URLUtil.getProtocol(loaderInfo.url);
 
 		isExtensionDevMode = (loaderInfo.parameters['extensionDevMode'] == 'true');
@@ -221,6 +221,8 @@ public class Scratch extends Sprite {
 		//Analyze.countMissingAssets();
 
 		handleStartupParameters();
+		
+		DialogBox.notify("Welcome to Sharp!", "Website: http://SharpScratchMod.github.io\nGitHub: https://github.com/SharpScratchMod/Sharp\n\nCredits:\nDrKat123 - Developer, Owner\nMrcomputer1 - Developer, Owner");
 	}
 
 	protected function handleStartupParameters():void {
