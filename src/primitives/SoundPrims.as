@@ -68,87 +68,109 @@ public class SoundPrims {
 	}
 
 	private function primPlaySound(b:Block):void {
-		var snd:ScratchSound = interp.targetObj().findSound(interp.arg(b, 0));
-		if (snd != null) playSound(snd, interp.targetObj());
+		if(Scratch.app.sharpSettings.data.allowSound){
+			var snd:ScratchSound = interp.targetObj().findSound(interp.arg(b, 0));
+			if (snd != null) playSound(snd, interp.targetObj());
+		}
 	}
 
 	private function primPlaySoundUntilDone(b:Block):void {
-		var activeThread:Thread = interp.activeThread;
-		if (activeThread.firstTime) {
-			var snd:ScratchSound = interp.targetObj().findSound(interp.arg(b, 0));
-			if (snd == null) return;
-			activeThread.tmpObj = playSound(snd, interp.targetObj());
-			activeThread.firstTime = false;
-		}
-		var player:ScratchSoundPlayer = ScratchSoundPlayer(activeThread.tmpObj);
-		if ((player == null) || (player.atEnd())) { // finished playing
-			activeThread.tmp = 0;
-			activeThread.firstTime = true;
-		} else {
-			interp.doYield();
+		if(Scratch.app.sharpSettings.data.allowSound){
+			var activeThread:Thread = interp.activeThread;
+			if (activeThread.firstTime) {
+				var snd:ScratchSound = interp.targetObj().findSound(interp.arg(b, 0));
+				if (snd == null) return;
+				activeThread.tmpObj = playSound(snd, interp.targetObj());
+				activeThread.firstTime = false;
+			}
+			var player:ScratchSoundPlayer = ScratchSoundPlayer(activeThread.tmpObj);
+			if ((player == null) || (player.atEnd())) { // finished playing
+				activeThread.tmp = 0;
+				activeThread.firstTime = true;
+			} else {
+				interp.doYield();
+			}
 		}
 	}
 
 	private function primPlayNote(b:Block):void {
-		var s:ScratchObj = interp.targetObj();
-		if (s == null) return;
-		if (interp.activeThread.firstTime) {
-			var key:Number = interp.numarg(b, 0);
-			var secs:Number = beatsToSeconds(interp.numarg(b, 1));
-			interp.activeThread.tmpObj = playNote(s.instrument, key, secs, s);
-			interp.startTimer(secs);
-		} else {
-			interp.checkTimer();
+		if(Scratch.app.sharpSettings.data.allowSound){
+			var s:ScratchObj = interp.targetObj();
+			if (s == null) return;
+			if (interp.activeThread.firstTime) {
+				var key:Number = interp.numarg(b, 0);
+				var secs:Number = beatsToSeconds(interp.numarg(b, 1));
+				interp.activeThread.tmpObj = playNote(s.instrument, key, secs, s);
+				interp.startTimer(secs);
+			} else {
+				interp.checkTimer();
+			}
 		}
 	}
 
 	private function primPlayDrum(b:Block):void {
-		var s:ScratchObj = interp.targetObj();
-		if (s == null) return;
-		if (interp.activeThread.firstTime) {
-			var drum:int = Math.round(interp.numarg(b, 0));
-			var isMIDI:Boolean = (b.op == 'drum:duration:elapsed:from:');
-			var secs:Number = beatsToSeconds(interp.numarg(b, 1));
-			playDrum(drum, isMIDI, 10, s); // always play entire drum sample
-			interp.startTimer(secs);
-		} else {
-			interp.checkTimer();
+		if(Scratch.app.sharpSettings.data.allowSound){
+			var s:ScratchObj = interp.targetObj();
+			if (s == null) return;
+			if (interp.activeThread.firstTime) {
+				var drum:int = Math.round(interp.numarg(b, 0));
+				var isMIDI:Boolean = (b.op == 'drum:duration:elapsed:from:');
+				var secs:Number = beatsToSeconds(interp.numarg(b, 1));
+				playDrum(drum, isMIDI, 10, s); // always play entire drum sample
+				interp.startTimer(secs);
+			} else {
+				interp.checkTimer();
+			}
 		}
 	}
 
 	private function playSound(s:ScratchSound, client:ScratchObj):ScratchSoundPlayer {
-		var player:ScratchSoundPlayer = s.sndplayer();
-		player.client = client;
-		player.startPlaying();
-		return player;
+		if(Scratch.app.sharpSettings.data.allowSound){
+			var player:ScratchSoundPlayer = s.sndplayer();
+			player.client = client;
+			player.startPlaying();
+			return player;
+		}else{
+			return null;
+		}
 	}
 
 	private function playDrum(drum:int, isMIDI:Boolean, secs:Number, client:ScratchObj):ScratchSoundPlayer {
-		var player:NotePlayer = SoundBank.getDrumPlayer(drum, isMIDI, secs);
-		if (player == null) return null;
-		player.client = client;
-		player.setDuration(secs);
-		player.startPlaying();
-		return player;
+		if(Scratch.app.sharpSettings.data.allowSound){
+			var player:NotePlayer = SoundBank.getDrumPlayer(drum, isMIDI, secs);
+			if (player == null) return null;
+			player.client = client;
+			player.setDuration(secs);
+			player.startPlaying();
+			return player;
+		}else{
+			return null;
+		}
 	}
 
 	private function playNote(instrument:int, midiKey:Number, secs:Number, client:ScratchObj):ScratchSoundPlayer {
-		var player:NotePlayer = SoundBank.getNotePlayer(instrument, midiKey);
-		if (player == null) return null;
-		player.client = client;
-		player.setNoteAndDuration(midiKey, secs);
-		player.startPlaying();
-		return player;
+		if(Scratch.app.sharpSettings.data.allowSound){
+			var player:NotePlayer = SoundBank.getNotePlayer(instrument, midiKey);
+			if (player == null) return null;
+			player.client = client;
+			player.setNoteAndDuration(midiKey, secs);
+			player.startPlaying();
+			return player;
+		}else{
+			return null;
+		}
 	}
 
 	private function primPlayRest(b:Block):void {
-		var s:ScratchObj = interp.targetObj();
-		if (s == null) return;
-		if (interp.activeThread.firstTime) {
-			var secs:Number = beatsToSeconds(interp.numarg(b, 0));
-			interp.startTimer(secs);
-		} else {
-			interp.checkTimer();
+		if(Scratch.app.sharpSettings.data.allowSound){
+			var s:ScratchObj = interp.targetObj();
+			if (s == null) return;
+			if (interp.activeThread.firstTime) {
+				var secs:Number = beatsToSeconds(interp.numarg(b, 0));
+				interp.startTimer(secs);
+			} else {
+				interp.checkTimer();
+			}
 		}
 	}
 
@@ -157,14 +179,16 @@ public class SoundPrims {
 	}
 
 	private function primSetInstrument(b:Block):void {
-		// Set Scratch 2.0 instrument.
-		var instr:int = interp.numarg(b, 0) - 1;
-		if (b.op == 'midiInstrument:') {
-			// map old to new instrument number
-			instr = instrumentMap[instr] - 1; // maps to -1 if out of range
+		if(Scratch.app.sharpSettings.data.allowSound){
+			// Set Scratch 2.0 instrument.
+			var instr:int = interp.numarg(b, 0) - 1;
+			if (b.op == 'midiInstrument:') {
+				// map old to new instrument number
+				instr = instrumentMap[instr] - 1; // maps to -1 if out of range
+			}
+			instr = Math.max(0, Math.min(instr, SoundBank.instrumentNames.length - 1));
+			if (interp.targetObj()) interp.targetObj().instrument = instr;
 		}
-		instr = Math.max(0, Math.min(instr, SoundBank.instrumentNames.length - 1));
-		if (interp.targetObj()) interp.targetObj().instrument = instr;
 	}
 
 	private function primChangeVolume(b:Block):void {

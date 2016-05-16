@@ -43,6 +43,7 @@ import flash.net.URLLoader;
 import flash.net.URLLoaderDataFormat;
 import flash.net.URLRequest;
 import flash.net.navigateToURL;
+import flash.net.SharedObject;
 import flash.system.*;
 import flash.text.*;
 import flash.utils.*;
@@ -77,6 +78,41 @@ public class Scratch extends Sprite {
 	// Version
 	public static const versionString:String = 'Dev : Scratch v446';
 	public static var app:Scratch; // static reference to the app, used for debugging
+	
+	// Sharp settings store
+	public var sharpSettings:SharedObject;
+	private var sharpSettingsVersion:int = 1;
+	private function initSettings():void{
+		if(!sharpSettings.data.hasOwnProperty("_settingsVersion")){
+			trace("Creating default setting values");
+			sharpSettings.data._settingsVersion = sharpSettingsVersion;
+			sharpSettings.data.allowSound = true;
+		}else{
+			
+		}
+	}
+	public function saveSettings():void{
+		sharpSettings.flush();
+	}
+	public function resetSettings():void{
+		sharpSettings.clear();
+		saveSettings();
+		exitSharp();
+	}
+	public function updateSettings():void{
+		if(sharpSettings.data._settingsVersion != sharpSettingsVersion){
+			/*if(sharpSettings.data._settingsVersion == (version to update from)){
+				trace("Updating settings from " + sharpSettings.data._settingsVersion + " to (version to update to)");
+				// do updates
+			}*/
+			updateSettings(); //Runs to see if there are more updates
+		}
+	}
+	
+	// Tasks
+	public function exitSharp():void{
+		fscommand("quit");
+	}
 
 	// Display modes
 	public var hostProtocol:String = 'http';
@@ -172,6 +208,8 @@ public class Scratch extends Sprite {
 
 		checkFlashVersion();
 		initServer();
+		
+		sharpSettings = SharedObject.getLocal("SharpScratchModSettings");
 
 		stage.align = StageAlign.TOP_LEFT;
 		stage.scaleMode = StageScaleMode.NO_SCALE;
@@ -224,6 +262,7 @@ public class Scratch extends Sprite {
 
 		handleStartupParameters();
 		
+		initSettings();
 		DialogBox.notify("Welcome to Sharp!", "Website: http://SharpScratchMod.github.io\nGitHub: https://github.com/SharpScratchMod/Sharp\n\nCredits:\nDrKat123 - Developer, Owner\nMrcomputer1 - Developer, Owner\nscratchyone - Developer");
 	}
 
@@ -1104,6 +1143,8 @@ public class Scratch extends Sprite {
 		m.addItem('About', helpMenuItemAbout);
 	}
 
+	public var fullscreenEditor:Boolean = false;
+	
 	protected function addFileMenuItems(b:*, m:Menu):void {
 		m.addItem('Load Project', runtime.selectProjectFile);
 		m.addItem('Save Project', exportProjectToFile);
@@ -1120,7 +1161,7 @@ public class Scratch extends Sprite {
 			m.addItem('Revert', revertToOriginalProject);
 		}
 		m.addLine();
-		m.addItem("Settings (WIP)", DialogBox.settingsDialog);
+		m.addItem("Settings", DialogBox.settingsDialog);
 
 		if (b.lastEvent.shiftKey) {
 			m.addLine();

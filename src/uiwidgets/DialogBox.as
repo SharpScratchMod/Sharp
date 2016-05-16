@@ -18,6 +18,7 @@
  */
 
 package uiwidgets {
+	import flash.system.fscommand;
 	import flash.display.*;
 	import flash.events.*;
 	import flash.filters.DropShadowFilter;
@@ -107,10 +108,17 @@ public class DialogBox extends Sprite {
 	public static function settingsDialog():void{
 		var d:DialogBox = new DialogBox(done);
 		function done():void {
-			
+			Scratch.app.sharpSettings.data.allowSound = d.booleanFields['sound'].isOn();
+			Scratch.app.saveSettings();
+		}
+		function resetSettings():void {
+			DialogBox.confirm("Do you really want to reset settings?", null, function():*{ Scratch.app.resetSettings(); });
 		}
 		d.addTitle("Settings");
-		d.addField("Test", 120, "", true, "Test");
+		d.addBoolean("sound", Scratch.app.sharpSettings.data.allowSound, false, "Allow sound");
+		d.addButton("OK", d.accept);
+		d.addButton("Cancel", d.cancel);
+		d.addButton("Reset Settings", resetSettings)
 		d.showOnStage(Scratch.app.stage);
 	}
 	
@@ -177,8 +185,10 @@ public class DialogBox extends Sprite {
 		labelsAndFields.push([l, f]);
 	}
 
-	public function addBoolean(fieldName:String, defaultValue:Boolean = false, isRadioButton:Boolean = false):void {
-		var l:TextField = makeLabel(Translator.map(fieldName) + ':');
+	public function addBoolean(fieldName:String, defaultValue:Boolean = false, isRadioButton:Boolean = false, label:String = null):void {
+		var l:TextField = null;
+		if(label == null) label = Translator.map(fieldName);
+		l = makeLabel(label + ':');
 		addChild(l);
 		var f:IconButton = isRadioButton ?
 			new IconButton(null, null, null, true) :
