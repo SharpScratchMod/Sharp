@@ -79,6 +79,7 @@ public class Primitives {
 		primTable["INCR_COUNT"]			= function(b:*):* { counter++ };
 		primTable["CLR_COUNT"]			= function(b:*):* { counter = 0 };
 		
+		// Sharp
 		primTable["inlineComment:"]     = function(b:*):* {};
 
 		new LooksPrims(app, interp).addPrimsTo(primTable);
