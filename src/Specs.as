@@ -397,7 +397,7 @@ public class Specs {
 		//["counter",								"r", 6, "COUNT"],
 		//["clear counter",						" ", 6, "CLR_COUNT"],
 		//["incr counter",						" ", 6, "INCR_COUNT"],
-		["for each %m.varName in %s",			"c", 99, "doForLoop", "v", 10],
+		//["for each %m.varName in %s",			"c", 99, "doForLoop", "v", 10],
 		["while %b",							"c", 99, "doWhile"],
 		["all at once",							"c", 99, "warpSpeed"],
 
