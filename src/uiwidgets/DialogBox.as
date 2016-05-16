@@ -97,12 +97,20 @@ public class DialogBox extends Sprite {
 			navigateToURL(request, "_blank");
 		}
 		d.addTitle("Report a bug");
-		d.addText("First box: Title");
-		d.addField("title", 120, "", false);
-		d.addText("Second box: Content");
-		d.addField("body", 120, "", false);
+		d.addField("title", 120, "", true, "Title");
+		d.addField("body", 120, "", true, "Content");
 		d.addButton("Report bug", d.accept);
 		d.addButton("Cancel", d.cancel);
+		d.showOnStage(Scratch.app.stage);
+	}
+	
+	public static function settingsDialog():void{
+		var d:DialogBox = new DialogBox(done);
+		function done():void {
+			
+		}
+		d.addTitle("Settings");
+		d.addField("Test", 120, "", true, "Test");
 		d.showOnStage(Scratch.app.stage);
 	}
 	
@@ -154,10 +162,12 @@ public class DialogBox extends Sprite {
 		addChild(o);
 	}
 
-	public function addField(fieldName:String, width:int, defaultValue:* = null, showLabel:Boolean = true):void {
+	public function addField(fieldName:String, width:int, defaultValue:* = null, showLabel:Boolean = true, label:String = null):void {
 		var l:TextField = null;
 		if (showLabel) {
-			l = makeLabel(Translator.map(fieldName) + ':');
+			//var labelStr:String = Translator.map(fieldName);
+			if(label == null) label = Translator.map(fieldName);
+			l = makeLabel(label + ':');
 			addChild(l);
 		}
 		var f:TextField = makeField(width);

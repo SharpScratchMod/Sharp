@@ -1119,6 +1119,8 @@ public class Scratch extends Sprite {
 			m.addLine();
 			m.addItem('Revert', revertToOriginalProject);
 		}
+		m.addLine();
+		m.addItem("Settings (WIP)", DialogBox.settingsDialog);
 
 		if (b.lastEvent.shiftKey) {
 			m.addLine();
