@@ -91,6 +91,7 @@ public class Scratch extends Sprite {
 	public var ignoreResize:Boolean = false; // If true, temporarily ignore resize events.
 	public var isExtensionDevMode:Boolean = false; // If true, run in extension development mode (as on ScratchX)
 	public var isMicroworld:Boolean = false;
+	public var isFullScreen:Boolean = false;
 
 	public var presentationScale:Number;
 	
@@ -223,7 +224,7 @@ public class Scratch extends Sprite {
 
 		handleStartupParameters();
 		
-		DialogBox.notify("Welcome to Sharp!", "Website: http://SharpScratchMod.github.io\nGitHub: https://github.com/SharpScratchMod/Sharp\n\nCredits:\nDrKat123 - Developer, Owner\nMrcomputer1 - Developer, Owner");
+		DialogBox.notify("Welcome to Sharp!", "Website: http://SharpScratchMod.github.io\nGitHub: https://github.com/SharpScratchMod/Sharp\n\nCredits:\nDrKat123 - Developer, Owner\nMrcomputer1 - Developer, Owner\nscratchyone - Developer");
 	}
 
 	protected function handleStartupParameters():void {
@@ -637,11 +638,13 @@ public class Scratch extends Sprite {
 				setEditMode(false);
 				if (jsEnabled) externalCall('tip_bar_api.hide');
 			}
+			isFullScreen = true;
 		} else {
 			if (wasEditing) {
 				setEditMode(true);
 				if (jsEnabled) externalCall('tip_bar_api.show');
 			}
+			isFullScreen = false;
 		}
 		if (isOffline) {
 			stage.displayState = enterPresentation ? StageDisplayState.FULL_SCREEN_INTERACTIVE : StageDisplayState.NORMAL;
@@ -1072,7 +1075,7 @@ public class Scratch extends Sprite {
 	
 	protected function addHelpMenuItems(b:*, m:Menu):void {
 		function helpMenuItemCredits(){
-			DialogBox.notify("Credits", "*Owner\n\nDrKat123*, Mrcomputer1*");
+			DialogBox.notify("Credits", "*Owner\n\nDrKat123*, Mrcomputer1*, scratchyone");
 		}
 		function helpMenuItemReportBug(){
 			DialogBox.reportBugDialog();
@@ -1090,7 +1093,7 @@ public class Scratch extends Sprite {
 			"\n" +
 			"\n" +
 			"Sharp\n" +
-			"Sharp Scratch mod by DrKat123 and Mrcomputer1\n" +
+			"Sharp Scratch mod by DrKat123, Mrcomputer1 and some others\n" +
 			"https://sharpscratchmod.github.io\n" +
 			versionString;
 			DialogBox.notify("About Sharp", aboutMsg);

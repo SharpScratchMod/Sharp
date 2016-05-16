@@ -76,6 +76,10 @@ public class SensingPrims {
 		
 		// Sharp
 		primTable["notify:"]            = primNotify;
+		primTable["isInEditor:"]        = function(b:*):* { return app.editMode };
+		primTable["isInFullscreen:"]    = function(b:*):* { return app.isFullScreen };
+		primTable["usingTurboMode:"]    = function(b:*):* { return interp.turboMode };
+		primTable["sharpVersion:"]      = function(b:*):* { return Scratch.versionString };
 	}
 	
 	// Sharp
