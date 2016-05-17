@@ -89,6 +89,7 @@ public class Scratch extends Sprite {
 			sharpSettings.data.allowSound = true;
 			sharpSettings.data.alwaysTurboMode = false;
 			sharpSettings.data.hackMode = false;
+			sharpSettings.data.cloneLimit = 300;
 		}else{
 			
 		}
