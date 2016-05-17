@@ -88,6 +88,7 @@ public class Scratch extends Sprite {
 			sharpSettings.data._settingsVersion = sharpSettingsVersion;
 			sharpSettings.data.allowSound = true;
 			sharpSettings.data.alwaysTurboMode = false;
+			sharpSettings.data.hackMode = false;
 		}else{
 			
 		}
@@ -117,6 +118,7 @@ public class Scratch extends Sprite {
 	}
 	
 	// Tasks
+	public var turboModeIsActive:Boolean = false;
 	public function exitSharp():void{
 		fscommand("quit");
 	}
@@ -1333,6 +1335,7 @@ public class Scratch extends Sprite {
 
 	public function toggleTurboMode():void {
 		interp.turboMode = !interp.turboMode;
+		turboModeIsActive = !turboModeIsActive;
 		stagePart.refresh();
 	}
 
