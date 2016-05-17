@@ -22,8 +22,8 @@
 //
 // This file defines the command blocks and categories.
 // To add a new command:
-//		a. add a specification for the new command to the commands array
-//		b. add a primitive for the new command to the interpreter
+//a. add a specification for the new command to the commands array
+//b. add a primitive for the new command to the interpreter
 
 package {
 	import flash.display.Bitmap;
