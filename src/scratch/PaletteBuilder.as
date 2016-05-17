@@ -210,6 +210,7 @@ public class PaletteBuilder {
 	private function makeVariable():void {
 		function makeVar2():void {
 			var n:String = d.getField('Variable name').replace(/^\s+|\s+$/g, '');
+			if (varSettings.isLocal) n = "[LOCAL] " + n;
 			if (n.length == 0) return;
 
 			createVar(n, varSettings);

@@ -105,6 +105,7 @@ public class Specs {
 		if (name == "stop") icon = Resources.createBmp('stopIcon');
 		if (name == "turnLeft") icon = Resources.createBmp('turnLeftIcon');
 		if (name == "turnRight") icon = Resources.createBmp('turnRightIcon');
+		if (name == "rabbit") icon = Resources.createBmp('rabbit');
 		if (icon != null) icon.scaleX = icon.scaleY = 0.5;
 		return icon;
 	}

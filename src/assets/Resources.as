@@ -81,6 +81,7 @@ public class Resources {
 	[Embed(source='blocks/stopIcon.png')] private static const stopIcon:Class;
 	[Embed(source='blocks/turnLeftIcon.png')] private static const turnLeftIcon:Class;
 	[Embed(source='blocks/turnRightIcon.png')] private static const turnRightIcon:Class;
+	[Embed(source='blocks/rabbit.png')] private static const rabbit:Class;
 
 	// Cursors
 	[Embed(source='cursors/copyCursor.png')] private static const copyCursor:Class;

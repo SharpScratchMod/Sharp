@@ -72,6 +72,7 @@ public class ProcedureSpecEditor extends Sprite {
 		addEventListener(FocusEvent.FOCUS_OUT, focusChange);
 		addEventListener(FocusEvent.FOCUS_IN, focusChange);
 
+		originalSpec = originalSpec.replace(/@rabbit/g, "");
 		addSpecElements(originalSpec, inputNames);
 		warpCheckbox.setOn(warpFlag);
 		showButtons(false);
@@ -137,6 +138,7 @@ public class ProcedureSpecEditor extends Sprite {
 
 	public function spec():String {
 		var result:String = '';
+		if(warpFlag()) result = '@rabbit ';
 		for each (var o:* in row) {
 			if (o is TextField) result += ReadStream.escape(TextField(o).text);
 			if (o is BlockArg) result += '%' + BlockArg(o).type;

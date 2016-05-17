@@ -125,7 +125,7 @@ public class DialogBox extends Sprite {
 		d.addField("cloneLimit", 120, Scratch.app.sharpSettings.data.cloneLimit, true, "Clone limit");
 		d.addButton("OK", d.accept);
 		d.addButton("Cancel", d.cancel);
-		d.addButton("Reset Settings", resetSettings)
+		d.addButton("Reset Settings", resetSettings);
 		d.showOnStage(Scratch.app.stage);
 	}
 	
