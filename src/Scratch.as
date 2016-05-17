@@ -87,8 +87,15 @@ public class Scratch extends Sprite {
 			trace("Creating default setting values");
 			sharpSettings.data._settingsVersion = sharpSettingsVersion;
 			sharpSettings.data.allowSound = true;
+			sharpSettings.data.alwaysTurboMode = false;
 		}else{
 			
+		}
+		prepareSettings();
+	}
+	private function prepareSettings():void{
+		if(sharpSettings.data.alwaysTurboMode){
+			toggleTurboMode();
 		}
 	}
 	public function saveSettings():void{
