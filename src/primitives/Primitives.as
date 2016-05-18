@@ -211,13 +211,5 @@ public class Primitives {
 	}
 
 
-	private function primWriteFile(b:Block):void{
-		var file:File =  new File(interp.arg(b, 1));
-    		var stream:FileStream = new FileStream();
-    		stream.open(file, FileMode.WRITE);
-		stream.writeUTFBytes(interp.arg(b, 0));
-		stream.close();
-	}
-
 
 }}
