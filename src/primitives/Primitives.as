@@ -81,6 +81,9 @@ public class Primitives {
 		
 		// Sharp
 		primTable["inlineComment:"]     = function(b:*):* {};
+		primTable["true"]               = function(b:*):* {return true};
+		primTable["false"]              = function(b:*):* {return false};
+		primTable["reportValue"]        = function(b:*):* { interp.arg(b, 0) };
 
 		new LooksPrims(app, interp).addPrimsTo(primTable);
 		new MotionAndPenPrims(app, interp).addPrimsTo(primTable);

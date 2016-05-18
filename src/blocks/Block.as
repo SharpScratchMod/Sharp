@@ -65,6 +65,11 @@ public class Block extends Sprite {
 
 	public static var MenuHandlerFunction:Function;	// optional function to handle block and blockArg menus
 
+	public var isCustomReporter:Boolean = false;
+	public var isCustomBoolean:Boolean = false;
+	
+	public var isReturnBlock:Boolean = false;
+	
 	public var spec:String;
 	public var type:String;
 	public var op:String = "";
@@ -115,6 +120,7 @@ public class Block extends Sprite {
 		this.spec = Translator.map(spec);
 		this.type = type;
 		this.op = op;
+		if(op == "call" && type == "r" || type == "b") isReturnBlock = true;
 
 		if ((Specs.CALL == op) ||
 			(Specs.GET_LIST == op) ||
@@ -179,6 +185,25 @@ public class Block extends Sprite {
 		setSpec(this.spec, defaultArgs);
 
 		addEventListener(FocusEvent.KEY_FOCUS_CHANGE, focusChange);
+	}
+	
+	public static const CUSTOM_COMMAND:Number = 0;
+	public static const CUSTOM_REPORTER:Number = 1;
+	public static const CUSTOM_BOOLEAN:Number = 2;
+	
+	public function setCustomBlockType(bType:Number = CUSTOM_COMMAND):void{
+		if(bType == CUSTOM_COMMAND){
+			isCustomBoolean = false;
+			isCustomReporter = false;
+		}else if(bType == CUSTOM_REPORTER){
+			isCustomBoolean = false;
+			isCustomReporter = true;
+		}else if(bType == CUSTOM_BOOLEAN){
+			isCustomBoolean = true;
+			isCustomReporter = false;
+		}else{
+			setCustomBlockType(CUSTOM_COMMAND);
+		}
 	}
 
 	public function setSpec(newSpec:String, defaultArgs:Array = null):void {

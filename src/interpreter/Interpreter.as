@@ -70,6 +70,8 @@ import scratch.*;
 
 import sound.*;
 
+import uiwidgets.DialogBox;
+
 public class Interpreter {
 
 	public var activeThread:Thread;				// current thread
@@ -318,7 +320,7 @@ public class Interpreter {
 		// Debug code
 		if(debugFunc != null)
 			debugFunc(b);
-
+		
 		return b.opFunction(b);
 	}
 
@@ -389,7 +391,7 @@ public class Interpreter {
 		return Number(n);
 	}
 
-	private function startCmdList(b:Block, isLoop:Boolean = false, argList:Array = null):void {
+	private function startCmdList(b:Block, isLoop:Boolean = false, argList:Array = null):* {
 		if (b == null) {
 			if (isLoop) yield = true;
 			return;
@@ -633,7 +635,7 @@ public class Interpreter {
 
 	// Procedure call/return
 
-	private function primCall(b:Block):void {
+	private function primCall(b:Block):* {
 		// Call a procedure. Handle recursive calls and "warp" procedures.
 		// The activeThread.firstTime flag is used to mark the first call
 		// to a procedure running in warp mode. activeThread.firstTime is

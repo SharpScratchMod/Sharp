@@ -42,7 +42,7 @@ public class Thread {
 	public var args:Array;			// arguments to a user-defined procedure
 
 	// the stack
-	private var stack:Vector.<StackFrame>;
+	public var stack:Vector.<StackFrame>;
 	private var sp:int;
 
 	public function Thread(b:Block, targetObj:*, startupDelay:int = 0) {
@@ -142,7 +142,7 @@ import blocks.*;
 import interpreter.*;
 
 class StackFrame {
-	internal var block:Block;
+	public var block:Block;
 	internal var isLoop:Boolean;
 	internal var firstTime:Boolean;
 	internal var tmp:int;

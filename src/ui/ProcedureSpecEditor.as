@@ -41,6 +41,11 @@ public class ProcedureSpecEditor extends Sprite {
 
 	private var warpCheckbox:IconButton;
 	private var warpLabel:TextField;
+	
+	public var returnValuesCheckbox:IconButton;
+	private var returnValuesLabel:TextField;
+	public var returnBooleanCheckbox:IconButton;
+	private var returnBooleanLabel:TextField;
 
 	private var deleteButton:IconButton;
 	private var focusItem:DisplayObject;
@@ -212,6 +217,14 @@ public class ProcedureSpecEditor extends Sprite {
 		addChild(warpCheckbox = new IconButton(null, 'checkbox'));
 		warpCheckbox.disableMouseover();
 		addChild(warpLabel = makeLabel('Run without screen refresh', 14));
+		
+		addChild(returnValuesCheckbox = new IconButton(null, 'checkbox'));
+		returnValuesCheckbox.disableMouseover();
+		addChild(returnValuesLabel = makeLabel('Does this block return anything?', 14));
+		
+		addChild(returnBooleanCheckbox = new IconButton(null, 'checkbox'));
+		returnBooleanCheckbox.disableMouseover();
+		addChild(returnBooleanLabel = makeLabel('This block returns a boolean', 14))
 	}
 
 	private function makeLabel(s:String, fontSize:int):TextField {
@@ -249,11 +262,19 @@ public class ProcedureSpecEditor extends Sprite {
 			for each (b in buttons) addChild(b);
 			addChild(warpCheckbox);
 			addChild(warpLabel);
+			addChild(returnBooleanCheckbox);
+			addChild(returnBooleanLabel);
+			addChild(returnValuesCheckbox);
+			addChild(returnValuesLabel);
 		} else {
 			for each (label in buttonLabels) if (label.parent) removeChild(label);
 			for each (b in buttons) if (b.parent) removeChild(b);
 			if (warpCheckbox.parent) removeChild(warpCheckbox);
 			if (warpLabel.parent) removeChild(warpLabel);
+			if (returnBooleanCheckbox.parent) removeChild(returnBooleanCheckbox);
+			if (returnBooleanLabel.parent) removeChild(returnBooleanLabel);
+			if (returnValuesCheckbox.parent) removeChild(returnValuesCheckbox);
+			if (returnValuesLabel.parent) removeChild(returnValuesLabel);
 		}
 
 		moreButton.setOn(showParams);
@@ -375,6 +396,18 @@ public class ProcedureSpecEditor extends Sprite {
 
 		warpLabel.x = warpCheckbox.x + 18;
 		warpLabel.y = warpCheckbox.y - 3;
+		rowY += 30;
+		
+		returnBooleanCheckbox.x = blockShape.x + 46;
+		returnBooleanCheckbox.y = rowY + 4;
+		returnBooleanLabel.x = returnBooleanCheckbox.x + 18;
+		returnBooleanLabel.y = returnBooleanCheckbox.y - 3;
+		rowY += 30;
+		
+		returnValuesCheckbox.x = blockShape.x + 46;
+		returnValuesCheckbox.y = rowY + 4;
+		returnValuesLabel.x = returnValuesCheckbox.x + 18;
+		returnValuesLabel.y = returnValuesCheckbox.y - 3;
 
 		if (updateDelete) updateDeleteButton();
 		if (parent is DialogBox) DialogBox(parent).fixLayout();
