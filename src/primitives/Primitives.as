@@ -210,8 +210,7 @@ public class Primitives {
 		app.runtime.cloneCount--;
 	}
 
-<<<<<<< HEAD
-=======
+
 	private function primWriteFile(b:Block):void{
 		var file:File =  new File(interp.arg(b, 1));
     		var stream:FileStream = new FileStream();
@@ -220,5 +219,5 @@ public class Primitives {
 		stream.close();
 	}
 
->>>>>>> origin/master
+
 }}
