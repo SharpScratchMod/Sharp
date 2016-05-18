@@ -25,6 +25,7 @@
 
 package primitives {
 	import flash.utils.Dictionary;
+	import flash.filesystem.*;
 	import blocks.*;
 	import interpreter.*;
 	import scratch.ScratchSprite;
@@ -209,4 +210,15 @@ public class Primitives {
 		app.runtime.cloneCount--;
 	}
 
+<<<<<<< HEAD
+=======
+	private function primWriteFile(b:Block):void{
+		var file:File =  new File(interp.arg(b, 1));
+    		var stream:FileStream = new FileStream();
+    		stream.open(file, FileMode.WRITE);
+		stream.writeUTFBytes(interp.arg(b, 0));
+		stream.close();
+	}
+
+>>>>>>> origin/master
 }}

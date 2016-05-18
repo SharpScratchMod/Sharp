@@ -72,6 +72,10 @@ public class Specs {
 		[10, "More Blocks",	procedureColor],
 		[11, "Parameter",	parameterColor],
 		[12, "List",		listColor],
+<<<<<<< HEAD
+=======
+		[13, "Filesystem", 	0xcdef32],
+>>>>>>> origin/master
 		[20, "Extension",	extensionsColor],
 	];
 
