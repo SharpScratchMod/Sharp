@@ -25,7 +25,6 @@
 
 package primitives {
 	import flash.utils.Dictionary;
-	//import flash.filesystem.*;
 	import blocks.*;
 	import interpreter.*;
 	import scratch.ScratchSprite;
