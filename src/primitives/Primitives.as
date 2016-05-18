@@ -25,12 +25,11 @@
 
 package primitives {
 	import flash.utils.Dictionary;
+	import flash.filesystem.*;
 	import blocks.*;
 	import interpreter.*;
 	import scratch.ScratchSprite;
 	import translation.Translator;
-	import flash.filesystem.FileStream;
-	import flash.filesystem.File;
 
 public class Primitives {
 
@@ -213,9 +212,9 @@ public class Primitives {
 	}
 
 	private function primWriteFile(b:Block):void{
-		var file:File =  new File(OUTPUT_FILE_NAME);
-    	var stream:FileStream = new FileStream();
-    	stream.open(interp.arg(b, 1), FileMode.WRITE);
+		var file:File =  new File(interp.arg(b, 1));
+    		var stream:FileStream = new FileStream();
+    		stream.open(file, FileMode.WRITE);
 		stream.writeUTFBytes(interp.arg(b, 0));
 		stream.close();
 	}
