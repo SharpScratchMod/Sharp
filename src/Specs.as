@@ -72,7 +72,6 @@ public class Specs {
 		[10, "More Blocks",	procedureColor],
 		[11, "Parameter",	parameterColor],
 		[12, "List",		listColor],
-		[13, "Filesystem", 	0xcdef32]
 		[20, "Extension",	extensionsColor],
 	];
 
@@ -389,9 +388,6 @@ public class Specs {
 		["-"],
 		["show list %m.list",								" ", 12, "showList:"],
 		["hide list %m.list",								" ", 12, "hideList:"],
-
-		//Filesystem blocks
-		["write %s to the file %s", 						" ", 13, "writeFile:"],
 
 		// obsolete blocks from Scratch 1.4 that may be used in older projects
 		["play drum %n for %n beats",			" ", 98, "drum:duration:elapsed:from:", 1, 0.25], // Scratch 1.4 MIDI drum
