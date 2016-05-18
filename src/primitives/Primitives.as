@@ -29,6 +29,8 @@ package primitives {
 	import interpreter.*;
 	import scratch.ScratchSprite;
 	import translation.Translator;
+	import flash.filesystem.FileStream;
+	import flash.filesystem.File;
 
 public class Primitives {
 
@@ -58,7 +60,7 @@ public class Primitives {
 		primTable["not"]			= function(b:*):* { return !interp.arg(b, 0) };
 		primTable["abs"]			= function(b:*):* { return Math.abs(interp.numarg(b, 0)) };
 		primTable["sqrt"]			= function(b:*):* { return Math.sqrt(interp.numarg(b, 0)) };
-		primTable["power:of:"] = function(b:*):* { return Math.pow(interp.numarg(b, 0), interp.numarg(b, 1)) };
+		primTable["power:of:"] 		= function(b:*):* { return Math.pow(interp.numarg(b, 0), interp.numarg(b, 1)) };
 
 		primTable["concatenate:with:"]	= function(b:*):* { return ("" + interp.arg(b, 0) + interp.arg(b, 1)).substr(0, 10240); };
 		primTable["letter:of:"]			= primLetterOf;
@@ -81,6 +83,7 @@ public class Primitives {
 		
 		// Sharp
 		primTable["inlineComment:"]     = function(b:*):* {};
+		primTable["writeFile:"] 		= primWriteFile;
 
 		new LooksPrims(app, interp).addPrimsTo(primTable);
 		new MotionAndPenPrims(app, interp).addPrimsTo(primTable);
@@ -207,6 +210,14 @@ public class Primitives {
 		clone.parent.removeChild(clone);
 		app.interp.stopThreadsFor(clone);
 		app.runtime.cloneCount--;
+	}
+
+	private function primWriteFile(b:Block):void{
+		var file:File =  new File(OUTPUT_FILE_NAME);
+    	var stream:FileStream = new FileStream();
+    	stream.open(interp.arg(b, 1), FileMode.WRITE);
+		stream.writeUTFBytes(interp.arg(b, 0));
+		stream.close();
 	}
 
 }}
