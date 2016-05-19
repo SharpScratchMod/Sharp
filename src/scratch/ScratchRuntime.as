@@ -797,7 +797,7 @@ public class ScratchRuntime {
 			filter = new FileFilter('SharpX Project', '*.sharpx;*.sharp;*.sb;*.sb2;*.sbx');
 		}
 		else {
-			filter = new FileFilter('Scratch Project', '*.sharp;*.sb;*.sb2');
+			filter = new FileFilter('Sharp Project', '*.sharp;*.sb;*.sb2');
 		}
 		Scratch.loadSingleFile(fileLoadHandler, filter);
 	}
