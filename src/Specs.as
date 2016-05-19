@@ -232,6 +232,7 @@ public class Specs {
 
 		// control - sprite
 		["// %s",                               " ", 6, "inlineComment:", "My comment"],
+		["%s",                                  "c", 6, "codeSection", "My code section"],
 		["-"],
 		["wait %n secs",						" ", 6, "wait:elapsed:from:",	1],
 		["-"],
@@ -259,6 +260,7 @@ public class Specs {
 
 		// control - stage
 		["// %s",                               " ", 106, "inlineComment:", "My comment"],
+		["%s",                                  "c", 106, "codeSection", "My code section"],
 		["-"],
 		["wait %n secs",						" ", 106, "wait:elapsed:from:",	1],
 		["-"],

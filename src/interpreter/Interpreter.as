@@ -438,6 +438,7 @@ public class Interpreter {
 	private function initPrims():void {
 		primTable = new Dictionary();
 		// control
+		primTable["codeSection"]          = primCodeSection;
 		primTable["whenGreenFlag"]		= primNoop;
 		primTable["whenKeyPressed"]		= primNoop;
 		primTable["whenClicked"]		= primNoop;
@@ -548,6 +549,20 @@ public class Interpreter {
 	private function primRepeat(b:Block):void {
 		if (activeThread.firstTime) {
 			var repeatCount:Number = Math.max(0, Math.min(Math.round(numarg(b, 0)), 2147483647)); // clip to range: 0 to 2^31-1
+			activeThread.tmp = repeatCount;
+			activeThread.firstTime = false;
+		}
+		if (activeThread.tmp > 0) {
+			activeThread.tmp--; // decrement count
+			startCmdList(b.subStack1, true);
+		} else {
+			activeThread.firstTime = true;
+		}
+	}
+	
+	private function primCodeSection(b:Block):void{
+		if (activeThread.firstTime) {
+			var repeatCount:Number = 1; // clip to range: 0 to 2^31-1
 			activeThread.tmp = repeatCount;
 			activeThread.firstTime = false;
 		}
