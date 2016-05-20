@@ -67,7 +67,7 @@ public class Primitives {
 
 		primTable["%"]				= primModulo;
 		primTable["rounded"]			= function(b:*):* { return Math.round(interp.numarg(b, 0)) };
-		primTable["computeFunction:of:"] = primMathFunction;
+		primTable["computeFunction:of:"] 	= primMathFunction;
 
 		// clone
 		primTable["createCloneOf"]		= primCreateCloneOf;
@@ -215,12 +215,12 @@ public class Primitives {
 	
 	private function primReverseString(b:Block):String {
 		var reverse:String = interp.arg(b, 0);
-		var output:String;
+		var result:String;
 		var i:int;
 		for(i = reverse.length - 1; i < 0; i--) {
-			output += reverse.charAt(i);
+			result += reverse.charAt(i);
 		}
-		return output;
+		return result;
 
 	}
 }}
