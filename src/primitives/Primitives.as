@@ -49,7 +49,7 @@ public class Primitives {
 		primTable["-"]				= function(b:*):* { return interp.numarg(b, 0) - interp.numarg(b, 1) };
 		primTable["*"]				= function(b:*):* { return interp.numarg(b, 0) * interp.numarg(b, 1) };
 		primTable["/"]				= function(b:*):* { return interp.numarg(b, 0) / interp.numarg(b, 1) };
-		primTable["randomFrom:to:"]	= primRandom;
+		primTable["randomFrom:to:"]		= primRandom;
 		primTable["<"]				= function(b:*):* { return compare(interp.arg(b, 0), interp.arg(b, 1)) < 0 };
 		primTable["="]				= function(b:*):* { return compare(interp.arg(b, 0), interp.arg(b, 1)) == 0 };
 		primTable[">"]				= function(b:*):* { return compare(interp.arg(b, 0), interp.arg(b, 1)) > 0 };
@@ -58,13 +58,14 @@ public class Primitives {
 		primTable["not"]			= function(b:*):* { return !interp.arg(b, 0) };
 		primTable["abs"]			= function(b:*):* { return Math.abs(interp.numarg(b, 0)) };
 		primTable["sqrt"]			= function(b:*):* { return Math.sqrt(interp.numarg(b, 0)) };
-		primTable["power:of:"] = function(b:*):* { return Math.pow(interp.numarg(b, 0), interp.numarg(b, 1)) };
+		primTable["power:of:"] 			= function(b:*):* { return Math.pow(interp.numarg(b, 0), interp.numarg(b, 1)) };
+		primTable["reverseString:"] 		= primReverseString;
 
-		primTable["concatenate:with:"]	= function(b:*):* { return ("" + interp.arg(b, 0) + interp.arg(b, 1)).substr(0, 10240); };
+		primTable["concatenate:with:"]		= function(b:*):* { return ("" + interp.arg(b, 0) + interp.arg(b, 1)).substr(0, 10240); };
 		primTable["letter:of:"]			= primLetterOf;
 		primTable["stringLength:"]		= function(b:*):* { return String(interp.arg(b, 0)).length };
 
-		primTable["%"]					= primModulo;
+		primTable["%"]				= primModulo;
 		primTable["rounded"]			= function(b:*):* { return Math.round(interp.numarg(b, 0)) };
 		primTable["computeFunction:of:"] = primMathFunction;
 
@@ -74,16 +75,16 @@ public class Primitives {
 		primTable["whenCloned"]			= interp.primNoop;
 
 		// testing (for development)
-		primTable["NOOP"]				= interp.primNoop;
-		primTable["COUNT"]				= function(b:*):* { return counter };
+		primTable["NOOP"]			= interp.primNoop;
+		primTable["COUNT"]			= function(b:*):* { return counter };
 		primTable["INCR_COUNT"]			= function(b:*):* { counter++ };
 		primTable["CLR_COUNT"]			= function(b:*):* { counter = 0 };
 		
 		// Sharp
-		primTable["inlineComment:"]     = function(b:*):* {};
-		primTable["true"]               = function(b:*):* {return true};
-		primTable["false"]              = function(b:*):* {return false};
-		primTable["reportValue"]        = function(b:*):* { interp.arg(b, 0) };
+		primTable["inlineComment:"]     	= function(b:*):* {};
+		primTable["true"]               	= function(b:*):* {return true};
+		primTable["false"]      	 	= function(b:*):* {return false};
+		primTable["reportValue"]        	= function(b:*):* { interp.arg(b, 0) };
 
 		new LooksPrims(app, interp).addPrimsTo(primTable);
 		new MotionAndPenPrims(app, interp).addPrimsTo(primTable);
@@ -211,7 +212,14 @@ public class Primitives {
 		app.interp.stopThreadsFor(clone);
 		app.runtime.cloneCount--;
 	}
-
+	
+	private function primReverseString(b:Block):String {
+		var reverse:String = interp.arg(b, 0);
+		var output:String = "";
+		for(var i:Number = reverse.length - 1; i < 0; i--) {
+			output += reverse.charAt(i);
+		}
+		return output;
 
 
 }}
