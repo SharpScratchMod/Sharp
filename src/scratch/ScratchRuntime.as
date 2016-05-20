@@ -35,6 +35,7 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 import flash.media.*;
 import flash.net.*;
+import flash.events.Event;
 import flash.system.System;
 import flash.text.TextField;
 import flash.utils.*;
@@ -800,6 +801,20 @@ public class ScratchRuntime {
 			filter = new FileFilter('Sharp Project', '*.sharp;*.sb;*.sb2');
 		}
 		Scratch.loadSingleFile(fileLoadHandler, filter);
+	}
+	
+	public function loadProjectFromURL(url:String, p:*):void {
+		function doInstall(e:Event):void {
+			installProjectFromFile(p['sharp_pid'], ByteArray(e.target.data));
+		}
+		stopAll();
+
+		var req:URLRequest = new URLRequest(url);
+		req.method = "get";
+		var loader:URLLoader = new URLLoader();
+		loader.addEventListener(Event.COMPLETE, doInstall);
+		loader.dataFormat = URLLoaderDataFormat.BINARY;
+		loader.load(req);
 	}
 
 	public function installProjectFromFile(fileName:String, data:ByteArray):void {

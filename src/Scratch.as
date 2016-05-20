@@ -262,8 +262,13 @@ public class Scratch extends Sprite {
 		setEditMode(startInEditMode());
 
 		// install project before calling fixLayout()
-		if (editMode) runtime.installNewProject();
-		else runtime.installEmptyProject();
+		if(loaderInfo.parameters.hasOwnProperty("sharp_pid")){
+			var p:* = loaderInfo.parameters;
+			runtime.loadProjectFromURL(p['sharp_domain'] + p['sharp_save_path'] + p['sharp_pid'] + p['sharp_save_format'], p);
+		}else{
+			if (editMode) runtime.installNewProject();
+			else runtime.installEmptyProject();
+		}
 
 		fixLayout();
 		//Analyze.collectAssets(0, 119110);
@@ -273,7 +278,7 @@ public class Scratch extends Sprite {
 		handleStartupParameters();
 		
 		initSettings();
-		DialogBox.notify("Welcome to Sharp!", "Website: http://SharpScratchMod.github.io\nGitHub: https://github.com/SharpScratchMod/Sharp\n\nCredits:\nDrKat123 - Developer, Owner\nMrcomputer1 - Developer, Owner\nscratchyone - Developer");
+		if(isOffline) DialogBox.notify("Welcome to Sharp!", "Website: http://SharpScratchMod.github.io\nGitHub: https://github.com/SharpScratchMod/Sharp\n\nCredits:\nDrKat123 - Developer, Owner\nMrcomputer1 - Developer, Owner\nscratchyone - Developer");
 	}
 
 	protected function handleStartupParameters():void {
@@ -293,6 +298,8 @@ public class Scratch extends Sprite {
 			addExternalCallback('ASloadGithubURL', loadGithubURL);
 			addExternalCallback('ASloadBase64SBX', loadBase64SBX);
 			addExternalCallback('ASsetModalOverlay', setModalOverlay);
+		}else{
+			addExternalCallback('ASloadGithubURL', loadGithubURL);
 		}
 	}
 
