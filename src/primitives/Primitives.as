@@ -215,10 +215,10 @@ public class Primitives {
 	
 	private function primReverseString(b:Block):String {
 		var reverse:String = interp.arg(b, 0);
-		var result:String;
+		var result:String = "";
 		var i:int;
-		for(i = reverse.length - 1; i < 0; i--) {
-			result += reverse.charAt(i);
+		for(i = reverse.length; i > 0; i--) {
+			result += reverse.charAt(i-1);
 		}
 		return result;
 
