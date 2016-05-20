@@ -215,8 +215,9 @@ public class Primitives {
 	
 	private function primReverseString(b:Block):String {
 		var reverse:String = interp.arg(b, 0);
-		var output:String = "";
-		for(var i:Number = reverse.length - 1; i < 0; i--) {
+		var output:String;
+		var i:int;
+		for(i = reverse.length - 1; i < 0; i--) {
 			output += reverse.charAt(i);
 		}
 		return output;
