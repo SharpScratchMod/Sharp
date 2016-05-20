@@ -366,10 +366,10 @@ public class Specs {
 		["-"],
 		["%b and %b",							"b", 8, "&"],
 		["%b or %b",							"b", 8, "|"],
-		["not %b",								"b", 8, "not"],
+		["not %b",							"b", 8, "not"],
 		["-"],
-		["true",                                "b", 8, "true"],
-		["false",                               "b", 8, "false"],
+		["true",                                			"b", 8, "true"],
+		["false",                       				"b", 8, "false"],
 		["-"],
 		["join %s %s",							"r", 8, "concatenate:with:",	"hello ", "world"],
 		["letter %n of %s",						"r", 8, "letter:of:",			1, "world"],
@@ -379,6 +379,7 @@ public class Specs {
 		["round %n",							"r", 8, "rounded", 				""],
 		["-"],
 		["%m.mathOp of %n",						"r", 8, "computeFunction:of:",	"sqrt", 9],
+		["reverse %s",							"r", 8, "reverseString:",	"hello"],			
 
 		// variables
 		["set %m.var to %s",								" ", 9, SET_VAR],
