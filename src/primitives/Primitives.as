@@ -29,6 +29,9 @@ package primitives {
 	import interpreter.*;
 	import scratch.ScratchSprite;
 	import translation.Translator;
+	
+	import flash.net.*;
+	import flash.events.Event;
 
 public class Primitives {
 
@@ -37,6 +40,7 @@ public class Primitives {
 	protected var app:Scratch;
 	protected var interp:Interpreter;
 	private var counter:int;
+	private var httpReturn:String = "";
 
 	public function Primitives(app:Scratch, interpreter:Interpreter) {
 		this.app = app;
@@ -85,7 +89,10 @@ public class Primitives {
 		primTable["true"]               	= function(b:*):* {return true};
 		primTable["false"]      	 	= function(b:*):* {return false};
 		primTable["reportValue"]        	= function(b:*):* { interp.arg(b, 0) };
-
+		// Sharp -- HTTP
+		primTable["httpBlock:"] = primHttp;
+		primTable["httpReturn:"] = function(b:*):* {return httpReturn};
+		
 		new LooksPrims(app, interp).addPrimsTo(primTable);
 		new MotionAndPenPrims(app, interp).addPrimsTo(primTable);
 		new SoundPrims(app, interp).addPrimsTo(primTable);
@@ -222,5 +229,21 @@ public class Primitives {
 		}
 		return result;
 
+	}
+	
+	// Sharp --- HTTP
+	private function primHttp(b:Block):void {
+		var url:String = interp.arg(b, 1);
+		var req:URLRequest = new URLRequest(url);
+		req.method = URLRequestMethod.GET;
+		
+		var loader:URLLoader = new URLLoader();
+		loader.addEventListener(Event.COMPLETE, onComplete);
+		loader.dataFormat = URLLoaderDataFormat.TEXT;
+		loader.load(req);
+		
+		function onComplete(e:Event){
+			httpReturn = e.target.data;
+		}
 	}
 }}

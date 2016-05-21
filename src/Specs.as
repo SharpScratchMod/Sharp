@@ -72,6 +72,7 @@ public class Specs {
 		[10, "More Blocks",	procedureColor],
 		[11, "Parameter",	parameterColor],
 		[12, "List",		listColor],
+		[13, "HTTP",        0x55af40],
 		[20, "Extension",	extensionsColor],
 	];
 
@@ -400,6 +401,13 @@ public class Specs {
 		["-"],
 		["show list %m.list",								" ", 12, "showList:"],
 		["hide list %m.list",								" ", 12, "hideList:"],
+		
+		// Sharp
+		// --HTTP--
+		["%m.httpMethod %s",                    " ", 13, "httpBlock:", "GET", "https://api.scratch.mit.edu"],
+		["http return",                         "r", 13, "httpReturn:"],
+		
+		// Scratch
 
 		// obsolete blocks from Scratch 1.4 that may be used in older projects
 		["play drum %n for %n beats",			" ", 98, "drum:duration:elapsed:from:", 1, 0.25], // Scratch 1.4 MIDI drum
