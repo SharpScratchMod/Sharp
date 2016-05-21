@@ -218,13 +218,13 @@ public class ProcedureSpecEditor extends Sprite {
 		warpCheckbox.disableMouseover();
 		addChild(warpLabel = makeLabel('Run without screen refresh', 14));
 		
-		addChild(returnValuesCheckbox = new IconButton(null, 'checkbox'));
-		returnValuesCheckbox.disableMouseover();
-		addChild(returnValuesLabel = makeLabel('Does this block return anything?', 14));
+		//addChild(returnValuesCheckbox = new IconButton(null, 'checkbox'));
+		//returnValuesCheckbox.disableMouseover();
+		//addChild(returnValuesLabel = makeLabel('Does this block return anything?', 14));
 		
-		addChild(returnBooleanCheckbox = new IconButton(null, 'checkbox'));
-		returnBooleanCheckbox.disableMouseover();
-		addChild(returnBooleanLabel = makeLabel('This block returns a boolean', 14))
+		//addChild(returnBooleanCheckbox = new IconButton(null, 'checkbox'));
+		//returnBooleanCheckbox.disableMouseover();
+		//addChild(returnBooleanLabel = makeLabel('This block returns a boolean', 14))
 	}
 
 	private function makeLabel(s:String, fontSize:int):TextField {
@@ -264,8 +264,8 @@ public class ProcedureSpecEditor extends Sprite {
 			addChild(warpLabel);
 			addChild(returnBooleanCheckbox);
 			addChild(returnBooleanLabel);
-			addChild(returnValuesCheckbox);
-			addChild(returnValuesLabel);
+			//addChild(returnValuesCheckbox);
+			//addChild(returnValuesLabel);
 		} else {
 			for each (label in buttonLabels) if (label.parent) removeChild(label);
 			for each (b in buttons) if (b.parent) removeChild(b);
@@ -273,8 +273,8 @@ public class ProcedureSpecEditor extends Sprite {
 			if (warpLabel.parent) removeChild(warpLabel);
 			if (returnBooleanCheckbox.parent) removeChild(returnBooleanCheckbox);
 			if (returnBooleanLabel.parent) removeChild(returnBooleanLabel);
-			if (returnValuesCheckbox.parent) removeChild(returnValuesCheckbox);
-			if (returnValuesLabel.parent) removeChild(returnValuesLabel);
+			//if (returnValuesCheckbox.parent) removeChild(returnValuesCheckbox);
+			//if (returnValuesLabel.parent) removeChild(returnValuesLabel);
 		}
 
 		moreButton.setOn(showParams);
@@ -404,10 +404,10 @@ public class ProcedureSpecEditor extends Sprite {
 		returnBooleanLabel.y = returnBooleanCheckbox.y - 3;
 		rowY += 30;
 		
-		returnValuesCheckbox.x = blockShape.x + 46;
-		returnValuesCheckbox.y = rowY + 4;
-		returnValuesLabel.x = returnValuesCheckbox.x + 18;
-		returnValuesLabel.y = returnValuesCheckbox.y - 3;
+		//returnValuesCheckbox.x = blockShape.x + 46;
+		//returnValuesCheckbox.y = rowY + 4;
+		//returnValuesLabel.x = returnValuesCheckbox.x + 18;
+		//returnValuesLabel.y = returnValuesCheckbox.y - 3;
 
 		if (updateDelete) updateDeleteButton();
 		if (parent is DialogBox) DialogBox(parent).fixLayout();

@@ -88,7 +88,6 @@ public class Primitives {
 		primTable["inlineComment:"]     	= function(b:*):* {};
 		primTable["true"]               	= function(b:*):* {return true};
 		primTable["false"]      	 	= function(b:*):* {return false};
-		primTable["reportValue"]        	= function(b:*):* { interp.arg(b, 0) };
 		// Sharp -- HTTP
 		primTable["httpBlock:"] = primHttp;
 		primTable["httpReturn:"] = function(b:*):* {return httpReturn};
