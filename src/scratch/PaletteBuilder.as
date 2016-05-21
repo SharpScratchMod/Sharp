@@ -132,9 +132,10 @@ public class PaletteBuilder {
 		if (definitions.length > 0) {
 			nextY += 5;
 			for each (var proc:Block in definitions) {
-				if(!proc.isCustomReporter && !proc.isCustomBoolean) var b:Block = new Block(proc.spec, ' ', Specs.procedureColor, Specs.CALL, proc.defaultArgValues);
-				if(proc.isCustomReporter && !proc.isCustomBoolean) var b:Block = new Block(proc.spec, 'r', Specs.procedureColor, Specs.CALL, proc.defaultArgValues);
-				if(!proc.isCustomReporter && proc.isCustomBoolean) var b:Block = new Block(proc.spec, 'b', Specs.procedureColor, Specs.CALL, proc.defaultArgValues);
+				//if(!proc.isCustomReporter && !proc.isCustomBoolean) var b:Block = new Block(proc.spec, ' ', Specs.procedureColor, Specs.CALL, proc.defaultArgValues);
+				//if(proc.isCustomReporter && !proc.isCustomBoolean) var b:Block = new Block(proc.spec, 'r', Specs.procedureColor, Specs.CALL, proc.defaultArgValues);
+				//if(!proc.isCustomReporter && proc.isCustomBoolean) var b:Block = new Block(proc.spec, 'b', Specs.procedureColor, Specs.CALL, proc.defaultArgValues);
+				var b:Block = new Block(proc.spec, proc.procedureType, Specs.procedureColor, Specs.CALL, proc.defaultArgValues);
 				addItem(b);
 			}
 			nextY += 5;
@@ -256,6 +257,7 @@ public class PaletteBuilder {
 			newHat.parameterNames = specEditor.inputNames();
 			newHat.defaultArgValues = specEditor.defaultArgValues();
 			newHat.warpProcFlag = specEditor.warpFlag();
+			newHat.procedureType = specEditor.type();
 			if(specEditor.returnValuesCheckbox.isOn() && !specEditor.returnBooleanCheckbox.isOn()) newHat.setCustomBlockType(Block.CUSTOM_REPORTER);
 			if(specEditor.returnValuesCheckbox.isOn() && specEditor.returnBooleanCheckbox.isOn()) newHat.setCustomBlockType(Block.CUSTOM_BOOLEAN);
 			if(!specEditor.returnValuesCheckbox.isOn() && !specEditor.returnBooleanCheckbox.isOn()) newHat.setCustomBlockType(Block.CUSTOM_COMMAND);
@@ -269,7 +271,7 @@ public class PaletteBuilder {
 			app.setSaveNeeded();
 		}
 
-		var specEditor:ProcedureSpecEditor = new ProcedureSpecEditor('', [], false);
+		var specEditor:ProcedureSpecEditor = new ProcedureSpecEditor('', [], false, ' ', false);
 		var d:DialogBox = new DialogBox(addBlockHat);
 		d.addTitle('New Block');
 		d.addWidget(specEditor);
