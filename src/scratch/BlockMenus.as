@@ -102,6 +102,7 @@ public class BlockMenus implements DragClient {
 		if (menuName == 'videoMotionType') menuHandler.videoMotionTypeMenu(evt);
 		if (menuName == 'videoState') menuHandler.videoStateMenu(evt);
 		if (menuName == 'httpMethod') menuHandler.httpMethodMenu(evt);
+		if (menuName == 'constantName') menuHandler.constantMenu(evt);
 	}
 
 	public static function strings():Array {
@@ -117,6 +118,7 @@ public class BlockMenus implements DragClient {
 			handler.broadcastMenu(evt);
 			handler.broadcastInfoMenu(evt);
 			handler.costumeMenu(evt);
+			handler.constantMenu(evt);
 			handler.dirMenu(evt);
 			handler.drumMenu(evt);
 			handler.effectMenu(evt);
@@ -858,5 +860,10 @@ public class BlockMenus implements DragClient {
 		m.addItem('GET');
 		showMenu(m);
 	}
-
+	
+	private function constantMenu(evt:MouseEvent):void {
+		var m:Menu = new Menu(setBlockArg, 'constantName');
+		m.addItem('Pi');
+		showMenu(m);
+	}
 }}
