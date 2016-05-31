@@ -72,6 +72,7 @@ public class Primitives {
 		primTable["%"]				= primModulo;
 		primTable["rounded"]			= function(b:*):* { return Math.round(interp.numarg(b, 0)) };
 		primTable["computeFunction:of:"] 	= primMathFunction;
+		primTable["chooseConstant:"] 		= primGetConstant;
 
 		// clone
 		primTable["createCloneOf"]		= primCreateCloneOf;
@@ -230,6 +231,13 @@ public class Primitives {
 
 	}
 	
+	private function primGetConstant(b:Block):Number {
+		var pickConstant:* = interp.arg(b, 0);
+		switch(pickConstant) {
+			case "Pi": return Math.PI;
+		}
+		return 0;
+	}
 	// Sharp --- HTTP
 	private function primHttp(b:Block):void {
 		var url:String = interp.arg(b, 1);
