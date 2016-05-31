@@ -374,6 +374,7 @@ public class Specs {
 		["round %n",							"r", 8, "rounded", 				""],
 		["-"],
 		["%m.mathOp of %n",						"r", 8, "computeFunction:of:",	"sqrt", 9],
+		["the constant %m.constantsMenu",				"r", 8, "chooseConstant:",	"pi"],		
 		["reverse %s",							"r", 8, "reverseString:",	"hello"],			
 
 		// variables
