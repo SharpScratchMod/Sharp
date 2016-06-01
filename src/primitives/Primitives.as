@@ -41,6 +41,7 @@ public class Primitives {
 	protected var interp:Interpreter;
 	private var counter:int;
 	private var httpReturn:String = "";
+	private var httpRequestsAllowed:int = 10; private var httpRequestsActive:int = 0; // TODO: Add "hidden" setting for HTTP requests allowed
 
 	public function Primitives(app:Scratch, interpreter:Interpreter) {
 		this.app = app;
@@ -232,6 +233,8 @@ public class Primitives {
 	
 	// Sharp --- HTTP
 	private function primHttp(b:Block):void {
+		if(httpRequestsActive == httpRequestsAllowed) return;
+		httpRequestsActive++;
 		var url:String = interp.arg(b, 1);
 		var req:URLRequest = new URLRequest(url);
 		req.method = URLRequestMethod.GET;
@@ -243,6 +246,7 @@ public class Primitives {
 		
 		function onComplete(e:Event){
 			httpReturn = e.target.data;
+			httpRequestsActive--;
 		}
 	}
 }}

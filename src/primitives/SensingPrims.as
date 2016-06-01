@@ -35,6 +35,8 @@ public class SensingPrims {
 
 	private var app:Scratch;
 	private var interp:Interpreter;
+	
+	private var dialogBoxAllowed = 10; private var dialogBoxActive = 0; // TODO: Add hidden setting for dialog boxs allowed
 
 	public function SensingPrims(app:Scratch, interpreter:Interpreter) {
 		this.app = app;
@@ -84,7 +86,9 @@ public class SensingPrims {
 	
 	// Sharp
 	private function primNotify(b:Block):void{
-		DialogBox.notify(interp.arg(b,1),interp.arg(b,0));
+		if(dialogBoxActive == dialogBoxAllowed) return;
+		dialogBoxActive++;
+		DialogBox.notify(interp.arg(b,1),interp.arg(b,0),null,false, function(d:*):*{ dialogBoxActive--; });
 	}
 
 	// TODO: move to stage
