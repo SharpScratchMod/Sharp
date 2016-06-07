@@ -463,6 +463,7 @@ public class Interpreter {
 
 		// procedures
 		primTable[Specs.CALL]			= primCall;
+		primTable["report"]             = primNoop;
 
 		// variables
 		primTable[Specs.GET_VAR]		= primVarGet;
