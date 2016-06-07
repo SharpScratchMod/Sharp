@@ -236,6 +236,7 @@ public class Primitives {
 		var pickConstant:* = interp.arg(b, 0);
 		switch(pickConstant) {
 			case "Pi": return Math.PI;
+			case "E": return Math.E;
 		}
 		return 0;
 	}

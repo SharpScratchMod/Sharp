@@ -313,7 +313,12 @@ public class Specs {
 		["-"],
 		["current %m.timeAndDate", 				"r", 7, "timeAndDate",			"minute"],
 		["days since 2000", 					"r", 7, "timestamp"],
-		["username",							"r", 7, "getUserName"],
+		//["username",							"r", 7, "getUserName"],
+
+		//----
+		//NOTE:
+		//The username block is disabled temporarily, until the sharp-www is released and is functioning properly
+		//----
 
 		// stage sensing
 		["ask %s and wait",						" ", 107, "doAsk", 				"What's your name?"],
@@ -374,7 +379,7 @@ public class Specs {
 		["round %n",							"r", 8, "rounded", 				""],
 		["-"],
 		["%m.mathOp of %n",						"r", 8, "computeFunction:of:",	"sqrt", 9],
-		["the constant %m.constantName",				"r", 8, "chooseConstant:",	"Pi"],		
+		["the constant %m.constantName",		"r", 8, "chooseConstant:",	"Pi"],		
 		["reverse %s",							"r", 8, "reverseString:",	"hello"],			
 
 		// variables

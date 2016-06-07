@@ -864,6 +864,7 @@ public class BlockMenus implements DragClient {
 	private function constantMenu(evt:MouseEvent):void {
 		var m:Menu = new Menu(setBlockArg, 'constantName');
 		m.addItem('Pi');
+		m.addItem('E');
 		showMenu(m);
 	}
 }}
