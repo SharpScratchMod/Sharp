@@ -36,6 +36,8 @@ public class Specs {
 	public static const CHANGE_VAR:String = "changeVar:by:";
 	public static const GET_LIST:String = "contentsOfList:";
 	public static const CALL:String = "call";
+	public static const CALL_REPORTER = "callr";
+	public static const CALL_BOOLEAN = "callb";
 	public static const PROCEDURE_DEF:String = "procDef";
 	public static const GET_PARAM:String = "getParam";
 
@@ -255,6 +257,8 @@ public class Specs {
 		["counter",								"r", 6, "COUNT"],
 		["clear counter",						" ", 6, "CLR_COUNT"],
 		["incr counter",						" ", 6, "INCR_COUNT"],
+		["-"],
+		["report %s",                           "f", 6, "report"],
 
 		// control - stage
 		["// %s",                               " ", 106, "inlineComment:", "My comment"],
@@ -278,6 +282,8 @@ public class Specs {
 		["counter",								"r", 106, "COUNT"],
 		["clear counter",						" ", 106, "CLR_COUNT"],
 		["incr counter",						" ", 106, "INCR_COUNT"],
+		["-"],
+		["report %s",                           "f", 106, "report"],
 
 		// sensing
 		["touching %m.touching?",				"b", 7, "touching:",			""],

@@ -42,6 +42,8 @@ public class BlockShape extends Shape {
 	public static const FinalLoopShape:int = 10;
 	// E-shaped blocks
 	public static const IfElseShape:int = 11;
+	public static const BooleanOutlineShape:int = 112;
+	public static const NumberOutlineShape:int = 113;
 
 	// Geometry
 	public static const NotchDepth:int = 3;
@@ -196,7 +198,7 @@ public class BlockShape extends Shape {
 	}
 
 	private function drawRectShape(g:Graphics):void { g.drawRect(0, 0, w, topH) }
-
+	
 	private function drawBooleanShape(g:Graphics):void {
 		var centerY:int = topH / 2;
 		g.moveTo(centerY, topH);
@@ -205,6 +207,13 @@ public class BlockShape extends Shape {
 		g.lineTo(w - centerY, 0);
 		g.lineTo(w, centerY);
 		g.lineTo(w - centerY, topH);
+	}
+	
+	private function drawBooleanOutlineShape(g:Graphics):void {
+		g.endFill();
+		g.lineStyle(2, 0xFFFFFF, 0.2);
+		drawBooleanShape(g);
+		g.lineTo(topH / 2, topH);
 	}
 
 	private function drawNumberShape(g:Graphics):void {
@@ -215,6 +224,13 @@ public class BlockShape extends Shape {
 		g.lineTo(w - centerY, 0);
 		curve(w - centerY, 0, w, centerY);
 		curve(w, centerY, w - centerY, topH);
+	}
+	
+	private function drawNumberOutlineShape(g:Graphics):void {
+		g.endFill();
+		g.lineStyle(2, 0xFFFFFF, 0.2);
+		drawNumberShape(g);
+		g.lineTo(topH / 2, topH);
 	}
 
 	private function drawCmdShape(g:Graphics):void {
