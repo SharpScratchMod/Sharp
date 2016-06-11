@@ -380,7 +380,8 @@ public class Specs {
 		["-"],
 		["%m.mathOp of %n",						"r", 8, "computeFunction:of:",	"sqrt", 9],
 		["the constant %m.constantName",		"r", 8, "chooseConstant:",	"Pi"],		
-		["reverse %s",							"r", 8, "reverseString:",	"hello"],			
+		["reverse %s",							"r", 8, "reverseString:",	"hello"],
+		["split %s from letter %n to %n", 				"r", 8, "splitStringFrom:", "Foobar", "1", "3"],
 
 		// variables
 		["set %m.var to %s",								" ", 9, SET_VAR],
