@@ -278,7 +278,7 @@ public class Scratch extends Sprite {
 		handleStartupParameters();
 		
 		initSettings();
-		if(isOffline) DialogBox.notify("Welcome to Sharp!", "Website: http://SharpScratchMod.github.io\nGitHub: https://github.com/SharpScratchMod/Sharp\n\nCredits:\nDrKat123 - Developer, Owner\nMrcomputer1 - Developer, Owner\nscratchyone - Developer");
+		if(isOffline) DialogBox.notify("Welcome to Sharp!", "Website: http://SharpScratchMod.github.io\nGitHub: https://github.com/SharpScratchMod/Sharp\n\nCredits:\nDrKat123 - Developer, Owner\nMrcomputer1 - Developer, Owner\nscratchyone - Developer\n\nOther important credits:\nNoMod-Programming - Custom reporters");
 	}
 
 	protected function handleStartupParameters():void {
@@ -1129,7 +1129,7 @@ public class Scratch extends Sprite {
 	
 	protected function addHelpMenuItems(b:*, m:Menu):void {
 		function helpMenuItemCredits(){
-			DialogBox.notify("Credits", "*Owner\n\nDrKat123*, Mrcomputer1*, scratchyone");
+			DialogBox.notify("Credits", "*Owner, # Non-Sharp Member\n\nDrKat123*, Mrcomputer1*, scratchyone\n\nNoMod-Programming#");
 		}
 		function helpMenuItemReportBug(){
 			DialogBox.reportBugDialog();
