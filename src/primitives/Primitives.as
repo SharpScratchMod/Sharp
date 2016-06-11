@@ -240,8 +240,8 @@ public class Primitives {
 		var a:String = b[0];
 		var result:String = "";
 		var i:int;
-		var j:int = b[2];
-		for(i = b[1]; i < j + 1; i++) {
+		var j:int = interp.numarg(b[2]);
+		for(i = interp.numarg(b[1]); i < j + 1; i++) {
 			result += a.charAt(i -1);
 		}
 		return result;
