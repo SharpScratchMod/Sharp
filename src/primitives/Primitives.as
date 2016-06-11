@@ -236,12 +236,12 @@ public class Primitives {
 		}
 		return 0;
 	}
-	private function primSplit(b:Block):String {
-		var a:String = interp.arg(b, 0);
+	private function primSplit(b:Array):String {
+		var a:String = b[0];
 		var result:String = "";
 		var i:int;
-		var j:int = interp.numarg(b, 2);
-		for(i = interp.numarg(b, 1); i < j + 1; i++) {
+		var j:int = b[2];
+		for(i = b[1]; i < j + 1; i++) {
 			result += a.charAt(i -1);
 		}
 		return result;
