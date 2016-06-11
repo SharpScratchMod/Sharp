@@ -36,6 +36,8 @@ public class Specs {
 	public static const CHANGE_VAR:String = "changeVar:by:";
 	public static const GET_LIST:String = "contentsOfList:";
 	public static const CALL:String = "call";
+	public static const CALL_BOOLEAN:String = "callb";
+	public static const CALL_NUMBER:String = "callr";
 	public static const PROCEDURE_DEF:String = "procDef";
 	public static const GET_PARAM:String = "getParam";
 
@@ -403,6 +405,9 @@ public class Specs {
 		["show list %m.list",								" ", 12, "showList:"],
 		["hide list %m.list",								" ", 12, "hideList:"],
 		
+		// custom blocks
+		["report %s",										"f", 10, "report",				""],
+
 		// Sharp
 		// --HTTP--
 		["%m.httpMethod %s",                    " ", 13, "httpBlock:", "GET", "https://api.scratch.mit.edu"],
