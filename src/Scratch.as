@@ -160,6 +160,7 @@ public class Scratch extends Sprite {
 	private var lastTab:String = 'scripts';
 	protected var wasEdited:Boolean; // true if the project was edited and autosaved
 	private var _usesUserNameBlock:Boolean = false;
+	private var _usesHTTPBlock:Boolean = false;
 	protected var languageChanged:Boolean; // set when language changed
 
 	// UI Elements
@@ -671,6 +672,16 @@ public class Scratch extends Sprite {
 		_usesUserNameBlock = value;
 		stagePart.refresh();
 	}
+	
+	public function get usesHTTPBlock():Boolean {
+		return _usesHTTPBlock;
+	}
+
+	public function set usesHTTPBlock(value:Boolean):void {
+		_usesHTTPBlock = value;
+		stagePart.refresh();
+	}
+
 
 	public function updatePalette(clearCaches:Boolean = true):void {
 		// Note: updatePalette() is called after changing variable, list, or procedure

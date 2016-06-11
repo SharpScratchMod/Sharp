@@ -97,6 +97,7 @@ public class BlockIO {
 		// Make a block from an array of form: <op><arg>*
 
 		if (cmd[0] == 'getUserName') Scratch.app.usesUserNameBlock = true;
+		if (cmd[0] == 'httpBlock:') Scratch.app.usesHTTPBlock = true;
 
 		var special:Block = specialCmd(cmd, forStage);
 		if (special) { special.fixArgLayout(); return special }

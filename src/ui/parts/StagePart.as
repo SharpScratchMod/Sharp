@@ -64,6 +64,7 @@ public class StagePart extends UIPart {
 
 	private var playButton:Sprite; // YouTube-like play button in center of screen; used by Kiosk version
 	private var userNameWarning:Sprite; // Container for privacy warning message for projects that use username block
+	private var httpWarning:Sprite;
 	private var runButtonOnTicks:int;
 
 	// x-y readouts
@@ -160,6 +161,7 @@ public class StagePart extends UIPart {
 			drawStageSizeButton();
 		}
 		if (userNameWarning) userNameWarning.visible = app.usesUserNameBlock;
+		if (httpWarning) httpWarning.visible = app.usesHTTPBlock;
 		updateProjectInfo();
 	}
 
@@ -535,6 +537,27 @@ public class StagePart extends UIPart {
 		playButton.addChild(userNameWarning);
 
 		userNameWarning.visible = false; // Don't show this by default
+	}
+	
+	public function addHTTPWarning():void{
+		httpWarning = new Sprite();
+		var g:Graphics = httpWarning.graphics;
+		g.clear();
+		g.beginFill(CSS.white);
+		g.drawRoundRect(10, 30, playButton.width - 20, 70, 15, 15);
+		g.endFill();
+		httpWarning.alpha = 0.9;
+		
+		const versionFormat:TextFormat = new TextFormat(CSS.font, 16, 0x000000);
+		var httpWarningText:TextField = makeLabel("This project sends HTTP requests, through the “http” block. It is recommended that you watch what you enter into the project as It might be sent with HTTP to any website.", versionFormat, 15, 45);
+		httpWarningText.width = httpWarning.width - 10;
+		httpWarningText.multiline = true;
+		httpWarningText.wordWrap = true;
+		
+		httpWarning.addChild(httpWarningText);
+		playButton.addChild(httpWarning);
+		
+		httpWarning.visible = false;
 	}
 
 	public function playButtonPressed(evt:MouseEvent):void {
