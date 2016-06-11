@@ -78,6 +78,8 @@ public class SensingPrims {
 		
 		// Sharp
 		primTable["notify:"]            = primNotify;
+		primTable["askBox:"]            = primAskBox;
+		primTable["confirm:"]           = primConfirm;
 		primTable["isInEditor:"]        = function(b:*):* { return app.editMode };
 		primTable["isInFullscreen:"]    = function(b:*):* { return app.isFullScreen };
 		primTable["usingTurboMode:"]    = function(b:*):* { return interp.turboMode };
@@ -89,6 +91,25 @@ public class SensingPrims {
 		if(dialogBoxActive == dialogBoxAllowed) return;
 		dialogBoxActive++;
 		DialogBox.notify(b[1],b[0],null,false, function(d:*):*{ dialogBoxActive--; });
+	}
+	private function primAskBox(b:Array):void{
+		if(dialogBoxActive == dialogBoxAllowed) return;
+		dialogBoxActive++;
+		DialogBox.ask(b[0], b[1], null, function(ans:*):*{
+			app.runtime.lastAnswer = ans;
+			dialogBoxActive--;
+		});
+	}
+	private function primConfirm(b:Array):void{
+		if(dialogBoxActive == dialogBoxAllowed) return;
+		dialogBoxActive++;
+		DialogBox.confirm(b[0], null, function(d:*):*{
+			app.runtime.lastAnswer = "true";
+			dialogBoxActive--;
+		}, function(d:*):*{
+			app.runtime.lastAnswer = "false";
+			dialogBoxActive--;
+		});
 	}
 
 	// TODO: move to stage
