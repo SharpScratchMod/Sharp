@@ -65,6 +65,7 @@ public class Primitives {
 		primTable["sqrt"]			= function(b:*):* { return Math.sqrt(interp.numarg(b[0])) };
 		primTable["power:of:"] 			= function(b:*):* { return Math.pow(interp.numarg(b[0]), interp.numarg(b[1])) };
 		primTable["reverseString:"] 		= primReverseString;
+		primTable["splitStringFrom:"]		= primSplit;
 
 		primTable["concatenate:with:"]	= function(b:*):* { return ("" + b[0] + b[1]).substr(0, 10240); };
 		primTable["letter:of:"]			= primLetterOf;
@@ -234,6 +235,17 @@ public class Primitives {
 			case "E": return Math.E;
 		}
 		return 0;
+	}
+	private function primSplit(b:Block):String {
+		var a:String = interp.arg(b, 0);
+		var result:String = "";
+		var i:int;
+		var j:int = interp.numarg(b, 2);
+		for(i = interp.numarg(b, 1); i < j + 1; i++) {
+			result += a.charAt(i -1);
+		}
+		return result;
+
 	}
 	// Sharp --- HTTP
 	private function primHttp(b:Array):void {
