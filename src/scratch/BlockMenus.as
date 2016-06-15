@@ -146,6 +146,7 @@ public class BlockMenus implements DragClient {
 			handler.varMenu(evt);
 			handler.videoMotionTypeMenu(evt);
 			handler.videoStateMenu(evt);
+			handler.httpMethodMenu(evt);
 		}
 		return [
 			'up arrow', 'down arrow', 'right arrow', 'left arrow', 'space', 'any',
