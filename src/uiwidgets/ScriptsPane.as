@@ -366,10 +366,8 @@ return true; // xxx disable this check for now; it was causing confusion at Scra
 	}
 
 	private function dropCompatible(droppedBlock:Block, target:DisplayObject):Boolean {
-		if(app.sharpSettings.data.hackMode){
 			return true; //Credit liam4: This line of code was taken from their mod
-		}
-		
+
 		const menusThatAcceptReporters:Array = [
 			'broadcast', 'costume', 'backdrop', 'scene', 'sound',
 			'spriteOnly', 'spriteOrMouse', 'location', 'spriteOrStage', 'touching'];
