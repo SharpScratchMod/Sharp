@@ -74,7 +74,7 @@ public class ScratchRuntime {
 	public var cloneCount:int;
 	public var edgeTriggersEnabled:Boolean = false; // initially false, becomes true when project first run
 	public var currentDoObj:ScratchObj = null;
-  public var canDropAnywhere:Boolean = true;
+  public var app.sharpSettings.data.hackMode:Boolean = true;
 
 	private var microphone:Microphone;
 	private var timerBase:uint;
