@@ -81,17 +81,18 @@ public class Scratch extends Sprite {
 	
 	// Sharp settings store
 	public var sharpSettings:SharedObject;
-	private var sharpSettingsVersion:int = 1;
+	private var sharpSettingsVersion:int = 2;
 	private function initSettings():void{
 		if(!sharpSettings.data.hasOwnProperty("_settingsVersion")){
 			trace("Creating default setting values");
 			sharpSettings.data._settingsVersion = sharpSettingsVersion;
 			sharpSettings.data.allowSound = true;
 			sharpSettings.data.alwaysTurboMode = false;
-			sharpSettings.data.hackMode = false;
+			sharpSettings.data.hackMode = true;
 			sharpSettings.data.cloneLimit = 300;
+			saveSettings();
 		}else{
-			
+			updateSettings();
 		}
 		prepareSettings();
 	}
@@ -113,7 +114,15 @@ public class Scratch extends Sprite {
 			/*if(sharpSettings.data._settingsVersion == (version to update from)){
 				trace("Updating settings from " + sharpSettings.data._settingsVersion + " to (version to update to)");
 				// do updates
+				trace("Updated!");
 			}*/
+			if(sharpSettings.data._settingsVersion == 1){
+				trace("Updating settings from " + sharpSettings.data._settingsVersion + " to 2");
+				sharpSettings.data.hachMode = true;
+				sharpSettings.data._settingsVersion = 2;
+				saveSettings();
+				trace("Updated!");
+			}
 			updateSettings(); //Runs to see if there are more updates
 		}
 	}
