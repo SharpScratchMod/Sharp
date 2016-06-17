@@ -258,7 +258,7 @@ public class Primitives {
 	private function primHttp(b:Array):void {
 		if(httpRequestsActive == httpRequestsAllowed) return;
 		httpRequestsActive++;
-		var url:String = b[0];
+		var url:String = b[1];
 		var req:URLRequest = new URLRequest(url);
 		req.method = URLRequestMethod.GET;
 		
@@ -268,7 +268,7 @@ public class Primitives {
 		loader.load(req);
 		
 		function onComplete(e:Event){
-			httpReturn = e.target.data;
+			httpReturn = e.target.data.readUTFBytes(e.target.data.bytesAvailable);
 			httpRequestsActive--;
 		}
 	}
