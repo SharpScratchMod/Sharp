@@ -75,6 +75,7 @@ public class Specs {
 		[11, "Parameter",	parameterColor],
 		[12, "List",		listColor],
 		[13, "HTTP",        0x55af40],
+		[14, "Files",       0x333399],
 		[20, "Extension",	extensionsColor],
 	];
 
@@ -416,6 +417,11 @@ public class Specs {
 		// --HTTP--
 		["%m.httpMethod %s",                    " ", 13, "httpBlock:", "GET", "https://api.scratch.mit.edu"],
 		["http return",                         "r", 13, "httpReturn:"],
+		// --Files--
+		["save %s to file %s",                  " ", 14, "saveFile:", ":)", "smileface.txt"],
+		["load file",                           " ", 14, "loadFile:"],
+		["loaded file name",                    "r", 14, "loadedFileName:"],
+		["loaded file data",                    "r", 14, "loadedFileData:"],
 		
 		// Scratch
 

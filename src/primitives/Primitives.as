@@ -32,6 +32,7 @@ package primitives {
 	
 	import flash.net.*;
 	import flash.events.Event;
+	import flash.utils.ByteArray;
 
 public class Primitives {
 
@@ -42,7 +43,8 @@ public class Primitives {
 	private var counter:int;
 	private var httpReturn:String = "";
 	private var httpRequestsAllowed:int = 10; private var httpRequestsActive:int = 0; // TODO: Add "hidden" setting for HTTP requests allowed
-
+	private var fileNameValue:String; private var fileDataValue:String;
+	
 	public function Primitives(app:Scratch, interpreter:Interpreter) {
 		this.app = app;
 		this.interp = interpreter;
@@ -94,6 +96,11 @@ public class Primitives {
 		// Sharp -- HTTP
 		primTable["httpBlock:"] = primHttp;
 		primTable["httpReturn:"] = function(b:*):* {return httpReturn};
+		// Sharp -- Files
+		primTable["saveFile:"] = primFileSave;
+		primTable["loadFile:"] = primFileLoad;
+		primTable["loadedFileName:"] = function(b:*):*{ return fileNameValue; };
+		primTable["loadedFileData:"] = function(b:*):*{ return fileDataValue; };
 		
 		new LooksPrims(app, interp).addPrimsTo(primTable, specialTable);
 		new MotionAndPenPrims(app, interp).addPrimsTo(primTable, specialTable);
@@ -264,5 +271,31 @@ public class Primitives {
 			httpReturn = e.target.data;
 			httpRequestsActive--;
 		}
+	}
+	//Sharp --- Files
+	private function primFileSave(b:Array):void{
+		var file:FileReference = new FileReference();
+		file.save(b[0], b[1]);
+	}
+	private function primFileLoad(b:Array):void{
+		var fileName:String, data:ByteArray;
+		function fileLoaded(event:Event):void{
+			var file:FileReference = FileReference(event.target);
+			fileName = file.name;
+			data = file.data;
+			
+			fileNameValue = fileName;
+			fileDataValue = data.readUTFBytes(data.bytesAvailable);
+		}
+		function fileSelected(event:Event):void{
+			var file:FileReference = FileReference(fileList.fileList[0]);
+			file.addEventListener(Event.COMPLETE, fileLoaded);
+			file.load();
+		}
+		var fileList:FileReferenceList = new FileReferenceList();
+		fileList.addEventListener(Event.SELECT, fileSelected);
+		try{
+			fileList.browse(null);
+		}catch(e:*){}
 	}
 }}

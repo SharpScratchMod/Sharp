@@ -33,7 +33,7 @@ public class PaletteSelector extends Sprite {
 
 	private static const categories:Array = [
 		'Motion', 'Looks', 'Sound', 'Pen', 'Data', 'HTTP', // column 1
-		'Events', 'Control', 'Sensing', 'Operators', 'More Blocks']; // column 2
+		'Events', 'Control', 'Sensing', 'Operators', 'More Blocks', 'Files']; // column 2
 
 	public var selectedCategory:int = 0;
 	private var app:Scratch;
