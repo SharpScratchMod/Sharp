@@ -1,8 +1,8 @@
 {
-  "name": "Scratch",
+  "name": "Sharp",
   "description": "Open source version of the Scratch 2.0 project editor.",
   "version": "1.0.0",
-  "homepage": "http://scratch.mit.edu/",
+  "homepage": "sharpscratchmod.cf",
   "main": "scratch-flash",
   "license": "GPL-2.0",
   "repository": {

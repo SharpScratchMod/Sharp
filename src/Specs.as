@@ -318,7 +318,7 @@ public class Specs {
 		["-"],
 		["current %m.timeAndDate", 				"r", 7, "timeAndDate",			"minute"],
 		["days since 2000", 					"r", 7, "timestamp"],
-		//["username",							"r", 7, "getUserName"],
+		//["username",							"r", 7, "getUserName"]
 
 		//----
 		//NOTE:
@@ -356,7 +356,7 @@ public class Specs {
 		["-"],
 		["current %m.timeAndDate", 				"r", 107, "timeAndDate",		"minute"],
 		["days since 2000", 					"r", 107, "timestamp"],
-		["username",							"r", 107, "getUserName"],
+		//["username",							"r", 107, "getUserName"],
 
 		// operators
 		["%n + %n",								"r", 8, "+",					"", ""],
@@ -389,6 +389,7 @@ public class Specs {
 		["the constant %m.constantName",		"r", 8, "chooseConstant:",	"Pi"],		
 		["reverse %s",							"r", 8, "reverseString:",	"hello"],
 		["split %s from letter %n to %n", 				"r", 8, "splitStringFrom:", "Foobar", "1", "3"],
+
 
 		// variables
 		["set %m.var to %s",								" ", 9, SET_VAR],
