@@ -72,7 +72,7 @@ public class Primitives {
 		primTable["concatenate:with:"]	= function(b:*):* { return ("" + b[0] + b[1]).substr(0, 10240); };
 		primTable["letter:of:"]			= primLetterOf;
 		primTable["stringLength:"]		= function(b:*):* { return String(b[0]).length };
-
+		primTable["digitalRootOf:"]	=	primDigitalRoot;
 		primTable["%"]				= primModulo;
 		primTable["rounded"]			= function(b:*):* { return Math.round(interp.numarg(b[0])) };
 		primTable["computeFunction:of:"] 	= primMathFunction;
@@ -297,5 +297,12 @@ public class Primitives {
 		try{
 			fileList.browse(null);
 		}catch(e:*){}
+	}
+	private function primDigitalRoot(b:Array):Number{
+		if(interp.numarg(b[0]) < 9){
+			return interp.numarg(b[0])
+		} else {
+			return interp.numarg(b[0]) - (9 * Math.floor((interp.numarg(b[0])-1)/9));
+		}
 	}
 }}
