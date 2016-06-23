@@ -17,6 +17,7 @@ Version            | Code Name        | LTS | Released | Still supported | Suppo
 ------------------ | ---------------- | --- | -------- | --------------- | --------------- | -----------------------------
 1.0.0 (Release)    | Katana           | NO  | NO       | --NOT YET--     | --NOT YET--     | 
 1.0.0 Beta         | Chainsaw         | NO  | NO       | --NOT YET--     | --NOT YET--     |
+1.1.5 Alpha		   | Sawtooth         | NO  | YES	   | YES             | --TBA--         | 		
 1.1.0 Alpha        | Sawtooth         | NO  | YES      | YES     | --TBA--     |
 1.0.1 Alpha        | Butterknife      | NO  | YES      | YES     | --TBA--     | Will replace 1.0.0 Alpha support
 1.0.0 Alpha        | Butterknife      | NO  | YES      | YES             | 30 Oct 2016     | 

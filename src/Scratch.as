@@ -620,7 +620,7 @@ public class Scratch extends Sprite {
 	public function strings():Array {
 		return [
 			'a copy of the project file on your computer.',
-			'Project not saved!', 'Save now', 'Not saved; project did not load.',
+			'Project not saved!', 'Save now', 'Not saved; project didn\'t load.',
 			'Save project?', 'Don\'t save',
 			'Save now', 'Saved',
 			'Revert', 'Undo Revert', 'Reverting...',
