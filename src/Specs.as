@@ -293,7 +293,7 @@ public class Specs {
 		["-"],
 		["notify %s title %s",                  " ", 7, "notify:", "Hi!", "Hello!"],
 		["ask %s with dialog %s",               " ", 7, "askBox:", "What's your name?", "IDK"],
-		["confirm %s",                          " ", 107, "confirm:", "Is Mrcomputer1 awesome?"],
+		["confirm %s",                          " ", 7, "confirm:", "Is Mrcomputer1 awesome?"],
 		["-"],
 		["key %m.key pressed?",					"b", 7, "keyPressed:",			"space"],
 		["mouse down?",							"b", 7, "mousePressed"],
