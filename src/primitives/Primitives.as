@@ -93,6 +93,7 @@ public class Primitives {
 		primTable["inlineComment:"]     	= function(b:*):* {};
 		primTable["true"]               	= function(b:*):* {return true};
 		primTable["false"]      	 	= function(b:*):* {return false};
+		primTable["blockReplace:"]     = primStrReplace;
 		// Sharp -- HTTP
 		primTable["httpBlock:"] = primHttp;
 		primTable["httpReturn:"] = function(b:*):* {return httpReturn};
@@ -253,6 +254,10 @@ public class Primitives {
 		}
 		return result;
 
+	}
+	// Sharp
+	private function primStrReplace(b:Array):String{
+		return b[1].replace(new RegExp(b[0], "g"), b[2]);
 	}
 	// Sharp --- HTTP
 	private function primHttp(b:Array):void {

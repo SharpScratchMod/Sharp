@@ -389,8 +389,8 @@ public class Specs {
 		["digital root of %n",					"r", 8, "digitalRootOf:",		"1234"],
 		["the constant %m.constantName",		"r", 8, "chooseConstant:",	"Pi"],		
 		["reverse %s",							"r", 8, "reverseString:",	"hello"],
+		["replace %s in %s with %s",            "r", 8, "blockReplace:", "Hi", "Hi", "Hello"],
 		["split %s from letter %n to %n", 				"r", 8, "splitStringFrom:", "Foobar", "1", "3"],
-
 
 		// variables
 		["set %m.var to %s",								" ", 9, SET_VAR],
