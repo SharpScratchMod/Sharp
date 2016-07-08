@@ -48,6 +48,7 @@ public class ListPrims {
 		primTable['getLine:ofList:']	= primGetItem;
 		primTable['lineCountOfList:']	= primLength;
 		primTable['list:contains:']		= primContains;
+		primTable["blockSplit:"]      = primSharpBlockSplit;
 	}
 
 	private function primContents(b:Array):String {
@@ -69,6 +70,23 @@ public class ListPrims {
 		listAppend(list, b[0]);
 		if (list.visible) list.updateWatcher(list.contents.length, false, interp);
 	}
+	/*
+		Sharp
+	*/
+	private function primSharpBlockSplit(b:Array):void{
+		var list:ListWatcher = listarg(b[2]);
+		if (!list) return;
+		var s = b[0].split(b[1]);
+		var i = 0;
+		while(i != s.length){
+			listAppend(list, s[i]);
+			i++;
+		}
+		if(list.visible) list.updateWatcher(list.contents.length, false, interp);
+	}
+	/*
+		/Sharp
+	*/
 
 	protected function listAppend(list:ListWatcher, item:*):void {
 		list.contents.push(item);

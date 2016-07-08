@@ -33,6 +33,9 @@ package primitives {
 	import flash.net.*;
 	import flash.events.Event;
 	import flash.utils.ByteArray;
+	
+	import mx.utils.Base64Encoder;
+	import mx.utils.Base64Decoder;
 
 public class Primitives {
 
@@ -94,6 +97,8 @@ public class Primitives {
 		primTable["true"]               	= function(b:*):* {return true};
 		primTable["false"]      	 	= function(b:*):* {return false};
 		primTable["blockReplace:"]     = primStrReplace;
+		primTable["blockSplitReturn:"] = function(b:*):* {return b[0].split(b[1])[b[2]-1]};
+		primTable["cleanStr:"]        = primCleanStr;
 		// Sharp -- HTTP
 		primTable["httpBlock:"] = primHttp;
 		primTable["httpReturn:"] = function(b:*):* {return httpReturn};

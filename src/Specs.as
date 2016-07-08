@@ -390,6 +390,8 @@ public class Specs {
 		["the constant %m.constantName",		"r", 8, "chooseConstant:",	"Pi"],		
 		["reverse %s",							"r", 8, "reverseString:",	"hello"],
 		["replace %s in %s with %s",            "r", 8, "blockReplace:", "Hi", "Hi", "Hello"],
+		["split %s at %s and return to %m.list"," ", 8, "blockSplit:", "H i", " ", ""],
+		["split %s at %s and return %n",        "r", 8, "blockSplitReturn:", "H i", " ", 1],
 		["split %s from letter %n to %n", 				"r", 8, "splitStringFrom:", "Foobar", "1", "3"],
 
 		// variables
