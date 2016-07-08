@@ -36,6 +36,7 @@ package primitives {
 	
 	import mx.utils.Base64Encoder;
 	import mx.utils.Base64Decoder;
+	import 
 
 public class Primitives {
 
@@ -98,7 +99,6 @@ public class Primitives {
 		primTable["false"]      	 	= function(b:*):* {return false};
 		primTable["blockReplace:"]     = primStrReplace;
 		primTable["blockSplitReturn:"] = function(b:*):* {return b[0].split(b[1])[b[2]-1]};
-		primTable["cleanStr:"]        = primCleanStr;
 		// Sharp -- HTTP
 		primTable["httpBlock:"] = primHttp;
 		primTable["httpReturn:"] = function(b:*):* {return httpReturn};
