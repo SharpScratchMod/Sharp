@@ -36,7 +36,6 @@ package primitives {
 	
 	import mx.utils.Base64Encoder;
 	import mx.utils.Base64Decoder;
-	import 
 
 public class Primitives {
 
