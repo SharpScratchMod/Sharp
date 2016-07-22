@@ -843,7 +843,7 @@ public class Block extends Sprite {
 	}
 
 	public function showHelp():void {
-		var extName:String = ExtensionManager.unpackExtensionName(op);
+		/*var extName:String = ExtensionManager.unpackExtensionName(op);
 		if (extName) {
 			if (Scratch.app.extensionManager.isInternal(extName)) {
 				Scratch.app.showTip('ext:' + extName);
@@ -857,7 +857,18 @@ public class Block extends Sprite {
 		}
 		else {
 			Scratch.app.showTip(op);
-		}
+		}*/
+		var mappings = {
+			// Control - Sprite/Stage
+			"inlineComment:": "control:inlineComment",
+			"codeSection": "control:codeSection",
+			"doForLoop": "control:doForLoop",
+			"COUNT": "control:COUNT",
+			"CLR_COUNT": "control:CLR_COUNT",
+			"INCR_COUNT": "control:INCR_COUNT",
+			// Sensing
+			"notify:": "sensing:notify"
+		};
 	}
 
 	public function duplicateStack(deltaX:Number, deltaY:Number):void {

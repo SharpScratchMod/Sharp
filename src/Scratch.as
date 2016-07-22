@@ -1176,6 +1176,11 @@ public class Scratch extends Sprite {
 		m.addLine();
 		m.addItem('Credits', helpMenuItemCredits);
 		m.addItem('About', helpMenuItemAbout);
+		if(b.lastEvent.shiftKey){
+			m.addLine();
+			m.addItem("Export blocks (commands.txt)", TranslatableStrings.exportCommands);
+			m.addItem("Export ui strings (uiStrings.txt)", TranslatableStrings.exportUIStrings);
+		}
 	}
 
 	public var fullscreenEditor:Boolean = false;
