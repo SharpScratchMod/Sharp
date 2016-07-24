@@ -373,7 +373,15 @@ public class Specs {
 		["-"],
 		["%b and %b",							"b", 8, "&"],
 		["%b or %b",							"b", 8, "|"],
-		["not %b",							"b", 8, "not"],
+		["not %b",							"b", 8, "~"],
+		//secret beta update blocks
+		//---
+		["%b nand %b", 				"b", 8, "nand"],
+		//["%b nor %b", 				"b", 8, "nor"],
+		["%b xor %b", 				"b", 8, "xor"],
+		["%b xnor %b",				"b", 8, "xnor"],
+		//this is supposed to be a secret but if you did find this, well, congratulations
+		//you just spoiled the secret update
 		["-"],
 		["true",                                			"b", 8, "true"],
 		["false",                       				"b", 8, "false"],
@@ -387,7 +395,7 @@ public class Specs {
 		["-"],
 		["%m.mathOp of %n",						"r", 8, "computeFunction:of:",	"sqrt", 9],
 		["digital root of %n",					"r", 8, "digitalRootOf:",		"1234"],
-		["the constant %m.constantName",		"r", 8, "chooseConstant:",	"Pi"],		
+		["the constant %m.constantName",		"r", 8, "chooseConstant:",	"Pi"],
 		["reverse %s",							"r", 8, "reverseString:",	"hello"],
 		["replace %s in %s with %s",            "r", 8, "blockReplace:", "Hi", "Hi", "Hello"],
 		["split %s at %s and return to %m.list"," ", 8, "blockSplit:", "H i", " ", ""],
@@ -413,7 +421,7 @@ public class Specs {
 		["-"],
 		["show list %m.list",								" ", 12, "showList:"],
 		["hide list %m.list",								" ", 12, "hideList:"],
-		
+
 		// custom blocks
 		["report %s",										"f", 10, "report",				""],
 
@@ -426,7 +434,8 @@ public class Specs {
 		["load file",                           " ", 14, "loadFile:"],
 		["loaded file name",                    "r", 14, "loadedFileName:"],
 		["loaded file data",                    "r", 14, "loadedFileData:"],
-		
+
+
 		// Scratch
 
 		// obsolete blocks from Scratch 1.4 that may be used in older projects

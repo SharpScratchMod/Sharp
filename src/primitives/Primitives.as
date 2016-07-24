@@ -29,11 +29,11 @@ package primitives {
 	import interpreter.*;
 	import scratch.ScratchSprite;
 	import translation.Translator;
-	
+
 	import flash.net.*;
 	import flash.events.Event;
 	import flash.utils.ByteArray;
-	
+
 	import mx.utils.Base64Encoder;
 	import mx.utils.Base64Decoder;
 
@@ -47,7 +47,7 @@ public class Primitives {
 	private var httpReturn:String = "";
 	private var httpRequestsAllowed:int = 10; private var httpRequestsActive:int = 0; // TODO: Add "hidden" setting for HTTP requests allowed
 	private var fileNameValue:String; private var fileDataValue:String;
-	
+
 	public function Primitives(app:Scratch, interpreter:Interpreter) {
 		this.app = app;
 		this.interp = interpreter;
@@ -65,7 +65,16 @@ public class Primitives {
 		primTable[">"]				= function(b:*):* { return compare(b[0], b[1]) > 0 };
 		primTable["&"]				= function(b:*):* { return interp.boolarg(b[0]) && interp.boolarg(b[1]) };
 		primTable["|"]				= function(b:*):* { return interp.boolarg(b[0]) || interp.boolarg(b[1]) };
-		primTable["not"]			= function(b:*):* { return !interp.boolarg(b[0]) };
+		primTable["~"]			= function(b:*):* { return !interp.boolarg(b[0]) };
+
+		//testing functions for moar logic gates
+		//don't spoil the secret update!
+		//Shhh
+		//---
+		primTable["nand"] =  function(b:*):* { return !(interp.boolarg(b[0]) && interp.boolarg(b[1])) };
+		primTable["nor"] = primLogicNor;
+		primTable["xor"] = primLogicXor;
+		primTable["xnor"] = primLogicXnor;
 		primTable["abs"]			= function(b:*):* { return Math.abs(interp.numarg(b[0])) };
 		primTable["sqrt"]			= function(b:*):* { return Math.sqrt(interp.numarg(b[0])) };
 		primTable["power:of:"] 			= function(b:*):* { return Math.pow(interp.numarg(b[0]), interp.numarg(b[1])) };
@@ -91,7 +100,7 @@ public class Primitives {
 		primTable["COUNT"]			= function(b:*):* { return counter };
 		primTable["INCR_COUNT"]			= function(b:*):* { counter++ };
 		primTable["CLR_COUNT"]			= function(b:*):* { counter = 0 };
-		
+
 		// Sharp
 		primTable["inlineComment:"]     	= function(b:*):* {};
 		primTable["true"]               	= function(b:*):* {return true};
@@ -106,7 +115,7 @@ public class Primitives {
 		primTable["loadFile:"] = primFileLoad;
 		primTable["loadedFileName:"] = function(b:*):*{ return fileNameValue; };
 		primTable["loadedFileData:"] = function(b:*):*{ return fileDataValue; };
-		
+
 		new LooksPrims(app, interp).addPrimsTo(primTable, specialTable);
 		new MotionAndPenPrims(app, interp).addPrimsTo(primTable, specialTable);
 		new SoundPrims(app, interp).addPrimsTo(primTable, specialTable);
@@ -239,7 +248,7 @@ public class Primitives {
 		return result;
 
 	}
-	
+
 	private function primGetConstant(b:Array):Number {
 		var pickConstant:* = b[0];
 		switch(pickConstant) {
@@ -270,12 +279,12 @@ public class Primitives {
 		var url:String = b[1];
 		var req:URLRequest = new URLRequest(url);
 		req.method = URLRequestMethod.GET;
-		
+
 		var loader:URLLoader = new URLLoader();
 		loader.addEventListener(Event.COMPLETE, onComplete);
 		loader.dataFormat = URLLoaderDataFormat.TEXT;
 		loader.load(req);
-		
+
 		function onComplete(e:Event){
 			httpReturn = e.target.data.readUTFBytes(e.target.data.bytesAvailable);
 			httpRequestsActive--;
@@ -292,7 +301,7 @@ public class Primitives {
 			var file:FileReference = FileReference(event.target);
 			fileName = file.name;
 			data = file.data;
-			
+
 			fileNameValue = fileName;
 			fileDataValue = data.readUTFBytes(data.bytesAvailable);
 		}
@@ -313,5 +322,32 @@ public class Primitives {
 		} else {
 			return interp.numarg(b[0]) - (9 * Math.floor((interp.numarg(b[0])-1)/9));
 		}
+	}
+
+
+	private function primLogicNor(b:Array):Boolean{
+		if((interp.boolarg(b[0]) == false) && (interp.boolarg(b[1]) == false)){
+			return true;
+		} else {
+			return false;
+		};
+		return false;
+	}
+
+	private function primLogicXor(b:Array):Boolean{
+		if(interp.boolarg(b[0]) !== interp.boolarg(b[1])){
+			return true;
+		} else if (interp.boolarg(b[0]) == interp.boolarg(b[1])) {
+			return false;
+		//comment
+	}
+
+	private function primLogicXnor(b:Array):Boolean{
+		if (interp.boolarg(b[0]) == interp.boolarg(b[1])) {
+			return true;
+		} else {
+			return false;
+		}
+		return false;
 	}
 }}
