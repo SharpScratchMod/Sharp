@@ -118,7 +118,7 @@ public class Scratch extends Sprite {
 			}*/
 			if(sharpSettings.data._settingsVersion == 1){
 				trace("Updating settings from " + sharpSettings.data._settingsVersion + " to 2");
-				sharpSettings.data.hachMode = true;
+				sharpSettings.data.hackMode = true;
 				sharpSettings.data._settingsVersion = 2;
 				saveSettings();
 				trace("Updated!");
@@ -1147,18 +1147,27 @@ public class Scratch extends Sprite {
 		runtime.stopVideo();
 	}
 	
+	public function sharpStrings(){
+		return [
+			"Credits", "*Owner, # Non-Sharp Member",
+			"Based on Scratch 2.0 from the MIT Media Lab",
+			"Sharp Scratch mod by DrKat123, Mrcomputer1 and some others",
+			"About Sharp", "Report a bug", "Credits", "About"
+		];
+	}
+	
 	protected function addHelpMenuItems(b:*, m:Menu):void {
 		function helpMenuItemCredits(){
-			DialogBox.notify("Credits", "*Owner, # Non-Sharp Member\n\nDrKat123*, Mrcomputer1*, scratchyone\n\nNoMod-Programming#");
+			DialogBox.notify("Credits", Translator.map("*Owner, # Non-Sharp Member") + "\n\nDrKat123*, Mrcomputer1*, scratchyone\n\nNoMod-Programming#");
 		}
 		function helpMenuItemReportBug(){
 			DialogBox.reportBugDialog();
 		}
 		function helpMenuItemAbout(){
 			var aboutMsg:String = "Scratch\n" +
-			"Based on Scratch from the MIT Media Lab, 2.0 v446\n" +
+			Translator.map("Based on Scratch 2.0 from the MIT Media Lab") + "\n" +
 			"\n" +
-			"Scratch is developed by the Lifelong Kindergarten Group at the MIT Media Lab\n" +
+			Translator.map("Scratch is developed by the Lifelong Kindergarten Group at the MIT Media Lab") + "\n" +
 			"\n" +
 			"https://scratch.mit.edu - https://github.com/llk/scratch-flash\n" +
 			"\n" +
@@ -1167,15 +1176,15 @@ public class Scratch extends Sprite {
 			"\n" +
 			"\n" +
 			"Sharp\n" +
-			"Sharp Scratch mod by DrKat123, Mrcomputer1 and some others\n" +
+			Translator.map("Sharp Scratch mod by DrKat123, Mrcomputer1 and some others") + "\n" +
 			"https://sharpscratchmod.github.io\n" +
 			versionString;
-			DialogBox.notify("About Sharp", aboutMsg);
+			DialogBox.notify(Translator.map("About Sharp"), aboutMsg);
 		}
-		m.addItem('Report a bug', helpMenuItemReportBug);
+		m.addItem(Translator.map('Report a bug'), helpMenuItemReportBug);
 		m.addLine();
-		m.addItem('Credits', helpMenuItemCredits);
-		m.addItem('About', helpMenuItemAbout);
+		m.addItem(Translator.map('Credits'), helpMenuItemCredits);
+		m.addItem(Translator.map('About'), helpMenuItemAbout);
 		if(b.lastEvent.shiftKey){
 			m.addLine();
 			m.addItem("Export blocks (commands.txt)", TranslatableStrings.exportCommands);

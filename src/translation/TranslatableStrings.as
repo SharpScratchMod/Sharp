@@ -117,6 +117,7 @@ public class TranslatableStrings {
 		addAll(ProjectIO.strings());
 		// Get the strings from the Scratch app instance so that the offline version can add strings
 		addAll(Scratch.app.strings());
+		addAll(Scratch.app.sharpStrings());
 		addAll(ScriptsPane.strings());
 		addAll(SoundEditor.strings());
 		addAll(SoundsPart.strings());
@@ -128,6 +129,7 @@ public class TranslatableStrings {
 		addAll(VariableSettings.strings());
 		addAll(Watcher.strings());
 		addAll(CameraDialog.strings());
+		addAll(DialogBox.sharpDialogStrings());
 		Menu.stringCollectionMode = false;
 
 		export('uiStrings');

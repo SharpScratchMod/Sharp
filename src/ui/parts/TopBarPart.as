@@ -95,7 +95,7 @@ public class TopBarPart extends UIPart {
 			Scratch.app.showEditMenu(Menu.dummyButton());
 			Scratch.app.showHelpMenu(Menu.dummyButton());
 		}
-		return ['File', 'Edit', 'Tips', 'Duplicate', 'Delete', 'Grow', 'Shrink', 'Block help', 'Offline Editor'];
+		return ['File', 'Edit', "Help", 'Tips', 'Duplicate', 'Delete', 'Grow', 'Shrink', 'Block help', 'Offline Editor'];
 	}
 
 	protected function removeTextButtons():void {

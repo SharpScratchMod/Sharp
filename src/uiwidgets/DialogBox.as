@@ -62,6 +62,17 @@ public class DialogBox extends Sprite {
 		addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
 		addEventListener(FocusEvent.KEY_FOCUS_CHANGE, focusChange);
 	}
+	
+	public static function sharpDialogStrings():Array{
+		return [
+			"Title", "Content",
+			"Report Bug", "Cancel",
+			"Report a bug", "Settings",
+			"Allow sound", "Always in turbo mode",
+			"Hack mode", "Clone limit", "OK", "Reset Settings",
+			"Do you really want to reset settings?"
+		];
+	}
 
 	public static function ask(question:String, defaultAnswer:String, stage:Stage = null, resultFunction:Function = null, context:Dictionary = null):void {
 		function done():void { if (resultFunction != null) resultFunction(d.fields['answer'].text) }
@@ -94,13 +105,13 @@ public class DialogBox extends Sprite {
 	public static function reportBugDialog():void{
 		var d:DialogBox = new DialogBox(done);
 		function done():void {
-			var request:URLRequest = new URLRequest("https://github.com/SharpScratchMod/Sharp/issues/new?title=" + d.fields['title'].text + "&body=" + d.fields["body"].text);
+			var request:URLRequest = new URLRequest("https://github.com/SharpScratchMod/Sharp/issues/new?title=" + d.fields['Title'].text + "&body=" + d.fields["Content"].text);
 			navigateToURL(request, "_blank");
 		}
 		d.addTitle("Report a bug");
-		d.addField("title", 120, "", true, "Title");
-		d.addField("body", 120, "", true, "Content");
-		d.addButton("Report bug", d.accept);
+		d.addField("Title", 120, "", true);
+		d.addField("Content", 120, "", true);
+		d.addButton("Report Bug", d.accept);
 		d.addButton("Cancel", d.cancel);
 		d.showOnStage(Scratch.app.stage);
 	}
@@ -108,21 +119,21 @@ public class DialogBox extends Sprite {
 	public static function settingsDialog():void{
 		var d:DialogBox = new DialogBox(done);
 		function done():void {
-			Scratch.app.sharpSettings.data.allowSound = d.booleanFields['sound'].isOn();
-			Scratch.app.sharpSettings.data.alwaysTurboMode = d.booleanFields['alwaysTurboMode'].isOn();
-			if(d.booleanFields['alwaysTurboMode'].isOn() && !Scratch.app.turboModeIsActive) Scratch.app.toggleTurboMode();
-			Scratch.app.sharpSettings.data.hackMode = d.booleanFields['hackMode'].isOn();
-			Scratch.app.sharpSettings.data.cloneLimit = d.fields['cloneLimit'].text;
+			Scratch.app.sharpSettings.data.allowSound = d.booleanFields['Allow sound'].isOn();
+			Scratch.app.sharpSettings.data.alwaysTurboMode = d.booleanFields['Always in turbo mode'].isOn();
+			if(d.booleanFields['Always in turbo mode'].isOn() && !Scratch.app.turboModeIsActive) Scratch.app.toggleTurboMode();
+			Scratch.app.sharpSettings.data.hackMode = d.booleanFields['Hack mode'].isOn();
+			Scratch.app.sharpSettings.data.cloneLimit = d.fields['Clone limit'].text;
 			Scratch.app.saveSettings();
 		}
 		function resetSettings():void {
-			DialogBox.confirm("Do you really want to reset settings?", null, function():*{ Scratch.app.resetSettings(); });
+			DialogBox.confirm(Translator.map("Do you really want to reset settings?"), null, function():*{ Scratch.app.resetSettings(); });
 		}
 		d.addTitle("Settings");
-		d.addBoolean("sound", Scratch.app.sharpSettings.data.allowSound, false, "Allow sound");
-		d.addBoolean("alwaysTurboMode", Scratch.app.sharpSettings.data.alwaysTurboMode, false, "Always in turbo mode");
-		d.addBoolean("hackMode", Scratch.app.sharpSettings.data.hackMode, false, "Hack mode");
-		d.addField("cloneLimit", 120, Scratch.app.sharpSettings.data.cloneLimit, true, "Clone limit");
+		d.addBoolean("Allow sound", Scratch.app.sharpSettings.data.allowSound, false);
+		d.addBoolean("Always in turbo mode", Scratch.app.sharpSettings.data.alwaysTurboMode, false);
+		d.addBoolean("Hack mode", Scratch.app.sharpSettings.data.hackMode, false);
+		d.addField("Clone limit", 120, Scratch.app.sharpSettings.data.cloneLimit, true);
 		d.addButton("OK", d.accept);
 		d.addButton("Cancel", d.cancel);
 		d.addButton("Reset Settings", resetSettings);

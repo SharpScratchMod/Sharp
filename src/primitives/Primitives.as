@@ -339,7 +339,9 @@ public class Primitives {
 			return true;
 		} else if (interp.boolarg(b[0]) == interp.boolarg(b[1])) {
 			return false;
-		//comment
+		} else {
+			return false;
+		}
 	}
 
 	private function primLogicXnor(b:Array):Boolean{
