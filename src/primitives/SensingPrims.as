@@ -30,6 +30,7 @@ package primitives {
 	import interpreter.*;
 	import scratch.*;
 	import uiwidgets.DialogBox;
+	import com.adobe.crypto.MD5;
 
 public class SensingPrims {
 
@@ -37,7 +38,8 @@ public class SensingPrims {
 	private var interp:Interpreter;
 	
 	private var dialogBoxAllowed = 10; private var dialogBoxActive = 0; // TODO: Add hidden setting for dialog boxs allowed
-
+	private var passwordWarningHasBeenShown:Boolean = false;
+	
 	public function SensingPrims(app:Scratch, interpreter:Interpreter) {
 		this.app = app;
 		this.interp = interpreter;
@@ -84,6 +86,8 @@ public class SensingPrims {
 		primTable["isInFullscreen:"]    = function(b:*):* { return app.isFullScreen };
 		primTable["usingTurboMode:"]    = function(b:*):* { return interp.turboMode };
 		primTable["sharpVersion:"]      = function(b:*):* { return Scratch.versionString };
+		primTable["passwordHash:"]      = primPasswordHash;
+		primTable["passwordVerify:"]    = primPasswordVerify;
 	}
 	
 	// Sharp
@@ -110,6 +114,35 @@ public class SensingPrims {
 			app.runtime.lastAnswer = "false";
 			dialogBoxActive--;
 		});
+	}
+	private function primPasswordHash(b:Array):String{
+		if(app.editMode && !passwordWarningHasBeenShown){
+			DialogBox.notify("Warning!", "The password blocks are not made for and should not be used for real encryption purposes.\nIt uses MD5 to hash the password.\nIn the future the block encryption may change from MD5.\n\nIf the encryption is changed a password needs conversion boolean block will be added.\nThe hash block will return passwords with the new encryption\nThe verify block will verify for both the old and new encryption\n\n\nNOTE: This notice is shown once per session. And only while in the editor.\nIt is recommended for you to tell your users not to use real passwords");
+			passwordWarningHasBeenShown = true;
+		}
+		//Hashing methods
+		//01 = MD5
+		var hash:String = "01" + MD5.hash(b[0]);
+		return hash;
+	}
+	private function primPasswordVerify(b:Array):Boolean{
+		if(app.editMode && !passwordWarningHasBeenShown){
+			DialogBox.notify("Warning!", "The password blocks are not made for and should not be used for real encryption purposes.\nIt uses MD5 to hash the password.\nIn the future the block encryption may change from MD5.");
+			DialogBox.notify("Warning!", "If the encryption is changed a password needs conversion will be added.\nThe hash block will return passwords with the new encryption\nThe verify block will verify for both the old and new encryption");
+			passwordWarningHasBeenShown = true;
+		}
+		//Hashing methods in passwordHash function
+		if(b[0].charAt(0) == "0" && b[0].charAt(1) == "1"){
+			var hash:String = MD5.hash(b[1]);
+			if(hash === b[0].substr(2)){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
 	}
 
 	// TODO: move to stage
