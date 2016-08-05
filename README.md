@@ -8,6 +8,8 @@ Sharp Scratch Mod by DrKat123 and Mrcomputer1
 
 [Scratch topic](https://scratch.mit.edu/discuss/topic/199192/)
 
+[Offline Editor](https://sharpscratchmod.github.io/sharp-offline-downloads/publish.htm)
+
 Looking for the Scratch readme? https://github.com/SharpScratchMod/Sharp/blob/master/README_Scratch.md
 
 ##Versions
