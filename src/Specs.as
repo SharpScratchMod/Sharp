@@ -435,11 +435,15 @@ public class Specs {
 		// --HTTP--
 		["%m.httpMethod %s",                    " ", 13, "httpBlock:", "GET", "https://api.scratch.mit.edu"],
 		["http return",                         "r", 13, "httpReturn:"],
+		["go to %s",                            " ", 13, "goToURL:"],
 		// --Files--
 		["save %s to file %s",                  " ", 14, "saveFile:", ":)", "smileface.txt"],
 		["load file",                           " ", 14, "loadFile:"],
 		["loaded file name",                    "r", 14, "loadedFileName:"],
 		["loaded file data",                    "r", 14, "loadedFileData:"],
+		["loaded?",                             "b", 14, "fileLoaded:"],
+		["loading failed?",                     "b", 14, "fileLoadFailed:"],
+		["loading failure reason",              "r", 14, "fileLoadFailReason:"],
 
 
 		// Scratch

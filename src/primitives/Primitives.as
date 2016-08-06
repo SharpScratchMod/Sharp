@@ -32,10 +32,14 @@ package primitives {
 
 	import flash.net.*;
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
+	import flash.events.SecurityErrorEvent;
 	import flash.utils.ByteArray;
 
 	import mx.utils.Base64Encoder;
 	import mx.utils.Base64Decoder;
+	
+	import uiwidgets.DialogBox;
 
 public class Primitives {
 
@@ -46,7 +50,7 @@ public class Primitives {
 	private var counter:int;
 	private var httpReturn:String = "";
 	private var httpRequestsAllowed:int = 10; private var httpRequestsActive:int = 0; // TODO: Add "hidden" setting for HTTP requests allowed
-	private var fileNameValue:String; private var fileDataValue:String;
+	private var fileNameValue:String; private var fileDataValue:String; private var fileLoadedValue:Boolean; private var fileErrored:Boolean; private var fileErrorValue:String;
 
 	public function Primitives(app:Scratch, interpreter:Interpreter) {
 		this.app = app;
@@ -110,11 +114,15 @@ public class Primitives {
 		// Sharp -- HTTP
 		primTable["httpBlock:"] = primHttp;
 		primTable["httpReturn:"] = function(b:*):* {return httpReturn};
+		primTable["goToURL:"] = primGoTo;
 		// Sharp -- Files
 		primTable["saveFile:"] = primFileSave;
 		primTable["loadFile:"] = primFileLoad;
 		primTable["loadedFileName:"] = function(b:*):*{ return fileNameValue; };
 		primTable["loadedFileData:"] = function(b:*):*{ return fileDataValue; };
+		primTable["fileLoaded:"] = primFileLoaded;
+		primTable["fileLoadFailed:"] = primFileLoadFail;
+		primTable["fileLoadFailReason:"] = primFileLoadFailReason;
 
 		new LooksPrims(app, interp).addPrimsTo(primTable, specialTable);
 		new MotionAndPenPrims(app, interp).addPrimsTo(primTable, specialTable);
@@ -272,50 +280,6 @@ public class Primitives {
 	private function primStrReplace(b:Array):String{
 		return b[1].replace(new RegExp(b[0], "g"), b[2]);
 	}
-	// Sharp --- HTTP
-	private function primHttp(b:Array):void {
-		if(httpRequestsActive == httpRequestsAllowed) return;
-		httpRequestsActive++;
-		var url:String = b[1];
-		var req:URLRequest = new URLRequest(url);
-		req.method = URLRequestMethod.GET;
-
-		var loader:URLLoader = new URLLoader();
-		loader.addEventListener(Event.COMPLETE, onComplete);
-		loader.dataFormat = URLLoaderDataFormat.TEXT;
-		loader.load(req);
-
-		function onComplete(e:Event){
-			httpReturn = e.target.data.readUTFBytes(e.target.data.bytesAvailable);
-			httpRequestsActive--;
-		}
-	}
-	//Sharp --- Files
-	private function primFileSave(b:Array):void{
-		var file:FileReference = new FileReference();
-		file.save(b[0], b[1]);
-	}
-	private function primFileLoad(b:Array):void{
-		var fileName:String, data:ByteArray;
-		function fileLoaded(event:Event):void{
-			var file:FileReference = FileReference(event.target);
-			fileName = file.name;
-			data = file.data;
-
-			fileNameValue = fileName;
-			fileDataValue = data.readUTFBytes(data.bytesAvailable);
-		}
-		function fileSelected(event:Event):void{
-			var file:FileReference = FileReference(fileList.fileList[0]);
-			file.addEventListener(Event.COMPLETE, fileLoaded);
-			file.load();
-		}
-		var fileList:FileReferenceList = new FileReferenceList();
-		fileList.addEventListener(Event.SELECT, fileSelected);
-		try{
-			fileList.browse(null);
-		}catch(e:*){}
-	}
 	private function primDigitalRoot(b:Array):Number{
 		if(interp.numarg(b[0]) < 9){
 			return interp.numarg(b[0])
@@ -351,5 +315,124 @@ public class Primitives {
 			return false;
 		}
 		return false;
+	}
+	// Sharp --- HTTP
+	private function primHttp(b:Array):void {
+		if(httpRequestsActive == httpRequestsAllowed) return;
+		httpRequestsActive++;
+		var url:String = b[1];
+		var req:URLRequest = new URLRequest(url);
+		req.method = URLRequestMethod.GET;
+
+		var loader:URLLoader = new URLLoader();
+		loader.addEventListener(Event.COMPLETE, onComplete);
+		loader.dataFormat = URLLoaderDataFormat.TEXT;
+		loader.load(req);
+
+		function onComplete(e:Event){
+			httpReturn = e.target.data.readUTFBytes(e.target.data.bytesAvailable);
+			httpRequestsActive--;
+		}
+	}
+	private function primGoTo(b:Array):void{
+		DialogBox.confirm("Do you want to go to '" + b[0] + "'?", null, okFunc);
+		function okFunc():void{
+			var request:URLRequest = new URLRequest(b[0]);
+			navigateToURL(request, "_blank");
+		}
+	}
+	//Sharp --- Files
+	private function primFileSave(b:Array):void{
+		DialogBox.confirm("Would you like to save the file '" + b[1] + "' to your computer?", null, okFunc, cancelFunc);
+		function okFunc():void{
+			function cancelHandle(e:Event){
+				fileLoadedValue = true;
+				fileErrored = true;
+				fileErrorValue = "Cancelled by user";
+			}
+			function ioErrorHandle(e:IOErrorEvent){
+				fileLoadedValue = true;
+				fileErrored = true;
+				fileErrorValue = "An IO error occurred!";
+			}
+			function securityError(e:SecurityErrorEvent){
+				fileLoadedValue = true;
+				fileErrored = true;
+				fileErrorValue = "A security error occurred! This is most likely a problem with Sharp!";
+			}
+			var file:FileReference = new FileReference();
+			file.addEventListener(Event.CANCEL, cancelHandle);
+			file.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandle);
+			file.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityError);
+			file.save(b[0], b[1]);
+			fileLoadedValue = true;
+		}
+		function cancelFunc():void{
+			fileLoadedValue = true;
+			fileErrored = true;
+			fileErrorValue = "Denied by user";
+		}
+	}
+	private function primFileLoad(b:Array):void{
+		DialogBox.confirm("Would you like to open a file from your computer?", null, okFunc, cancelFunc);
+		function okFunc():void{
+			var fileName:String, data:ByteArray;
+			function cancelHandle(e:Event){
+				fileLoadedValue = true;
+				fileErrored = true;
+				fileErrorValue = "Cancelled by user";
+			}
+			function ioErrorHandle(e:IOErrorEvent){
+				fileLoadedValue = true;
+				fileErrored = true;
+				fileErrorValue = "An IO error occurred!";
+			}
+			function securityError(e:SecurityErrorEvent){
+				fileLoadedValue = true;
+				fileErrored = true;
+				fileErrorValue = "A security error occurred! This is most likely a problem with Sharp!";
+			}
+			function fileLoaded(event:Event):void{
+				var file:FileReference = FileReference(event.target);
+				file.addEventListener(Event.CANCEL, cancelHandle);
+				file.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandle);
+				file.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityError);
+				fileName = file.name;
+				data = file.data;
+
+				fileNameValue = fileName;
+				fileDataValue = data.readUTFBytes(data.bytesAvailable);
+				fileLoadedValue = true;
+			}
+			function fileSelected(event:Event):void{
+				var file:FileReference = FileReference(fileList.fileList[0]);
+				file.addEventListener(Event.COMPLETE, fileLoaded);
+				file.load();
+			}
+			var fileList:FileReferenceList = new FileReferenceList();
+			fileList.addEventListener(Event.SELECT, fileSelected);
+			fileList.addEventListener(Event.CANCEL, cancelHandle);
+			fileList.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandle);
+			fileList.addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityError);
+			try{
+				fileList.browse(null);
+			}catch(e:*){}
+		}
+		function cancelFunc():void{
+			fileLoadedValue = true;
+			fileErrored = true;
+			fileErrorValue = "Denied by user";
+		}
+	}
+	private function primFileLoaded(b:Array):Boolean{
+		var bl:Boolean = fileLoadedValue;
+		fileLoadedValue = false;
+		return bl;
+	}
+	private function primFileLoadFail(b:Array):Boolean{
+		return fileErrored;
+	}
+	private function primFileLoadFailReason(b:Array):String{
+		return fileErrorValue;
 	}
 }}
