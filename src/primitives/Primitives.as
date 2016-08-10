@@ -71,12 +71,10 @@ public class Primitives {
 		primTable["|"]				= function(b:*):* { return interp.boolarg(b[0]) || interp.boolarg(b[1]) };
 		primTable["~"]			= function(b:*):* { return !interp.boolarg(b[0]) };
 
-		//testing functions for moar logic gates
-		//don't spoil the secret update!
-		//Shhh
-		//---
+
+
 		primTable["nand"] =  function(b:*):* { return !(interp.boolarg(b[0]) && interp.boolarg(b[1])) };
-		primTable["nor"] = primLogicNor;
+		primTable["nor"] = function(b:*):* { return !(interp.boolarg(b[0]) || interp.boolarg(b[1])) }; //if i had realized that it was this simple i should've implemented logic gates since i started making sharp!
 		primTable["xor"] = primLogicXor;
 		primTable["xnor"] = primLogicXnor;
 		primTable["abs"]			= function(b:*):* { return Math.abs(interp.numarg(b[0])) };
@@ -84,6 +82,13 @@ public class Primitives {
 		primTable["power:of:"] 			= function(b:*):* { return Math.pow(interp.numarg(b[0]), interp.numarg(b[1])) };
 		primTable["reverseString:"] 		= primReverseString;
 		primTable["splitStringFrom:"]		= primSplit;
+		primTable["bitwiseAnd:"]	= function(b:*):* { return interp.numarg(b[0]) & interp.numarg(b[1]) };
+		primTable["bitwiseOr:"]		= function(b:*):* { return interp.numarg(b[0]) | interp.numarg(b[1]) };
+		primTable["bitwiseNot:"]	= function(b:*):* { return ~ interp.numarg(b[0]) };
+		primTable["bitwiseXor:"]		= function(b:*):* { return interp.numarg(b[0]) ^ interp.numarg(b[1]) };
+		primTable["bitwiseLeftShift:"]	= function(b:*):* { return interp.numarg(b[0]) << interp.numarg(b[1])};
+		primTable["bitwiseRightShift:"]	= function(b:*):* { return interp.numarg(b[0]) >> interp.numarg(b[1])};
+		//primTable["bitwiseUnsignedShift"]	= function(b:*):* { return interp.numarg(b[0]) >>> interp.numarg(b[1])};
 
 		primTable["concatenate:with:"]	= function(b:*):* { return ("" + b[0] + b[1]).substr(0, 10240); };
 		primTable["letter:of:"]			= primLetterOf;
@@ -288,15 +293,6 @@ public class Primitives {
 		}
 	}
 
-
-	private function primLogicNor(b:Array):Boolean{
-		if((interp.boolarg(b[0]) == false) && (interp.boolarg(b[1]) == false)){
-			return true;
-		} else {
-			return false;
-		};
-		return false;
-	}
 
 	private function primLogicXor(b:Array):Boolean{
 		if(interp.boolarg(b[0]) !== interp.boolarg(b[1])){

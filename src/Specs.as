@@ -380,21 +380,13 @@ public class Specs {
 		["%b and %b",							"b", 8, "&"],
 		["%b or %b",							"b", 8, "|"],
 		["not %b",							"b", 8, "~"],
-		//secret beta update blocks
-		//---
 		["%b nand %b", 				"b", 8, "nand"],
-		//["%b nor %b", 				"b", 8, "nor"],
+		["%b nor %b", 				"b", 8, "nor"],
+		//why the heck is NOR commented...
 		["%b xor %b", 				"b", 8, "xor"],
 		["%b xnor %b",				"b", 8, "xnor"],
-		//this is supposed to be a secret but if you did find this, well, congratulations
-		//you just spoiled the secret update
-		["-"],
 		["true",                                			"b", 8, "true"],
 		["false",                       				"b", 8, "false"],
-		["-"],
-		["join %s %s",							"r", 8, "concatenate:with:",	"hello ", "world"],
-		["letter %n of %s",						"r", 8, "letter:of:",			1, "world"],
-		["length of %s",						"r", 8, "stringLength:",		"world"],
 		["-"],
 		["%n mod %n",							"r", 8, "%",					"", ""],
 		["round %n",							"r", 8, "rounded", 				""],
@@ -402,11 +394,24 @@ public class Specs {
 		["%m.mathOp of %n",						"r", 8, "computeFunction:of:",	"sqrt", 9],
 		["digital root of %n",					"r", 8, "digitalRootOf:",		"1234"],
 		["the constant %m.constantName",		"r", 8, "chooseConstant:",	"Pi"],
+		["-"],
+		["join %s %s",							"r", 8, "concatenate:with:",	"hello ", "world"],
+		["letter %n of %s",						"r", 8, "letter:of:",			1, "world"],
+		["length of %s",						"r", 8, "stringLength:",		"world"],
 		["reverse %s",							"r", 8, "reverseString:",	"hello"],
 		["replace %s in %s with %s",            "r", 8, "blockReplace:", "Hi", "Hi", "Hello"],
 		["split %s at %s and return to %m.list"," ", 8, "blockSplit:", "H i", " ", ""],
 		["split %s at %s and return %n",        "r", 8, "blockSplitReturn:", "H i", " ", 1],
 		["split %s from letter %n to %n", 				"r", 8, "splitStringFrom:", "Foobar", "1", "3"],
+		//bitwise
+		["-"],
+		["%n & %n", 							"r", 8, "bitwiseAnd:", "1", "2"],
+		["%n | %n",								"r", 8, "bitwiseOr:", "1", "2"],
+		["%n ^ %n",								"r", 8, "bitwiseXor:", "1", "2"],
+		["~ %n",								"r", 8, "bitwiseNot:", "1", "2"],
+		["%n << %n",							"r", 8, "bitwiseLeftShift:", "2", "10"],
+		["%n >> %n",							"r", 8, "bitwiseRightShift:", "2", "10"],
+		//["%n >>> %n",							"r", 8, "bitwiseUnsignedShift:", "2", "10"],
 
 		// variables
 		["set %m.var to %s",								" ", 9, SET_VAR],
