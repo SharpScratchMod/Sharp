@@ -18,7 +18,7 @@ Looking for the Scratch readme? https://github.com/SharpScratchMod/Sharp/blob/ma
 Version            | Code Name        | LTS | Released | Still supported | Supported until | Notes
 ------------------ | ---------------- | --- | -------- | --------------- | --------------- | -----------------------------
 1.0.0 (Release)    | Katana           | NO  | NO       | --NOT YET--     | --NOT YET--     | 
-1.0.0 Beta         | Chainsaw         | NO  | NO       | --NOT YET--     | --NOT YET--     |
+1.0.0 Beta         | Chainsaw         | YES  | YES       | YES     | January 1, 2017  |
 1.1.5 Alpha		   | Sawtooth         | NO  | YES	   | YES             | --TBA--         | 		
 1.1.0 Alpha        | Sawtooth         | NO  | YES      | YES     | --TBA--     |
 1.0.1 Alpha        | Butterknife      | NO  | YES      | YES     | --TBA--     | Will replace 1.0.0 Alpha support
