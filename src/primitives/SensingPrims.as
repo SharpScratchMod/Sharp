@@ -31,6 +31,7 @@ package primitives {
 	import scratch.*;
 	import uiwidgets.DialogBox;
 	import com.adobe.crypto.MD5;
+	import com.adobe.crypto.SHA256;
 
 public class SensingPrims {
 
@@ -88,6 +89,7 @@ public class SensingPrims {
 		primTable["sharpVersion:"]      = function(b:*):* { return Scratch.versionString };
 		primTable["passwordHash:"]      = primPasswordHash;
 		primTable["passwordVerify:"]    = primPasswordVerify;
+		primTable["passwordRehash:"]    = primPasswordRehashCheck;
 	}
 	
 	// Sharp
@@ -117,18 +119,21 @@ public class SensingPrims {
 	}
 	private function primPasswordHash(b:Array):String{
 		if(app.editMode && !passwordWarningHasBeenShown){
-			DialogBox.notify("Warning!", "The password blocks are not made for and should not be used for real encryption purposes.\nIt uses MD5 to hash the password.\nIn the future the block encryption may change from MD5.\n\nIf the encryption is changed a password needs conversion boolean block will be added.\nThe hash block will return passwords with the new encryption\nThe verify block will verify for both the old and new encryption\n\n\nNOTE: This notice is shown once per session. And only while in the editor.\nIt is recommended for you to tell your users not to use real passwords");
+		//The password blocks are not made for and should not be used for real encryption purposes.\nIt uses MD5 to hash the password.\nIn the future the block encryption may change from MD5.\n\nIf the encryption is changed a password needs conversion boolean block will be added.\nThe hash block will return passwords with the new encryption\nThe verify block will verify for both the old and new encryption\n\n\nNOTE: This notice is shown once per session. And only while in the editor.\nIt is recommended for you to tell your users not to use real passwords
+			DialogBox.notify("Warning!", "The password blocks are not made for real password use.\nIt uses SHA256 to hash the password.\nIn the future the block encryption may change from SHA256.\n\nTo convert from MD5 use the password needs rehash boolean and password hash the password\nThe verify block can handle the MD5 and SHA256 methods.\n\n\nNOTE: This notice is shown once per session. And only while in the editor.\nIt is recommended for you to tell your users not to use real passwords");
 			passwordWarningHasBeenShown = true;
 		}
 		//Hashing methods
 		//01 = MD5
-		var hash:String = "01" + MD5.hash(b[0]);
+		//02 = SHA256
+		var hash:String = "02" + SHA256.hash(b[0]);
 		return hash;
 	}
 	private function primPasswordVerify(b:Array):Boolean{
 		if(app.editMode && !passwordWarningHasBeenShown){
-			DialogBox.notify("Warning!", "The password blocks are not made for and should not be used for real encryption purposes.\nIt uses MD5 to hash the password.\nIn the future the block encryption may change from MD5.");
-			DialogBox.notify("Warning!", "If the encryption is changed a password needs conversion will be added.\nThe hash block will return passwords with the new encryption\nThe verify block will verify for both the old and new encryption");
+			//DialogBox.notify("Warning!", "The password blocks are not made for and should not be used for real encryption purposes.\nIt uses MD5 to hash the password.\nIn the future the block encryption may change from MD5.");
+			//DialogBox.notify("Warning!", "If the encryption is changed a password needs conversion will be added.\nThe hash block will return passwords with the new encryption\nThe verify block will verify for both the old and new encryption");
+			DialogBox.notify("Warning!", "The password blocks are not made for real password use.\nIt uses SHA256 to hash the password.\nIn the future the block encryption may change from SHA256.\n\nTo convert from MD5 use the password needs rehash boolean and password hash the password\nThe verify block can handle the MD5 and SHA256 methods.\n\n\nNOTE: This notice is shown once per session. And only while in the editor.\nIt is recommended for you to tell your users not to use real passwords");
 			passwordWarningHasBeenShown = true;
 		}
 		//Hashing methods in passwordHash function
@@ -139,6 +144,30 @@ public class SensingPrims {
 			}else{
 				return false;
 			}
+		}else if(b[0].charAt(0) == "0" && b[0].charAt(1) == "2"){
+			var hash:String = SHA256.hash(b[1]);
+			if(hash === b[0].substr(2)){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
+	}
+	private function primPasswordRehashCheck(b:Array):Boolean{
+		if(app.editMode && !passwordWarningHasBeenShown){
+			//DialogBox.notify("Warning!", "The password blocks are not made for and should not be used for real encryption purposes.\nIt uses MD5 to hash the password.\nIn the future the block encryption may change from MD5.");
+			//DialogBox.notify("Warning!", "If the encryption is changed a password needs conversion will be added.\nThe hash block will return passwords with the new encryption\nThe verify block will verify for both the old and new encryption");
+			DialogBox.notify("Warning!", "The password blocks are used at your own risk.\nIt uses SHA256 to hash the password.\nIn the future the block encryption may change from SHA256.\n\nTo convert from MD5 use the password needs rehash boolean and password hash the password\nThe verify block can handle the MD5 and SHA256 methods.\n\n\nNOTE: This notice is shown once per session. And only while in the editor.\nIt is recommended for you to tell your users not to use real passwords");
+			passwordWarningHasBeenShown = true;
+		}
+		//Hashing methods in passwordHash function
+		if(b[0].charAt(0) == "0" && b[0].charAt(1) == "1"){
+			return true
+		}else if(b[0].charAt(0) == "0" && b[0].charAt(1) == "2"){
+			return false;
 		}
 		else{
 			return false;
