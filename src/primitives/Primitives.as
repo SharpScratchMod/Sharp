@@ -267,6 +267,7 @@ public class Primitives {
 		switch(pickConstant) {
 			case "Pi": return Math.PI;
 			case "E": return Math.E;
+			case "Phi": return (1 + Math.sqrt(5)) / 2;
 		}
 		return 0;
 	}
