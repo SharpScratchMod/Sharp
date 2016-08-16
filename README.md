@@ -3,8 +3,8 @@ Sharp Scratch Mod by DrKat123 and Mrcomputer1
 
 [![Gitter](https://badges.gitter.im/SharpScratchMod/Sharp.svg)](https://gitter.im/SharpScratchMod/Sharp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
 [![Build Status](https://travis-ci.org/SharpScratchMod/Sharp.svg?branch=master)](https://travis-ci.org/SharpScratchMod/Sharp)
-[![Version](https://img.shields.io/badge/version-beta%201.0.0-brightgreen.svg)](https://github.com/SharpScratchMod/Sharp/releases/tag/v1.0.0-beta)
-[![License](https://img.shields.io/badge/license-GPL%20v2-brightgreen.svg)](https://github.com/SharpScratchMod/Sharp/blob/master/COPYING)  
+[![Version](https://img.shields.io/badge/version-beta%201.0.0-brightgreen.svg?style=flat-square)](https://github.com/SharpScratchMod/Sharp/releases/tag/v1.0.0-beta)
+[![License](https://img.shields.io/badge/license-GPL%20v2-brightgreen.svg?style=flat-square)](https://github.com/SharpScratchMod/Sharp/blob/master/COPYING)  
 [Try it!](https://sharpscratchmod.github.io/Sharp.swf)
 
 [Scratch topic](https://scratch.mit.edu/discuss/topic/199192/)
