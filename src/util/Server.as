@@ -253,12 +253,14 @@ public class Server implements IServer {
 //			whenDone(BackpackPart.localAssets[md5]);
 //			return null;
 //		}
-		var url:String = URLs.assetCdnPrefix + URLs.internalAPI + 'asset/' + md5 + '/get/';
+		//var url:String = URLs.assetCdnPrefix + URLs.internalAPI + 'asset/' + md5 + '/get/';
+		var url:String = "static/assets/" + md5;
 		return serverGet(url, whenDone);
 	}
 
 	public function getMediaLibrary(libraryType:String, whenDone:Function):URLLoader {
-		var url:String = getCdnStaticSiteURL() + 'medialibraries/' + libraryType + 'Library.json';
+		//var url:String = getCdnStaticSiteURL() + 'medialibraries/' + libraryType + 'Library.json';
+		var url:String = "static/medialibraries/" + libraryType + "Library.json";
 		return serverGet(url, whenDone);
 	}
 
