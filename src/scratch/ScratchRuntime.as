@@ -80,7 +80,8 @@ public class ScratchRuntime {
 
 	protected var projectToInstall:ScratchStage;
 	protected var saveAfterInstall:Boolean;
-
+	[Embed(source='../assets/sprite1A.svg', mimeType='application/octet-stream')] protected static var ModCostume1:Class;
+	[Embed(source='../assets/sprite1B.svg', mimeType='application/octet-stream')] protected static var ModCostume2:Class;
 	public function ScratchRuntime(app:Scratch, interp:Interpreter) {
 		this.app = app;
 		this.interp = interp;
@@ -775,7 +776,17 @@ public class ScratchRuntime {
 	}
 
 	public function installNewProject():void {
-		installEmptyProject();
+		var newStage:ScratchStage = new ScratchStage();
+        var sprite:ScratchSprite = new ScratchSprite('Sprite1');
+        var costume1:ScratchCostume = new ScratchCostume(Translator.map('costume1'), new ModCostume1());
+        var costume2:ScratchCostume = new ScratchCostume(Translator.map('costume2'), new ModCostume2());
+        sprite.costumes = [costume1, costume2];
+        sprite.showCostume(1); //To fix odd bug
+        sprite.showCostume(0);
+        newStage.addChild(sprite);
+        app.saveForRevert(new ProjectIO(app).encodeProjectAsZipFile(newStage),true);
+        app.oldWebsiteURL = "";
+        installProject(newStage);
 	}
 
 	public function selectProjectFile():void {

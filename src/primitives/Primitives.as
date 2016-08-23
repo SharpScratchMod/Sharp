@@ -88,6 +88,7 @@ public class Primitives {
 		primTable["bitwiseXor:"]		= function(b:*):* { return interp.numarg(b[0]) ^ interp.numarg(b[1]) };
 		primTable["bitwiseLeftShift:"]	= function(b:*):* { return interp.numarg(b[0]) << interp.numarg(b[1])};
 		primTable["bitwiseRightShift:"]	= function(b:*):* { return interp.numarg(b[0]) >> interp.numarg(b[1])};
+		//this block doesn't work so please don't use it until we can fix it
 		//primTable["bitwiseUnsignedShift"]	= function(b:*):* { return interp.numarg(b[0]) >>> interp.numarg(b[1])};
 
 		primTable["concatenate:with:"]	= function(b:*):* { return ("" + b[0] + b[1]).substr(0, 10240); };
@@ -267,6 +268,7 @@ public class Primitives {
 		switch(pickConstant) {
 			case "Pi": return Math.PI;
 			case "E": return Math.E;
+			case "Phi": return (1 + Math.sqrt(5)) / 2;
 		}
 		return 0;
 	}
