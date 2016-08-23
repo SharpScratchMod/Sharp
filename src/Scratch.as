@@ -183,7 +183,7 @@ public class Scratch extends Sprite {
 
 	// UI Parts
 	public var libraryPart:LibraryPart;
-	protected var topBarPart:TopBarPart;
+	public var topBarPart:TopBarPart; //was protected
 	protected var stagePart:StagePart;
 	private var tabsPart:TabsPart;
 	protected var scriptsPart:ScriptsPart;
@@ -289,6 +289,7 @@ public class Scratch extends Sprite {
 		
 		initSettings();
 		if(isOffline) DialogBox.notify("Welcome to Sharp!", "Website: http://SharpScratchMod.github.io\nGitHub: https://github.com/SharpScratchMod/Sharp\n\nCredits:\nDrKat123 - Developer, Owner\nMrcomputer1 - Developer, Owner\nscratchyone - Developer\n\nOther important credits:\nNoMod-Programming - Custom reporters");
+		Tutorial.editorMap();
 	}
 
 	protected function handleStartupParameters():void {

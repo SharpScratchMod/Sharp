@@ -39,13 +39,13 @@ public class TopBarPart extends UIPart {
 
 	private var shape:Shape;
 	protected var logoButton:IconButton;
-	protected var languageButton:IconButton;
+	public var languageButton:IconButton; //was protected
 
-	protected var fileMenu:IconButton;
-	protected var editMenu:IconButton;
-	protected var helpMenu:IconButton;
+	public var fileMenu:IconButton; //was protected
+	public var editMenu:IconButton; //was protected
+	public var helpMenu:IconButton; //was protected
 
-	private var copyTool:IconButton;
+	public var copyTool:IconButton; //was private
 	private var cutTool:IconButton;
 	private var growTool:IconButton;
 	private var shrinkTool:IconButton;

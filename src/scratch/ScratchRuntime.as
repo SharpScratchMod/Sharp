@@ -496,11 +496,11 @@ public class ScratchRuntime {
 			file.save(video, "movie.flv");
 			Scratch.app.log(LogLevel.TRACK, "Video downloaded", {projectID: app.projectID, seconds: roundToTens(seconds), megabytes: roundToTens(video.length/1000000)});
 			var specEditor:SharingSpecEditor = new SharingSpecEditor();
-			DialogBox.close("Playing and Sharing Your Video",null,specEditor,"Back to Scratch");
+			DialogBox.close("Playing and Sharing Your Video",null,specEditor,"Back to Sharp");
 		    releaseVideo(false);
         }
 		function releaseVideo(log:Boolean = true):void {
-			if (log) Scratch.app.log(LogLevel.TRACK, "Video canceled", {projectID: app.projectID, seconds: roundToTens(seconds), megabytes: roundToTens(video.length/1000000)});
+			if (log) Scratch.app.log(LogLevel.TRACK, "Video cancelled", {projectID: app.projectID, seconds: roundToTens(seconds), megabytes: roundToTens(video.length/1000000)});
             video = null;
 		}
 		DialogBox.close("Video Finished!","To save, click the button below.",null,"Save and Download",app.stage,saveFile,releaseVideo,null,true);
