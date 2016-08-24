@@ -44,12 +44,13 @@ public class TopBarPart extends UIPart {
 	public var fileMenu:IconButton; //was protected
 	public var editMenu:IconButton; //was protected
 	public var helpMenu:IconButton; //was protected
+	private var devMenu:IconButton;
 
 	public var copyTool:IconButton; //was private
-	private var cutTool:IconButton;
-	private var growTool:IconButton;
-	private var shrinkTool:IconButton;
-	private var helpTool:IconButton;
+	public var cutTool:IconButton; //was private
+	public var growTool:IconButton; //was private
+	public var shrinkTool:IconButton; //was private
+	public var helpTool:IconButton; //was private
 	private var toolButtons:Array = [];
 	private var toolOnMouseDown:String;
 
@@ -94,8 +95,9 @@ public class TopBarPart extends UIPart {
 			Scratch.app.showFileMenu(Menu.dummyButton());
 			Scratch.app.showEditMenu(Menu.dummyButton());
 			Scratch.app.showHelpMenu(Menu.dummyButton());
+			if(Scratch.app.builtWithDevMode) Scratch.app.showDevMenu(Menu.dummyButton());
 		}
-		return ['File', 'Edit', "Help", 'Tips', 'Duplicate', 'Delete', 'Grow', 'Shrink', 'Block help', 'Offline Editor'];
+		return ['File', 'Edit', "Help", 'Tips', 'Duplicate', 'Delete', 'Grow', 'Shrink', 'Block help', 'Offline Editor', 'Dev'];
 	}
 
 	protected function removeTextButtons():void {
@@ -103,6 +105,7 @@ public class TopBarPart extends UIPart {
 			removeChild(fileMenu);
 			removeChild(editMenu);
 			removeChild(helpMenu);
+			if(Scratch.app.builtWithDevMode) removeChild(devMenu);
 		}
 	}
 
@@ -156,6 +159,12 @@ public class TopBarPart extends UIPart {
 		helpMenu.x = nextX;
 		helpMenu.y = buttonY;
 		nextX += helpMenu.width + buttonSpace;
+		
+		if(Scratch.app.builtWithDevMode){
+			devMenu.x = nextX;
+			devMenu.y = buttonY;
+			nextX += devMenu.width + buttonSpace;
+		}
 
 		// cursor tool buttons
 		var space:int = 3;
@@ -216,6 +225,7 @@ public class TopBarPart extends UIPart {
 		addChild(fileMenu = makeMenuButton('File', app.showFileMenu, true));
 		addChild(editMenu = makeMenuButton('Edit', app.showEditMenu, true));
 		addChild(helpMenu = makeMenuButton('Help', app.showHelpMenu, true));
+		if(Scratch.app.builtWithDevMode) addChild(devMenu = makeMenuButton('Dev', app.showDevMenu, true));
 	}
 
 	private function addToolButtons():void {

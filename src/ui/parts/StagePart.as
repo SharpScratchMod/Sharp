@@ -51,9 +51,9 @@ public class StagePart extends UIPart {
 	protected var projectInfo:TextField;
 	private var versionInfo:TextField;
 	private var turboIndicator:TextField;
-	private var runButton:IconButton;
-	private var stopButton:IconButton;
-	private var fullscreenButton:IconButton;
+	public var runButton:IconButton; //was private
+	public var stopButton:IconButton; //was private
+	public var fullscreenButton:IconButton; //was private
 	private var stageSizeButton:Sprite;
 	
 	//video recording tools
@@ -72,7 +72,7 @@ public class StagePart extends UIPart {
 	private var xLabel:TextField;
 	private var xReadout:TextField;
 	private var yLabel:TextField;
-	private var yReadout:TextField;
+	public var yReadout:TextField; //was private
 
 	public function StagePart(app:Scratch) {
 		this.app = app;

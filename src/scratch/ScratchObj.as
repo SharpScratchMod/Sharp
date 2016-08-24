@@ -402,11 +402,19 @@ public class ScratchObj extends Sprite {
 
 	/* Procedures */
 
-	public function procedureDefinitions():Array {
+	public function procedureDefinitions():Array { 
 		var result:Array = [];
 		for (var i:int = 0; i < scripts.length; i++) {
 			var b:Block = scripts[i] as Block;
 			if (b && (b.op == Specs.PROCEDURE_DEF)) result.push(b);
+		}
+		var theStage:ScratchObj = Scratch.app.stagePane.objNamed("_stage_");
+		var stageScripts:Array = theStage.scripts;
+		if(theStage != this){
+			for (var i:int = 0; i < stageScripts.length; i++) {
+				var b:Block = stageScripts[i] as Block;
+				if (b && (b.op == Specs.PROCEDURE_DEF)) result.push(b);
+			}
 		}
 		return result;
 	}
@@ -414,6 +422,12 @@ public class ScratchObj extends Sprite {
 	public function lookupProcedure(procName:String):Block {
 		for (var i:int = 0; i < scripts.length; i++) {
 			var b:Block = scripts[i] as Block;
+			if (b && (b.op == Specs.PROCEDURE_DEF) && (b.spec == procName)) return b;
+		}
+		var theStage:ScratchObj = Scratch.app.stagePane.objNamed("_stage_");
+		var stageScripts:Array = theStage.scripts;
+		for (var i:int = 0; i < stageScripts.length; i++) {
+			var b:Block = stageScripts[i] as Block;
 			if (b && (b.op == Specs.PROCEDURE_DEF) && (b.spec == procName)) return b;
 		}
 		return null;

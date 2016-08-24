@@ -36,7 +36,7 @@ import uiwidgets.*;
 public class ScriptsPart extends UIPart {
 
 	private var shape:Shape;
-	private var selector:PaletteSelector;
+	public var selector:PaletteSelector; //was private
 	private var spriteWatermark:Bitmap;
 	protected var paletteFrame:ScrollFrame;
 	protected var scriptsFrame:ScrollFrame;

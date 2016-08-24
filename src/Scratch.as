@@ -74,10 +74,22 @@ import util.*;
 
 import watchers.ListWatcher;
 
+import com.adobe.crypto.SHA256;
+
 public class Scratch extends Sprite {
 	// Version
-	public static const versionString:String = 'Beta 1.0.0 (Katana) : Scratch v448';
+	public static const versionString:String = 'Beta 1.0.0 (Katana) : Scratch v448' + (SHARP::builtWithDevMode ? " : Sharp Developer Mode Active" : "");
 	public static var app:Scratch; // static reference to the app, used for debugging
+	// Sharp Developer Menu
+	// *------------------------------------*
+	// | We won't say the password! You will|
+	// | have to change the password or     |
+	// | edit the code to gain access to thi|
+	// |s menu                              |
+	// *------------------------------------*
+	public var builtWithDevMode:Boolean = SHARP::builtWithDevMode;
+	public var devMode:Boolean = false;
+	public var devModePassword:String = "99625b7abd0d05c32905b9aa67c9e6cb7e19ead8dc16d0caf5d372a8441dbd34";
 	
 	// Sharp settings store
 	public var sharpSettings:SharedObject;
@@ -184,9 +196,9 @@ public class Scratch extends Sprite {
 	// UI Parts
 	public var libraryPart:LibraryPart;
 	public var topBarPart:TopBarPart; //was protected
-	protected var stagePart:StagePart;
+	public var stagePart:StagePart; //was protected
 	private var tabsPart:TabsPart;
-	protected var scriptsPart:ScriptsPart;
+	public var scriptsPart:ScriptsPart; //was protected
 	public var imagesPart:ImagesPart;
 	public var soundsPart:SoundsPart;
 	public const tipsBarClosedWidth:int = 17;
@@ -289,7 +301,6 @@ public class Scratch extends Sprite {
 		
 		initSettings();
 		if(isOffline) DialogBox.notify("Welcome to Sharp!", "Website: http://SharpScratchMod.github.io\nGitHub: https://github.com/SharpScratchMod/Sharp\n\nCredits:\nDrKat123 - Developer, Owner\nMrcomputer1 - Developer, Owner\nscratchyone - Developer\n\nOther important credits:\nNoMod-Programming - Custom reporters");
-		Tutorial.editorMap();
 	}
 
 	protected function handleStartupParameters():void {
@@ -1144,6 +1155,40 @@ public class Scratch extends Sprite {
 		m.showOnStage(stage, b.x, topBarPart.bottom() - 1);
 	}
 	
+	public function showDevMenu(b:*):void{
+		var m:Menu = new Menu(null, 'Dev', CSS.topBarColor(), 28);
+		
+		function devModeLogin():void{
+			var d:DialogBox = new DialogBox(done);
+			function done():void{
+				var hash:String = SHA256.hash(d.getField("Password"));
+				if(hash == devModePassword){
+					devMode = true;
+					DialogBox.notify("Sharp Developer Mode",
+					"You are now logged in to Sharp Developer Mode!");
+				}else{
+					DialogBox.notify("Sharp Developer Mode",
+					"Wrong Password! :(");
+				}
+			}
+			d.addTitle("Sharp Developer Mode");
+			d.addText("Please enter the Sharp Developer Password");
+			d.addField("Password", 120, "", true);
+			d.setPasswordField("Password");
+			d.addButton("Login Now", d.accept);
+			d.addButton("Cancel", d.cancel);
+			d.showOnStage(stage);
+		}
+		
+		if(!devMode){
+			
+			m.addItem("Login to dev mode", devModeLogin);
+			
+		}else addDevMenuItems(b, m);
+		
+		m.showOnStage(stage, b.x, topBarPart.bottom() - 1);
+	}
+	
 	public function stopVideo(b:*):void {
 		runtime.stopVideo();
 	}
@@ -1155,6 +1200,32 @@ public class Scratch extends Sprite {
 			"Sharp Scratch mod by DrKat123, Mrcomputer1 and some others",
 			"About Sharp", "Report a bug", "Credits", "About"
 		];
+	}
+	
+	protected function addDevMenuItems(b:*, m:Menu):void {
+		function devMenuAboutBuild(){
+			DialogBox.notify("Sharp Developer Menu", 
+			"Sharp Version: " + versionString.replace(" : Sharp Developer Mode Active", "") + "\n" +
+			"Host Protocol: " + hostProtocol  + "\n" +
+			"Is in 3d: " + isIn3D             + "\n" +
+			"Is ARM CPU: " + isArmCPU         + "\n" +
+			"JS Enabled: " + jsEnabled        + "\n" +
+			"Extension Dev Mode: " + isExtensionDevMode + "\n" +
+			"Uses Username Block: " + usesUserNameBlock + "\n" +
+			"Uses HTTP Block: " + usesHTTPBlock + "\n" +
+			"Turbo Mode is Active: " + turboModeIsActive + "\n" +
+			"Built with dev mode: " + SHARP::builtWithDevMode + "\n" +
+			"Build with allow3d: " + SCRATCH::allow3d);
+		}
+		function devMenuLogout(){
+			devMode = false;
+			DialogBox.notify("Sharp Developer Menu",
+			"You have been logged out!");
+		}
+		m.addItem("About this build", devMenuAboutBuild);
+		m.addItem("Logout of dev mode", devMenuLogout);
+		m.addLine();
+		m.addItem("Tutorial: Editor Map", Tutorial.editorMap);
 	}
 	
 	protected function addHelpMenuItems(b:*, m:Menu):void {
