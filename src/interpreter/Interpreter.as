@@ -190,6 +190,7 @@ public class Interpreter {
 				if (t.tmpObj is ScratchSoundPlayer) {
 					(t.tmpObj as ScratchSoundPlayer).stopPlaying();
 				}
+				if (askThread == t) app.runtime.clearAskPrompts();
 				t.stop();
 			}
 		}
@@ -219,6 +220,7 @@ public class Interpreter {
 	public function stopAllThreads():void {
 		threads = [];
 		if (activeThread != null) activeThread.stop();
+		app.runtime.clearAskPrompts(); // seems sensible this should happen here
 		clearWarpBlock();
 		app.runtime.clearRunFeedback();
 		doRedraw = true;

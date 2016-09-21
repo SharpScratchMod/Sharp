@@ -308,7 +308,7 @@ public class SensingPrims {
 		if (interp.activeThread.firstTime) {
 			var question:String = b[0];
 			if ((obj is ScratchSprite) && (obj.visible)) {
-				ScratchSprite(obj).showBubble(question, 'talk', true);
+				ScratchSprite(obj).showBubble(question, 'talk', obj, true);
 				app.runtime.showAskPrompt('');
 			} else {
 				app.runtime.showAskPrompt(question);
