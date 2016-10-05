@@ -576,7 +576,7 @@ public class Block extends Sprite {
 	public function duplicate(forClone:Boolean, forStage:Boolean = false):Block {
 		var newSpec:String = spec;
 		if (op == 'whenClicked') newSpec = forStage ? 'when Stage clicked' : 'when this sprite clicked';
-		var dup:Block = new Block(newSpec, procedureType ? procedureType : type, (int)(forClone ? -1 : base.color), op);
+		var dup:Block = new Block(newSpec, type, (int)(forClone ? -1 : base.color), op);
 		dup.isRequester = isRequester;
 		dup.forceAsync = forceAsync;
 		dup.parameterNames = parameterNames;
