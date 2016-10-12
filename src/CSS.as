@@ -28,6 +28,8 @@ package {
 
 public class CSS {
 
+	//To add a value for Sharp Bleeding Edge replace the color code with "!Scratch.app.bleedingEdge ? (old color code) : (new color code)"
+
 	public static function topBarColor():int { return Scratch.app.isExtensionDevMode ? topBarColor_ScratchX : topBarColor_default; }
 	public static function backgroundColor():int { return Scratch.app.isExtensionDevMode ? backgroundColor_ScratchX : backgroundColor_default; }
 

@@ -78,7 +78,7 @@ import com.adobe.crypto.SHA256;
 
 public class Scratch extends Sprite {
 	// Version
-	public static const versionString:String = 'Beta 1.0.0 (Katana) : Scratch v449' + (SHARP::builtWithDevMode ? " : Sharp Developer Mode Active" : "");
+	public static const versionString:String = 'Beta 1.0.0 (Katana) : Scratch v449' + (SHARP::builtWithDevMode ? " : Sharp Developer Mode Active" : "") + (SHARP::bleedingEdge ? " : BLEEDING EDGE" : "");
 	public static var app:Scratch; // static reference to the app, used for debugging
 	// Sharp Developer Menu
 	// *------------------------------------*
@@ -88,6 +88,7 @@ public class Scratch extends Sprite {
 	// |s menu                              |
 	// *------------------------------------*
 	public var builtWithDevMode:Boolean = SHARP::builtWithDevMode;
+	public var bleedingEdge:Boolean = SHARP::bleedingEdge;
 	public var devMode:Boolean = false;
 	public var devModePassword:String = "99625b7abd0d05c32905b9aa67c9e6cb7e19ead8dc16d0caf5d372a8441dbd34";
 	
@@ -1843,6 +1844,11 @@ public class Scratch extends Sprite {
 		var args:Array = jsCallbackArray.concat(); // clone
 		args.splice(1, 0, returnValueCallback);
 		externalCall.apply(this, args);
+	}
+	
+	// SHARP LIBRARY SYSTEM
+	public function importLibrary(id:String){
+		DialogBox.notify("Hi!", "Imported " + id);
 	}
 }
 }
