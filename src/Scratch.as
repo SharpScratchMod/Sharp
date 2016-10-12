@@ -1226,6 +1226,7 @@ public class Scratch extends Sprite {
 		m.addItem("Logout of dev mode", devMenuLogout);
 		m.addLine();
 		m.addItem("Tutorial: Editor Map", Tutorial.editorMap);
+		m.addItem("Libraries: Import library by ID", LibraryManager.display);
 	}
 	
 	protected function addHelpMenuItems(b:*, m:Menu):void {
