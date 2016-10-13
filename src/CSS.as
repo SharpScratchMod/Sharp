@@ -28,6 +28,8 @@ package {
 
 public class CSS {
 
+	//To add a value for Sharp Bleeding Edge replace the color code with "!Scratch.app.bleedingEdge ? (old color code) : (new color code)"
+
 	public static function topBarColor():int { return Scratch.app.isExtensionDevMode ? topBarColor_ScratchX : topBarColor_default; }
 	public static function backgroundColor():int { return Scratch.app.isExtensionDevMode ? backgroundColor_ScratchX : backgroundColor_default; }
 
@@ -37,8 +39,8 @@ public class CSS {
 
 	// Colors
 	public static const white:int = 0xFFFFFF;
-	public static const backgroundColor_default:int = white;
-	public static const topBarColor_default:int = 0x9C9EA2;
+	public static const backgroundColor_default:int = !Scratch.app.bleedingEdge ? white : 0xa6a6a6;
+	public static const topBarColor_default:int = !Scratch.app.bleedingEdge ? 0x9C9EA2 : 0x333333;
 	public static const tabColor:int = 0xE6E8E8;
 	public static const panelColor:int = 0xF2F2F2;
 	public static const itemSelectedColor:int = 0xD0D0D0;

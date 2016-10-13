@@ -13,6 +13,10 @@ dev:
 	@echo Building Sharp (Dev Mode)...
 	@.\gradlew build -Ptarget=11.6dev
 	@echo Building complete
+bleedingedge:
+	@echo Building Sharp (Bleeding Edge)...
+	@.\gradlew build -Ptarget=11.6be
+	@echo Building complete
 help:
 	@echo "nmake" for a shortcut for "nmake go"
 	@echo.
