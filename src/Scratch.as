@@ -78,7 +78,7 @@ import com.adobe.crypto.SHA256;
 
 public class Scratch extends Sprite {
 	// Version
-	public static const versionString:String = 'Beta 1.0.0 (Katana) : Scratch v449' + (SHARP::builtWithDevMode ? " : Sharp Developer Mode Active" : "") + (SHARP::bleedingEdge ? " : BLEEDING EDGE" : "");
+	public static const versionString:String = 'Beta 1.0.0 (Katana) : Scratch v450.1' + (SHARP::builtWithDevMode ? " : Sharp Developer Mode Active" : "") + (SHARP::bleedingEdge ? " : BLEEDING EDGE" : "");
 	public static var app:Scratch; // static reference to the app, used for debugging
 	// Sharp Developer Menu
 	// *------------------------------------*
