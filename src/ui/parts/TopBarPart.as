@@ -45,6 +45,7 @@ public class TopBarPart extends UIPart {
 	public var editMenu:IconButton; //was protected
 	public var helpMenu:IconButton; //was protected
 	private var devMenu:IconButton;
+	private var beMenu:IconButton; // --[Bleeding Edge]--
 
 	public var copyTool:IconButton; //was private
 	public var cutTool:IconButton; //was private
@@ -96,8 +97,9 @@ public class TopBarPart extends UIPart {
 			Scratch.app.showEditMenu(Menu.dummyButton());
 			Scratch.app.showHelpMenu(Menu.dummyButton());
 			if(Scratch.app.builtWithDevMode) Scratch.app.showDevMenu(Menu.dummyButton());
+			if(Scratch.app.bleedingEdge) Scratch.app.showBleedingEdgeMenu(Menu.dummyButton());
 		}
-		return ['File', 'Edit', "Help", 'Tips', 'Duplicate', 'Delete', 'Grow', 'Shrink', 'Block help', 'Offline Editor', 'Dev'];
+		return ['File', 'Edit', "Help", 'Tips', 'Duplicate', 'Delete', 'Grow', 'Shrink', 'Block help', 'Offline Editor', 'Dev', 'Bleeding Edge'];
 	}
 
 	protected function removeTextButtons():void {
@@ -106,6 +108,7 @@ public class TopBarPart extends UIPart {
 			removeChild(editMenu);
 			removeChild(helpMenu);
 			if(Scratch.app.builtWithDevMode) removeChild(devMenu);
+			if(Scratch.app.bleedingEdge) removeChild(beMenu);
 		}
 	}
 
@@ -164,6 +167,12 @@ public class TopBarPart extends UIPart {
 			devMenu.x = nextX;
 			devMenu.y = buttonY;
 			nextX += devMenu.width + buttonSpace;
+		}
+		
+		if(Scratch.app.bleedingEdge){
+			beMenu.x = nextX;
+			beMenu.y = buttonY;
+			nextX += beMenu.width + buttonSpace;
 		}
 
 		// cursor tool buttons
@@ -226,6 +235,7 @@ public class TopBarPart extends UIPart {
 		addChild(editMenu = makeMenuButton('Edit', app.showEditMenu, true));
 		addChild(helpMenu = makeMenuButton('Help', app.showHelpMenu, true));
 		if(Scratch.app.builtWithDevMode) addChild(devMenu = makeMenuButton('Dev', app.showDevMenu, true));
+		if(Scratch.app.bleedingEdge) addChild(beMenu = makeMenuButton('Bleeding Edge', app.showBleedingEdgeMenu, true));
 	}
 
 	private function addToolButtons():void {

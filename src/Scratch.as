@@ -76,6 +76,9 @@ import watchers.ListWatcher;
 
 import com.adobe.crypto.SHA256;
 
+import blocks.BlockIO;
+import blocks.Block;
+
 public class Scratch extends Sprite {
 	// Version
 	public static const versionString:String = 'Beta 1.0.0 (Katana) : Scratch v450.1' + (SHARP::builtWithDevMode ? " : Sharp Developer Mode Active" : "") + (SHARP::bleedingEdge ? " : BLEEDING EDGE" : "");
@@ -1156,6 +1159,12 @@ public class Scratch extends Sprite {
 		m.showOnStage(stage, b.x, topBarPart.bottom() - 1);
 	}
 	
+	public function showBleedingEdgeMenu(b:*):void{
+		var m:Menu = new Menu(null, 'Bleeding Edge', CSS.topBarColor(), 28);
+		m.addItem("Library System: Import a Library!", LibraryManager.display);
+		m.showOnStage(stage, b.x, topBarPart.bottom() - 1);
+	}
+	
 	public function showDevMenu(b:*):void{
 		var m:Menu = new Menu(null, 'Dev', CSS.topBarColor(), 28);
 		
@@ -1849,7 +1858,25 @@ public class Scratch extends Sprite {
 	
 	// SHARP LIBRARY SYSTEM
 	public function importLibrary(id:String){
-		DialogBox.notify("Hi!", "Imported " + id);
+		DialogBox.notify("Sharp Library System", "Importing... " + id);
+		var url:String = "https://sharpscratchmod.cf/Sharp-Libraries-New/libraries/" + id + ".json";
+		var req:URLRequest = new URLRequest(url);
+		req.method = URLRequestMethod.GET;
+
+		var loader:URLLoader = new URLLoader();
+		loader.addEventListener(Event.COMPLETE, onComplete);
+		loader.dataFormat = URLLoaderDataFormat.TEXT;
+		loader.load(req);
+
+		function onComplete(e:Event){
+			var res = e.target.data.readUTFBytes(e.target.data.bytesAvailable);
+			var asJson = utils.JSON.parse(res);
+			DialogBox.notify("Sharp Library System", "Identified library as " + asJson['name'] + " by " + asJson['author']);
+			//for(var b1 in asJson['blocks']){
+			//	var b = asJson['blocks'][b1];
+			//	
+			//}
+		}
 	}
 }
 }
