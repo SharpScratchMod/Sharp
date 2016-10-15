@@ -396,6 +396,7 @@ public class Specs {
 		["%m.mathOp of %n",						"r", 8, "computeFunction:of:",	"sqrt", 9],
 		["digital root of %n",					"r", 8, "digitalRootOf:",		"1234"],
 		["the constant %m.constantName",		"r", 8, "chooseConstant:",	"Pi"],
+		["%n !",								"r", 8, "factorialOf:", 5],
 		["-"],
 		["join %s %s",							"r", 8, "concatenate:with:",	"hello ", "world"],
 		["letter %n of %s",						"r", 8, "letter:of:",			1, "world"],

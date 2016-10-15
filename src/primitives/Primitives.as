@@ -88,6 +88,7 @@ public class Primitives {
 		primTable["bitwiseXor:"]		= function(b:*):* { return interp.numarg(b[0]) ^ interp.numarg(b[1]) };
 		primTable["bitwiseLeftShift:"]	= function(b:*):* { return interp.numarg(b[0]) << interp.numarg(b[1])};
 		primTable["bitwiseRightShift:"]	= function(b:*):* { return interp.numarg(b[0]) >> interp.numarg(b[1])};
+		primTable["factorialOf:"] = primFactorial;
 		//this block doesn't work so please don't use it until we can fix it
 		//primTable["bitwiseUnsignedShift"]	= function(b:*):* { return interp.numarg(b[0]) >>> interp.numarg(b[1])};
 
@@ -435,5 +436,15 @@ public class Primitives {
 	}
 	private function primFileLoadFailReason(b:Array):String{
 		return fileErrorValue;
+	}
+
+	private function primFactorial(b:Array):Number{
+		function factorial(n:int){
+			if (n < 2) {
+  				return 1;
+ 			}
+			return n*factorial(n-1);
+		}
+		return factorial(interp.numarg(b[0]));
 	}
 }}
