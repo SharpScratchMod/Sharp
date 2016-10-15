@@ -301,7 +301,7 @@ public class Scratch extends Sprite {
 		handleStartupParameters();
 		
 		initSettings();
-		if(isOffline) DialogBox.notify("Welcome to Sharp!", "Website: http://SharpScratchMod.github.io\nGitHub: https://github.com/SharpScratchMod/Sharp\n\nCredits:\nDrKat123 - Developer, Owner\nMrcomputer1 - Developer, Owner\nscratchyone - Developer\n\nOther important credits:\nNoMod-Programming - Custom reporters");
+		if(isOffline) DialogBox.notify("Welcome to Sharp!", "Website: http://SharpScratchMod.cf\nGitHub: https://github.com/SharpScratchMod/Sharp\n\nCredits:\nalgmwc5 - Developer, Owner\nMrcomputer1 - Developer, Owner\nscratchyone - Developer\n\nOther important credits:\nNoMod-Programming - Custom reporters");
 	}
 
 	protected function handleStartupParameters():void {
