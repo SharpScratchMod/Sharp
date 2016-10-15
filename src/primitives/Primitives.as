@@ -73,6 +73,7 @@ public class Primitives {
 
 
 
+
 		primTable["nand"] =  function(b:*):* { return !(interp.boolarg(b[0]) && interp.boolarg(b[1])) };
 		primTable["nor"] = function(b:*):* { return !(interp.boolarg(b[0]) || interp.boolarg(b[1])) }; //if i had realized that it was this simple i should've implemented logic gates since i started making sharp!
 		primTable["xor"] = primLogicXor;
@@ -88,6 +89,7 @@ public class Primitives {
 		primTable["bitwiseXor:"]		= function(b:*):* { return interp.numarg(b[0]) ^ interp.numarg(b[1]) };
 		primTable["bitwiseLeftShift:"]	= function(b:*):* { return interp.numarg(b[0]) << interp.numarg(b[1])};
 		primTable["bitwiseRightShift:"]	= function(b:*):* { return interp.numarg(b[0]) >> interp.numarg(b[1])};
+		primTable["intToBin:"] = primIntToBin;
 		//this block doesn't work so please don't use it until we can fix it
 		//primTable["bitwiseUnsignedShift"]	= function(b:*):* { return interp.numarg(b[0]) >>> interp.numarg(b[1])};
 
@@ -435,5 +437,18 @@ public class Primitives {
 	}
 	private function primFileLoadFailReason(b:Array):String{
 		return fileErrorValue;
+	}
+	private function primIntToBin(b:Array):Number{
+		var num = interp.numarg(b[0]);
+		var tempOutput:String;
+		var tempOutput2:int;
+		var output:String;
+		while(num != 1){
+			tempOutput2 = num%2;
+			tempOutput = tempOutput2.toString();
+			output += tempOutput;
+			num = Math.floor(num/2);
+		}
+		return int(output);
 	}
 }}
