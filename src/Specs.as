@@ -397,6 +397,7 @@ public class Specs {
 		["digital root of %n",					"r", 8, "digitalRootOf:",		"1234"],
 		["the constant %m.constantName",		"r", 8, "chooseConstant:",	"Pi"],
 		["%n !",								"r", 8, "factorialOf:", 5],
+		["%n th Fibonacci number",				"r", 8, "nthFibonacci:", 10],
 		["-"],
 		["join %s %s",							"r", 8, "concatenate:with:",	"hello ", "world"],
 		["letter %n of %s",						"r", 8, "letter:of:",			1, "world"],

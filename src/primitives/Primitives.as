@@ -89,6 +89,7 @@ public class Primitives {
 		primTable["bitwiseLeftShift:"]	= function(b:*):* { return interp.numarg(b[0]) << interp.numarg(b[1])};
 		primTable["bitwiseRightShift:"]	= function(b:*):* { return interp.numarg(b[0]) >> interp.numarg(b[1])};
 		primTable["factorialOf:"] = primFactorial;
+		primTable["nthFibonacci:"] = primFibonacci;
 		//this block doesn't work so please don't use it until we can fix it
 		//primTable["bitwiseUnsignedShift"]	= function(b:*):* { return interp.numarg(b[0]) >>> interp.numarg(b[1])};
 
@@ -446,5 +447,22 @@ public class Primitives {
 			return n*factorial(n-1);
 		}
 		return factorial(interp.numarg(b[0]));
+	}
+	private function primFibonacci(b:Array):Number{
+		function getFibonacci(n:int){
+			var f1:int, f2:int, f:int, i:int;
+			if(n < 2){
+				return n;
+			}
+			f1 = 0;
+			f2 = 1;
+			for(i = 2; i <= n; i++){
+				f = f1;
+				f1 = f2;
+				f2 = f + f1;
+			}
+			return f2;
+		}
+		return getFibonacci(interp.numarg(b[0]));
 	}
 }}
