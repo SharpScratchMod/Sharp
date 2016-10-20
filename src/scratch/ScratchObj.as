@@ -43,6 +43,8 @@ import translation.Translator;
 	import util.*;
 
 	import watchers.*;
+	
+	import uiwidgets.DialogBox;
 
 public class ScratchObj extends Sprite {
 

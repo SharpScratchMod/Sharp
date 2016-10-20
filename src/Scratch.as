@@ -42,6 +42,7 @@ import flash.net.LocalConnection;
 import flash.net.URLLoader;
 import flash.net.URLLoaderDataFormat;
 import flash.net.URLRequest;
+import flash.net.URLRequestMethod;
 import flash.net.navigateToURL;
 import flash.net.SharedObject;
 import flash.system.*;
@@ -1869,13 +1870,26 @@ public class Scratch extends Sprite {
 		loader.load(req);
 
 		function onComplete(e:Event){
-			var res = e.target.data.readUTFBytes(e.target.data.bytesAvailable);
-			var asJson = utils.JSON.parse(res);
+			var res:String = e.target.data.readUTFBytes(e.target.data.bytesAvailable);
+			var asJson:Object = util.JSON.parse(res);
 			DialogBox.notify("Sharp Library System", "Identified library as " + asJson['name'] + " by " + asJson['author']);
-			//for(var b1 in asJson['blocks']){
-			//	var b = asJson['blocks'][b1];
-			//	
-			//}
+			for(var block1 in asJson["blocks"]){
+				var block:Object = asJson["blocks"][block1];
+				var proc:ProcedureSpecEditor = new ProcedureSpecEditor(block["name"], block["args_name"], block["warp"], block["type"], false);
+				var b:Block = new Block(proc.spec(), 'p', Specs.procedureColor, Specs.PROCEDURE_DEF);
+				b.parameterNames = proc.inputNames();
+				b.defaultArgValues = proc.defaultArgValues();
+				b.warpProcFlag = proc.warpFlag();
+				b.procedureType = proc.type();
+				b.setSpec(proc.spec());
+				b.x = 10 - scriptsPane.x + Math.random() * 100;
+				b.y = 10 - scriptsPane.y + Math.random() * 100;
+				scriptsPane.addChild(b);
+				scriptsPane.saveScripts();
+				runtime.updateCalls();
+				updatePalette();
+				setSaveNeeded();
+			}
 		}
 	}
 }
