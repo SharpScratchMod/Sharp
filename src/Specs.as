@@ -397,6 +397,8 @@ public class Specs {
 		["the constant %m.constantName",		"r", 8, "chooseConstant:",	"Pi"],
 		["integer %n to binary",				"r", 8, "intToBin:",	1234],
 		//["binary %n to integer",				"r", 8, "binToInt:",	1010],
+		["%n !",								"r", 8, "factorialOf:", 5],
+		["%n th Fibonacci number",				"r", 8, "nthFibonacci:", 10],
 		["-"],
 		["join %s %s",							"r", 8, "concatenate:with:",	"hello ", "world"],
 		["letter %n of %s",						"r", 8, "letter:of:",			1, "world"],

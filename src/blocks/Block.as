@@ -136,6 +136,8 @@ public class Block extends Sprite {
 		} else if (type == "b" || type == "ob") {
 			base = new BlockShape(type == "ob" ? BlockShape.BooleanOutlineShape : BlockShape.BooleanShape, color);
 			isReporter = true;
+			forceAsync = Scratch.app.extensionManager.shouldForceAsync(op);
+			isRequester = forceAsync;
 			indentLeft = 9;
 			indentRight = 7;
 		} else if (type == "r" || type == "R" || type == "or") {
