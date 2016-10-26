@@ -78,7 +78,7 @@ import com.adobe.crypto.SHA256;
 
 public class Scratch extends Sprite {
 	// Version
-	public static const versionString:String = 'Beta 1.0.0 (Katana) : Scratch v450.1' + (SHARP::builtWithDevMode ? " : Sharp Developer Mode Active" : "") + (SHARP::bleedingEdge ? " : BLEEDING EDGE" : "");
+	public static const versionString:String = 'Beta 1.0.0 (Katana) : Scratch v451' + (SHARP::builtWithDevMode ? " : Sharp Developer Mode Active" : "") + (SHARP::bleedingEdge ? " : BLEEDING EDGE" : "");
 	public static var app:Scratch; // static reference to the app, used for debugging
 	// Sharp Developer Menu
 	// *------------------------------------*
@@ -721,6 +721,12 @@ public class Scratch extends Sprite {
 	protected var wasEditing:Boolean;
 
 	public function setPresentationMode(enterPresentation:Boolean):void {
+		if (stagePart.isInPresentationMode() != enterPresentation) {
+			presentationModeWasChanged(enterPresentation);
+		}
+	}
+
+	public function presentationModeWasChanged(enterPresentation:Boolean):void {
 		if (enterPresentation) {
 			wasEditing = editMode;
 			if (wasEditing) {
@@ -741,6 +747,7 @@ public class Scratch extends Sprite {
 		for each (var o:ScratchObj in stagePane.allObjects()) o.applyFilters();
 
 		if (lp) fixLoadProgressLayout();
+		stagePart.presentationModeWasChanged(enterPresentation);
 		stagePane.updateCostume();
 		SCRATCH::allow3d {
 			if (isIn3D) render3D.onStageResize();
@@ -755,7 +762,6 @@ public class Scratch extends Sprite {
 		// Escape exists presentation mode.
 		else if ((evt.charCode == 27) && stagePart.isInPresentationMode()) {
 			setPresentationMode(false);
-			stagePart.exitPresentationMode();
 		}
 		// Handle enter key
 //		else if(evt.keyCode == 13 && !stage.focus) {
