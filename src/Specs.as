@@ -76,6 +76,7 @@ public class Specs {
 		[12, "List",		listColor],
 		[13, "HTTP",        0x55af40],
 		[14, "Files",       0x333399],
+		[15, "Miscellaneous", 0x657b32],
 		[20, "Extension",	extensionsColor],
 	];
 
@@ -396,7 +397,7 @@ public class Specs {
 		["%m.mathOp of %n",						"r", 8, "computeFunction:of:",	"sqrt", 9],
 		["digital root of %n",					"r", 8, "digitalRootOf:",		"1234"],
 		["the constant %m.constantName",		"r", 8, "chooseConstant:",	"Pi"],
-		["%n !",								"r", 8, "factorialOf:", 5],
+		[" %n !",								"r", 8, "factorialOf:", 5],
 		["%n th Fibonacci number",				"r", 8, "nthFibonacci:", 10],
 		["-"],
 		["join %s %s",							"r", 8, "concatenate:with:",	"hello ", "world"],
@@ -453,6 +454,8 @@ public class Specs {
 		["loaded?",                             "b", 14, "fileLoaded:"],
 		["loading failed?",                     "b", 14, "fileLoadFailed:"],
 		["loading failure reason",              "r", 14, "fileLoadFailReason:"],
+		//--MISCELLANEOUS--
+		["base64 encode %s",					"r", 15, "b64encode:", "abcd"],
 
 
 		// Scratch
