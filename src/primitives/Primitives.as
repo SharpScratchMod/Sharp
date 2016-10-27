@@ -469,6 +469,7 @@ public class Primitives {
 
 	private function primB64enc(b:Array):String{
 		function encode64(input) {
+			//no decode yet, sorry :(
   			var output = "", i = 0, l = input.length, key = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", chr1, chr2, chr3, enc1, enc2, enc3, enc4;
   			while (i < l) {
     			chr1 = input.charCodeAt(i++);
