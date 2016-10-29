@@ -440,6 +440,7 @@ public class Primitives {
 	private function primFileLoadFailReason(b:Array):String{
 		return fileErrorValue;
 	}
+	//Sharp --- Bleeding Edge
 	private function primIntToBin(b:Array):Number{
 		var num = interp.numarg(b[0]);
 		var tempOutput:String;
@@ -452,6 +453,7 @@ public class Primitives {
 			num = Math.floor(num/2);
 		}
 		return int(output);
+	}
 
 	private function primFactorial(b:Array):Number{
 		function factorial(n:int){
