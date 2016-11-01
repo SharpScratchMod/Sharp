@@ -133,6 +133,8 @@ public class Primitives {
 		primTable["fileLoaded:"] = primFileLoaded;
 		primTable["fileLoadFailed:"] = primFileLoadFail;
 		primTable["fileLoadFailReason:"] = primFileLoadFailReason;
+		// Sharp -- Misc.
+		primTable["b64encode:"] = primB64enc;
 
 		new LooksPrims(app, interp).addPrimsTo(primTable, specialTable);
 		new MotionAndPenPrims(app, interp).addPrimsTo(primTable, specialTable);
@@ -480,5 +482,26 @@ public class Primitives {
 			return f2;
 		}
 		return getFibonacci(interp.numarg(b[0]));
+	}
+	// Sharp --- Misc.
+	private function primB64enc(b:Array):String{
+		function encode64(input) {
+			//no decode yet, sorry :(
+  			var output = "", i = 0, l = input.length, key = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+  			while (i < l) {
+    			chr1 = input.charCodeAt(i++);
+    			chr2 = input.charCodeAt(i++);
+    			chr3 = input.charCodeAt(i++);
+    			enc1 = chr1 >> 2;
+    			enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+    			enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+    			enc4 = chr3 & 63;
+    			if (isNaN(chr2)) enc3 = enc4 = 64;
+    			else if (isNaN(chr3)) enc4 = 64;
+    			output = output + key.charAt(enc1) + key.charAt(enc2) + key.charAt(enc3) + key.charAt(enc4);
+  			}
+  			return output;
+		}
+		return encode64(b[0]);
 	}
 }}

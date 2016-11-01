@@ -55,6 +55,9 @@ public class ProcedureSpecEditor extends Sprite {
 
 	public function ProcedureSpecEditor(originalSpec:String, inputNames:Array, warpFlag:Boolean, type:String, isEdit:Boolean) {
 		this.isEdit = isEdit;
+		if(isEdit){
+			originalSpec = originalSpec.replace(/^@rabbit/g, "");
+		}
 
 		addChild(base = new Shape());
 		setWidthHeight(350, 10);

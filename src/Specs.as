@@ -76,6 +76,7 @@ public class Specs {
 		[12, "List",		listColor],
 		[13, "HTTP",        0x55af40],
 		[14, "Files",       0x333399],
+		[15, "Miscellaneous", 0x657b32],
 		[20, "Extension",	extensionsColor],
 	];
 
@@ -454,6 +455,8 @@ public class Specs {
 		["loaded?",                             "b", 14, "fileLoaded:"],
 		["loading failed?",                     "b", 14, "fileLoadFailed:"],
 		["loading failure reason",              "r", 14, "fileLoadFailReason:"],
+		//--MISCELLANEOUS--
+		["base64 encode %s",					"r", 15, "b64encode:", "abcd"],
 
 
 		// Scratch
