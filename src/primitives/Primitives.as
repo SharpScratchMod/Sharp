@@ -89,11 +89,10 @@ public class Primitives {
 		primTable["bitwiseXor:"]		= function(b:*):* { return interp.numarg(b[0]) ^ interp.numarg(b[1]) };
 		primTable["bitwiseLeftShift:"]	= function(b:*):* { return interp.numarg(b[0]) << interp.numarg(b[1])};
 		primTable["bitwiseRightShift:"]	= function(b:*):* { return interp.numarg(b[0]) >> interp.numarg(b[1])};
-		primTable["intToBin:"] = primIntToBin;
+		primTable["binToInt:"] = primBinToInt;
 		primTable["factorialOf:"] = primFactorial;
 		primTable["nthFibonacci:"] = primFibonacci;
-		//this block doesn't work so please don't use it until we can fix it
-		//primTable["bitwiseUnsignedShift"]	= function(b:*):* { return interp.numarg(b[0]) >>> interp.numarg(b[1])};
+		primTable["bitwiseUnsignedShift:"]	= function(b:*):* { return interp.numarg(b[0]) >>> interp.numarg(b[1])};
 
 		primTable["concatenate:with:"]	= function(b:*):* { return ("" + b[0] + b[1]).substr(0, 10240); };
 		primTable["letter:of:"]			= primLetterOf;
@@ -180,21 +179,21 @@ public class Primitives {
 		var op:* = b[0];
 		var n:Number = interp.numarg(b[1]);
 		switch(op) {
-		case "abs": return Math.abs(n);
-		case "floor": return Math.floor(n);
-		case "ceiling": return Math.ceil(n);
-		case "int": return n - (n % 1); // used during alpha, but removed from menu
-		case "sqrt": return Math.sqrt(n);
-		case "sin": return Math.sin((Math.PI * n) / 180);
-		case "cos": return Math.cos((Math.PI * n) / 180);
-		case "tan": return Math.tan((Math.PI * n) / 180);
-		case "asin": return (Math.asin(n) * 180) / Math.PI;
-		case "acos": return (Math.acos(n) * 180) / Math.PI;
-		case "atan": return (Math.atan(n) * 180) / Math.PI;
-		case "ln": return Math.log(n);
-		case "log": return Math.log(n) / Math.LN10;
-		case "e ^": return Math.exp(n);
-		case "10 ^": return Math.pow(10, n);
+			case "abs": return Math.abs(n);
+			case "floor": return Math.floor(n);
+			case "ceiling": return Math.ceil(n);
+			case "int": return n - (n % 1); // used during alpha, but removed from menu
+			case "sqrt": return Math.sqrt(n);
+			case "sin": return Math.sin((Math.PI * n) / 180);
+			case "cos": return Math.cos((Math.PI * n) / 180);
+			case "tan": return Math.tan((Math.PI * n) / 180);
+			case "asin": return (Math.asin(n) * 180) / Math.PI;
+			case "acos": return (Math.acos(n) * 180) / Math.PI;
+			case "atan": return (Math.atan(n) * 180) / Math.PI;
+			case "ln": return Math.log(n);
+			case "log": return Math.log(n) / Math.LN10;
+			case "e ^": return Math.exp(n);
+			case "10 ^": return Math.pow(10, n);
 		}
 		return 0;
 	}
@@ -443,20 +442,11 @@ public class Primitives {
 		return fileErrorValue;
 	}
 	//Sharp --- Bleeding Edge
-	private function primIntToBin(b:Array):Number{
-		var num = interp.numarg(b[0]);
-		var tempOutput:String;
-		var tempOutput2:int;
-		var output:String;
-		while(num != 1){
-			tempOutput2 = num%2;
-			tempOutput = tempOutput2.toString();
-			output += tempOutput;
-			num = Math.floor(num/2);
-		}
-		return int(output);
+	private function primBinToInt(b:Array):Number{
+		var n = interp.numarg(b[0]);
+		n.toString(2);
+		return parseInt(n,2);
 	}
-
 	private function primFactorial(b:Array):Number{
 		function factorial(n:int){
 			if (n < 2) {

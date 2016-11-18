@@ -396,8 +396,7 @@ public class Specs {
 		["%m.mathOp of %n",						"r", 8, "computeFunction:of:",	"sqrt", 9],
 		["digital root of %n",					"r", 8, "digitalRootOf:",		1234],
 		["the constant %m.constantName",		"r", 8, "chooseConstant:",	"Pi"],
-		["integer %n to binary",				"r", 8, "intToBin:",	1234],
-		//["binary %n to integer",				"r", 8, "binToInt:",	1010],
+		["binary %n to integer",				"r", 8, "binToInt:",	1010],
 		["%n !",								"r", 8, "factorialOf:", 5],
 		["%n th Fibonacci number",				"r", 8, "nthFibonacci:", 10],
 		["-"],
@@ -417,7 +416,7 @@ public class Specs {
 		["~ %n",								"r", 8, "bitwiseNot:", "1", "2"],
 		["%n << %n",							"r", 8, "bitwiseLeftShift:", "2", "10"],
 		["%n >> %n",							"r", 8, "bitwiseRightShift:", "2", "10"],
-		//["%n >>> %n",							"r", 8, "bitwiseUnsignedShift:", "2", "10"],
+		["%n >>> %n",							"r", 8, "bitwiseUnsignedShift:", "2", "10"],
 
 		// variables
 		["set %m.var to %s",								" ", 9, SET_VAR],
