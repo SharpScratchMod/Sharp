@@ -13,3 +13,5 @@ install:
 script:
   - ./gradlew check -Ptarget=11.6
   - ./gradlew check -Ptarget=10.2
+notifications:
+  slack: scratch-aters:Rs9AFuklnf206XX9BGYXXXvM
