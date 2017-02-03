@@ -148,8 +148,8 @@ public class Specs {
 		["think %s for %n secs",				" ", 2, "think:duration:elapsed:from:", "Hmm...", 2],
 		["think %s",							" ", 2, "think:",						"Hmm..."],
 		["-"],
-		["show",								" ", 2, "show"],
-		["hide",								" ", 2, "hide"],
+		["show %m.spriteOnly",					" ", 2, "showSprite", "_myself_"],
+		["hide %m.spriteOnly",					" ", 2, "hideSprite", "_myself_"],
 		["-"],
 		["switch costume to %m.costume",		" ", 2, "lookLike:",				"costume1"],
 		["next costume",						" ", 2, "nextCostume"],
@@ -170,6 +170,9 @@ public class Specs {
 		["size",								"r", 2, "scale"],
 
 		// stage looks
+		["show %m.spriteNotSelf",					" ", 102, "showStage", "Sprite1"],
+		["hide %m.spriteNotSelf",					" ", 102, "hideStage", "Sprite1"],
+		["-"],
 		["switch backdrop to %m.backdrop",			" ", 102, "startScene", 			"backdrop1"],
 		["switch backdrop to %m.backdrop and wait", " ", 102, "startSceneAndWait",		"backdrop1"],
 		["next backdrop",							" ", 102, "nextScene"],
@@ -473,6 +476,10 @@ public class Specs {
 		["switch to background %m.costume",		" ", 98, "showBackground:", "backdrop1"],
 		["next background",						" ", 98, "nextBackground"],
 		["forever if %b",						"cf",98, "doForeverIf"],
+		
+		// obsolete blocks from Official Scratch that may be used in older Sharp/current Scratch projects
+		["legacy show",							" ", 98, "show"],
+		["legacy hide",							" ", 98, "hide"],
 
 		// testing and experimental control prims
 		["noop",								"r", 99, "COUNT"],

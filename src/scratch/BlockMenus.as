@@ -95,6 +95,7 @@ public class BlockMenus implements DragClient {
 		if (menuName == 'spriteOrStage') menuHandler.spriteMenu(evt, false, false, true, false, false);
 		if (menuName == 'touching') menuHandler.spriteMenu(evt, true, true, false, false, false);
 		if (menuName == 'stageOrThis') menuHandler.stageOrThisSpriteMenu(evt);
+		if (menuName == 'spriteNotSelf') menuHandler.spriteMenu(evt, false, false, false, false, false);
 		if (menuName == 'stop') menuHandler.stopMenu(evt);
 		if (menuName == 'timeAndDate') menuHandler.timeAndDateMenu(evt);
 		if (menuName == 'triggerSensor') menuHandler.triggerSensorMenu(evt);
@@ -139,6 +140,7 @@ public class BlockMenus implements DragClient {
 			handler.spriteMenu(evt, true, false, false, false, true);
 			handler.spriteMenu(evt, false, false, true, false, false);
 			handler.spriteMenu(evt, true, true, false, false, false);
+			handler.spriteMenu(evt, false, false, false, false, false);
 			handler.stageOrThisSpriteMenu(evt);
 			handler.stopMenu(evt);
 			handler.timeAndDateMenu(evt);
@@ -193,6 +195,7 @@ public class BlockMenus implements DragClient {
 		case 'spriteOrMouse':
 		case 'location':
 		case 'spriteOrStage':
+		case 'spriteNotSelf':
 		case 'touching':
 			return false; // handled directly by menu code
 		case 'var':

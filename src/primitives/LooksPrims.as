@@ -69,6 +69,11 @@ public class LooksPrims {
 		primTable['hide']					= primHide;
 //		primTable['hideAll']				= primHideAll;
 
+		primTable['showStage']				= primShow;
+		primTable['hideStage']				= primHide;
+		primTable['showSprite']				= primShow;
+		primTable['hideSprite']				= primHide;
+
 		primTable['comeToFront']			= primGoFront;
 		primTable['goBackByLayers:']		= primGoBack;
 
@@ -244,7 +249,11 @@ public class LooksPrims {
 	}
 
 	private function primShow(b:Array):void {
-		var s:ScratchSprite = interp.targetSprite();
+		if(b.length != 1 || b[0] == "_myself_"){
+			var s:ScratchSprite = interp.targetSprite();
+		}else{
+			var s:ScratchSprite = Scratch.app.stagePane.spriteNamed(b[0]);
+		}
 		if (s == null) return;
 		s.visible = true;
 		if(!app.isIn3D) s.applyFilters();
@@ -253,7 +262,11 @@ public class LooksPrims {
 	}
 
 	private function primHide(b:Array):void {
-		var s:ScratchSprite = interp.targetSprite();
+		if(b.length != 1 || b[0] == "_myself_"){
+			var s:ScratchSprite = interp.targetSprite();
+		}else{
+			var s:ScratchSprite = Scratch.app.stagePane.spriteNamed(b[0]);
+		}
 		if ((s == null) || !s.visible) return;
 		s.visible = false;
 		if(!app.isIn3D) s.applyFilters();

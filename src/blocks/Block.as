@@ -40,6 +40,8 @@ import flash.events.*;
 import flash.filters.GlowFilter;
 import flash.geom.*;
 import flash.net.URLLoader;
+import flash.net.URLRequest;
+import flash.net.navigateToURL;
 import flash.text.*;
 
 import scratch.*;
@@ -860,7 +862,7 @@ public class Block extends Sprite {
 		else {
 			Scratch.app.showTip(op);
 		}*/
-		var mappings = {
+		/*
 			// Control - Sprite/Stage
 			"inlineComment:": "control:inlineComment",
 			"codeSection": "control:codeSection",
@@ -870,7 +872,18 @@ public class Block extends Sprite {
 			"INCR_COUNT": "control:INCR_COUNT",
 			// Sensing
 			"notify:": "sensing:notify"
+		*/
+		var mappings = {
+			"show": "obsolete:legacy_show_hide",
+			"hide": "obsolete:legacy_show_hide"
 		};
+		var path = "https://wiki.sharpscratchmod.cf/";
+		if(mappings[op]){
+			var req:URLRequest = new URLRequest(path + mappings[op]);
+			navigateToURL(req, "_blank");
+		}else{
+			DialogBox.notify("Sorry, No help for this block", "We don't have help for this block, sorry!");
+		}
 	}
 
 	public function duplicateStack(deltaX:Number, deltaY:Number):void {

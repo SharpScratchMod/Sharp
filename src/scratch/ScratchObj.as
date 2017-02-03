@@ -331,6 +331,10 @@ public class ScratchObj extends Sprite {
 			sprites = Scratch.app.stagePane.sprites();
 			return (sprites.length > 0) ? ['x position', sprites[sprites.length - 1].objName] : ['volume', '_stage_'];
 		}
+		if ('showStage' == op || 'hideStage' == op){
+			sprites = Scratch.app.stagePane.sprites();
+			return (sprites.length > 0) ? [sprites[sprites.length - 1].objName] : [""];
+		}
 
 		if ('setVar:to:' == op) return [defaultVarName(), 0];
 		if ('changeVar:by:' == op) return [defaultVarName(), 1];
