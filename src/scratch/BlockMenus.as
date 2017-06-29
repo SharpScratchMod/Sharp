@@ -539,6 +539,7 @@ public class BlockMenus implements DragClient {
 			m.addItem('add comment', block.addComment);
 		}
 		m.addItem('help', block.showHelp);
+		if(Scratch.app.builtWithDevMode) m.addItem('Show Block Spec', block.showSpec)
 		m.addLine();
 	}
 

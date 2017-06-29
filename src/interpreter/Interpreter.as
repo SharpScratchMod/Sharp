@@ -315,6 +315,17 @@ public class Interpreter {
 		if(debugFunc != null)
 			debugFunc(b);
 
+		if(b.op == "procDef" && (b.procedureType == "r" || b.procedureType == "b")){
+			var curBlock:Block = b;
+			while(curBlock.nextBlock){
+				curBlock = curBlock.nextBlock;
+			}
+			if(curBlock.op != "report"){
+				curBlock.insertBlock(new Block("report %s", "f", Specs.procedureColor, "report", [0]));
+				DialogBox.notify("Warning", "A custom reporter/boolean was missing a report block!\nWe added one to prevent Sharp crashing.");
+			}
+		}
+		
 		if (b.opFunction == primNoop) {
 			// kludge: don't evaluate args for primNoop because procDef has weird ones
 			activeThread.popState();

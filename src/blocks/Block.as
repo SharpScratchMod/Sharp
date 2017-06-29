@@ -845,8 +845,13 @@ public class Block extends Sprite {
 			if ('cut' == tool) deleteStack();
 		}
 		if (tool == 'help') showHelp();
+		if (tool == "showSpec") showSpec();
 	}
 
+	public function showSpec(){
+		DialogBox.notify("Block Spec Information", "Spec: " + this.spec + "\n" + "OP Code: " + this.op + "\nType: " + this.type);
+	}
+	
 	public function showHelp():void {
 		/*var extName:String = ExtensionManager.unpackExtensionName(op);
 		if (extName) {
