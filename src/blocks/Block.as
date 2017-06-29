@@ -143,7 +143,7 @@ public class Block extends Sprite {
 			indentLeft = 9;
 			indentRight = 7;
 		} else if (type == "r" || type == "R" || type == "or") {
-			this.type = 'r';
+			this.type = type == "or" ? 'or' : 'r';
 			base = new BlockShape(type == "or" ? BlockShape.NumberOutlineShape : BlockShape.NumberShape, color);
 			isReporter = true;
 			forceAsync = (type == 'r') && Scratch.app.extensionManager.shouldForceAsync(op);
@@ -587,6 +587,7 @@ public class Block extends Sprite {
 		dup.defaultArgValues = defaultArgValues;
 		dup.warpProcFlag = warpProcFlag;
 		dup.procedureType = procedureType;
+		//DialogBox.notify("", newSpec + ":" + type + ":" + op + ":" + procedureType);
 		if (forClone) {
 			dup.copyArgsForClone(args);
 		} else {
