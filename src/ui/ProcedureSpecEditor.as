@@ -293,7 +293,7 @@ public class ProcedureSpecEditor extends Sprite {
 			for each (label in buttonLabels) if (label.parent) removeChild(label);
 			for each (label in shapeLabels) if (label.parent) removeChild(label);
 			for each (b in buttons) if (b.parent) removeChild(b);
-			for each (ib in shapeButtons) if (b.parent) removeChild(b);
+			for each (ib in shapeButtons) if (ib.parent) removeChild(ib);
 			for each (shape in shapeIcons) if (shape.parent) removeChild(shape);
 			if (warpCheckbox.parent) removeChild(warpCheckbox);
 			if (warpLabel.parent) removeChild(warpLabel);
