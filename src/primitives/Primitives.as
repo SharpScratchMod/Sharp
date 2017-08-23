@@ -347,6 +347,9 @@ public class Primitives {
 	}
 	//Sharp --- Files
 	private function primFileSave(b:Array):void{
+		fileLoadedValue = false;
+		fileErrored = false;
+		fileErrorValue = "";
 		DialogBox.confirm("Would you like to save the file '" + b[1] + "' to your computer?", null, okFunc, cancelFunc);
 		function okFunc():void{
 			function cancelHandle(e:Event){
@@ -378,6 +381,9 @@ public class Primitives {
 		}
 	}
 	private function primFileLoad(b:Array):void{
+		fileLoadedValue = false;
+		fileErrored = false;
+		fileErrorValue = "";
 		DialogBox.confirm("Would you like to open a file from your computer?", null, okFunc, cancelFunc);
 		function okFunc():void{
 			var fileName:String, data:ByteArray;
@@ -429,8 +435,8 @@ public class Primitives {
 		}
 	}
 	private function primFileLoaded(b:Array):Boolean{
-		var bl:Boolean = fileLoadedValue;
-		fileLoadedValue = false;
+		//var bl:Boolean = fileLoadedValue;
+		//fileLoadedValue = false;
 		return bl;
 	}
 	private function primFileLoadFail(b:Array):Boolean{

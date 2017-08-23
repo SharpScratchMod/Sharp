@@ -454,9 +454,9 @@ public class Specs {
 		["load file",                           " ", 14, "loadFile:"],
 		["loaded file name",                    "r", 14, "loadedFileName:"],
 		["loaded file data",                    "r", 14, "loadedFileData:"],
-		["loaded?",                             "b", 14, "fileLoaded:"],
-		["loading failed?",                     "b", 14, "fileLoadFailed:"],
-		["loading failure reason",              "r", 14, "fileLoadFailReason:"],
+		["loaded/saved?",                       "b", 14, "fileLoaded:"],
+		["failed?",                             "b", 14, "fileLoadFailed:"],
+		["failure reason",                      "r", 14, "fileLoadFailReason:"],
 		//--MISCELLANEOUS--
 		["base64 encode %s",					"r", 15, "b64encode:", "abcd"],
 
