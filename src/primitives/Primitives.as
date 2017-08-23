@@ -437,7 +437,7 @@ public class Primitives {
 	private function primFileLoaded(b:Array):Boolean{
 		//var bl:Boolean = fileLoadedValue;
 		//fileLoadedValue = false;
-		return bl;
+		return fileLoadedValue;
 	}
 	private function primFileLoadFail(b:Array):Boolean{
 		return fileErrored;
