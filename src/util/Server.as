@@ -265,12 +265,18 @@ public class Server implements IServer {
 //		}
 		//var url:String = URLs.assetCdnPrefix + URLs.internalAPI + 'asset/' + md5 + '/get/';
 		var url:String = "static/assets/" + md5;
+		if(Scratch.app.loaderInfo.parameters["requestPrefix"]){
+			url = "../" + url;
+		}
 		return serverGet(url, whenDone);
 	}
 
 	public function getMediaLibrary(libraryType:String, whenDone:Function):URLLoader {
 		//var url:String = getCdnStaticSiteURL() + 'medialibraries/' + libraryType + 'Library.json';
 		var url:String = "static/medialibraries/" + libraryType + "Library.json";
+		if(Scratch.app.loaderInfo.parameters["requestPrefix"]){
+			url = "../" + url;
+		}
 		return serverGet(url, whenDone);
 	}
 
@@ -299,7 +305,9 @@ public class Server implements IServer {
 		function imageDecoded(e:Event):void {
 			whenDone(makeThumbnail(e.target.content.bitmapData));
 		}
-
+		if(Scratch.app.loaderInfo.parameters["requestPrefix"]){
+			url = "../" + url;
+		}
 		return serverGet(url, decodeImage);
 	}
 
@@ -327,10 +335,18 @@ public class Server implements IServer {
 	//------------------------------
 
 	public function getLanguageList(whenDone:Function):void {
+		if(Scratch.app.loaderInfo.parameters["requestPrefix"]){
+			serverGet("../locale/lang_list.txt", whenDone);
+			return;
+		}
 		serverGet('locale/lang_list.txt', whenDone);
 	}
 
 	public function getPOFile(lang:String, whenDone:Function):void {
+		if(Scratch.app.loaderInfo.parameters["requestPrefix"]){
+			serverGet("../locale/" + lang + ".po", whenDone);
+			return;
+		}
 		serverGet('locale/' + lang + '.po', whenDone);
 	}
 
