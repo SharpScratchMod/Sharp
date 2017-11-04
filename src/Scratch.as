@@ -78,7 +78,7 @@ import com.adobe.crypto.SHA256;
 
 public class Scratch extends Sprite {
 	// Version
-	public static const versionString:String = 'Beta 1.0.0 (Katana) : Scratch v453.1' + (SHARP::builtWithDevMode ? " : Sharp Developer Mode Active" : "") + (SHARP::bleedingEdge ? " : BLEEDING EDGE" : "");
+	public static const versionString:String = 'Beta 1.0.0 (Katana) : Scratch v458.0.1' + (SHARP::builtWithDevMode ? " : Sharp Developer Mode Active" : "") + (SHARP::bleedingEdge ? " : BLEEDING EDGE" : "");
 	public static var app:Scratch; // static reference to the app, used for debugging
 	// Sharp Developer Menu
 	// *------------------------------------*
@@ -713,8 +713,12 @@ public class Scratch extends Sprite {
 	}
 
 	public function setProjectName(s:String):void {
-		if (s.slice(-3) == '.sb') s = s.slice(0, -3);
-		if (s.slice(-4) == '.sb2') s = s.slice(0, -4);
+		for (;;) {
+			if (StringUtil.endsWith(s, '.sb')) s = s.slice(0, -3);
+			else if (StringUtil.endsWith(s, '.sb2')) s = s.slice(0, -4);
+			else if (StringUtil.endsWith(s, '.sbx')) s = s.slice(0, -4);
+			else break;
+		}
 		stagePart.setProjectName(s);
 	}
 
