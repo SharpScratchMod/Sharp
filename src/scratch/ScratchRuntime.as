@@ -568,6 +568,10 @@ public class ScratchRuntime {
 			case Keyboard.UP: keyName = 'up arrow'; break;
 			case Keyboard.DOWN: keyName = 'down arrow'; break;
 			case Keyboard.SPACE: keyName = 'space'; break;
+			case Keyboard.SHIFT: keyName = 'shift'; break;
+			case Keyboard.ENTER: keyName = 'enter'; break;
+			case Keyboard.BACKSPACE: keyName = 'backspace'; break;
+			case Keyboard.CONTROL: keyName = 'control'; break;
 			default: keyName = String.fromCharCode(keyCode).toLowerCase(); break;
 		}
 		function startMatchingKeyHats(stack:Block, target:ScratchObj):void {

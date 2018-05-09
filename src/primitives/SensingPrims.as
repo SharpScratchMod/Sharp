@@ -340,6 +340,10 @@ public class SensingPrims {
 			case 'up arrow': ch = Keyboard.UP; break;
 			case 'down arrow': ch = Keyboard.DOWN; break;
 			case 'space': ch = Keyboard.SPACE; break;
+			case 'shift': ch = Keyboard.SHIFT; break;
+			case 'enter': ch = Keyboard.ENTER; break;
+			case 'backspace': ch = Keyboard.BACKSPACE; break;
+			case 'control': ch = Keyboard.CONTROL; break;
 			default: ch = key.toUpperCase().charCodeAt(0); break;
 		}
 		return app.runtime.keyIsDown[ch] || false;
