@@ -94,7 +94,7 @@ public class Scratch extends Sprite {
 	
 	// Sharp settings store
 	public var sharpSettings:SharedObject;
-	private var sharpSettingsVersion:int = 2;
+	private var sharpSettingsVersion:int = 3;
 	private function initSettings():void{
 		if(!sharpSettings.data.hasOwnProperty("_settingsVersion")){
 			trace("Creating default setting values");
@@ -103,6 +103,7 @@ public class Scratch extends Sprite {
 			sharpSettings.data.alwaysTurboMode = false;
 			sharpSettings.data.hackMode = true;
 			sharpSettings.data.cloneLimit = 300;
+			sharpSettings.data.restoreScratchShowHide = false;
 			saveSettings();
 		}else{
 			updateSettings();
@@ -113,6 +114,24 @@ public class Scratch extends Sprite {
 		if(sharpSettings.data.alwaysTurboMode){
 			toggleTurboMode();
 		}
+		reloadSettings();
+	}
+	public function reloadSettings():void{
+		// Reload "Restore Scratch show/hide Blocks" setting.
+		var showFound:Boolean = false;
+		var hideFound:Boolean = false;
+		var shouldBeVisible:Boolean = sharpSettings.data.restoreScratchShowHide;
+		for(var i = 0; i < Specs.commands.length; i++){
+			if(Specs.commands[i][3] == "show"){
+				Specs.commands[i][2] = shouldBeVisible ? 2 : 98;
+				showFound = true;
+			}else if(Specs.commands[i][3] == "hide"){
+				Specs.commands[i][2] = shouldBeVisible ? 2 : 98;
+				hideFound = true;
+			}
+			if(showFound && hideFound) break;
+		}
+		updatePalette();
 	}
 	public function saveSettings():void{
 		sharpSettings.flush();
@@ -129,6 +148,13 @@ public class Scratch extends Sprite {
 				// do updates
 				trace("Updated!");
 			}*/
+			if(sharpSettings.data._settingsVersion == 2){
+				trace("Updating settings from " + sharpSettings.data._settingsVersion + " to 3");
+				sharpSettings.data.restoreScratchShowHide = false;
+				sharpSettings.data._settingsVersion = 3;
+				saveSettings();
+				trace("Updated!");
+			}
 			if(sharpSettings.data._settingsVersion == 1){
 				trace("Updating settings from " + sharpSettings.data._settingsVersion + " to 2");
 				sharpSettings.data.hackMode = true;

@@ -151,6 +151,9 @@ public class Specs {
 		["show %m.spriteOnly",					" ", 2, "showSprite", "_myself_"],
 		["hide %m.spriteOnly",					" ", 2, "hideSprite", "_myself_"],
 		["-"],
+		["scratch show",						" ", 98, "show"],//This block is hidden by default, but shown by the "Restore Scratch show/hide Blocks" option
+		["scratch hide",						" ", 98, "hide"],//This block is hidden by default, but shown by the "Restore Scratch show/hide Blocks" option
+		["-"],
 		["switch costume to %m.costume",		" ", 2, "lookLike:",				"costume1"],
 		["next costume",						" ", 2, "nextCostume"],
 		["switch backdrop to %m.backdrop",		" ", 2, "startScene", 				"backdrop1"],
@@ -478,8 +481,6 @@ public class Specs {
 		["forever if %b",						"cf",98, "doForeverIf"],
 		
 		// obsolete blocks from Official Scratch that may be used in older Sharp/current Scratch projects
-		["legacy show",							" ", 98, "show"],
-		["legacy hide",							" ", 98, "hide"],
 
 		// testing and experimental control prims
 		["noop",								"r", 99, "COUNT"],

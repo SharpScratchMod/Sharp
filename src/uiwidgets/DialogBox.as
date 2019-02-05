@@ -124,7 +124,9 @@ public class DialogBox extends Sprite {
 			if(d.booleanFields['Always in turbo mode'].isOn() && !Scratch.app.turboModeIsActive) Scratch.app.toggleTurboMode();
 			Scratch.app.sharpSettings.data.hackMode = d.booleanFields['Hack mode'].isOn();
 			Scratch.app.sharpSettings.data.cloneLimit = d.fields['Clone limit'].text;
+			Scratch.app.sharpSettings.data.restoreScratchShowHide = d.booleanFields['Restore Scratch show/hide Blocks'].isOn();
 			Scratch.app.saveSettings();
+			Scratch.app.reloadSettings();
 		}
 		function resetSettings():void {
 			DialogBox.confirm(Translator.map("Do you really want to reset settings?"), null, function():*{ Scratch.app.resetSettings(); });
@@ -134,6 +136,7 @@ public class DialogBox extends Sprite {
 		d.addBoolean("Always in turbo mode", Scratch.app.sharpSettings.data.alwaysTurboMode, false);
 		d.addBoolean("Hack mode", Scratch.app.sharpSettings.data.hackMode, false);
 		d.addField("Clone limit", 120, Scratch.app.sharpSettings.data.cloneLimit, true);
+		d.addBoolean("Restore Scratch show/hide Blocks", Scratch.app.sharpSettings.data.restoreScratchShowHide, false);
 		d.addButton("OK", d.accept);
 		d.addButton("Cancel", d.cancel);
 		d.addButton("Reset Settings", resetSettings);
